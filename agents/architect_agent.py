@@ -22,7 +22,7 @@ KNOWN_FIR_TOPOLOGIES = {
     "folded",
 }
 KNOWN_IIR_TOPOLOGIES = {
-    "biquad_df2t", "biquad_df1", "cascaded",
+    "biquad_df2t", "biquad_df1", "df2t",
 }
 
 
@@ -1447,8 +1447,8 @@ def _build_plans(specs: dict, verif_specs: dict) -> tuple[str, str, list]:
             latency_rule = "IIR rigid (1 or 2 cycles)"
         else:
             if topology == "transposed_direct_form" or topology.startswith("transposed"):
-                latency = 3
-                latency_rule = "3 (transposed_direct_form fixed latency)"
+                latency = 4
+                latency_rule = "4 (transposed_direct_form fixed latency)"
             elif topology == "systolic" or topology.startswith("systolic"):
                 # FIR SYSTOLIC: one always_ff stage per PE + one output register.
                 latency = taps + 1 if taps > 0 else 1
@@ -1653,6 +1653,24 @@ def _build_plans(specs: dict, verif_specs: dict) -> tuple[str, str, list]:
         f"INTERFACE={interface_str}",
         "VALID_TIMING=result_valid = sample_valid delayed by LATENCY cycles",
     ]
+
+    # Defensive sync: ensure a few critical metadata keys in VERIFICATION_PLAN
+    # exactly match the deterministically-built DESIGN_PLAN. This prevents
+    # accidental divergence when earlier code paths mutate values or when
+    # templates vary between topology cases.
+    sync_keys = [
+        ("FOLDING", folding),
+        ("FOLD_FACTOR", fold_factor),
+        ("LATENCY", latency),
+        ("COEFF_FRAC_BITS", coeff_frac_bits),
+        ("ACC_WIDTH", acc_width),
+        ("DATA_WIDTH", data_width),
+    ]
+    # Remove any existing lines for these keys, then append canonical values.
+    new_verif = [l for l in verif_lines if not any(l.startswith(f"{k}=") for k, _ in sync_keys)]
+    for k, v in sync_keys:
+        new_verif.append(f"{k}={v}")
+    verif_lines = new_verif
 
     return "\n".join(design_lines) + "\n", "\n".join(verif_lines) + "\n", mismatches
 

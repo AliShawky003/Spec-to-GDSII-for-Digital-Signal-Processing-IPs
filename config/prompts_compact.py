@@ -123,13 +123,13 @@ ARCHITECT RULES:
    Example: TAPS=41, UNIQUE=21 → LATENCY = 2 + ceil(log2(21)) = 2 + 5 = 7
    LATENCY_RULE = "2 + ceil(log2(21)) = 7 (symmetric_direct_form)"
 
-   ── transposed_direct_form ───────────────────────────────
-    Pipeline: data_reg(1) + s_array_regs(1) + result_out(1) = 3
-    LATENCY = 3  (or 2 if ACCUM_TYPE=combinational removes result_out)
+    ── transposed_direct_form ───────────────────────────────
+    Pipeline: data_in_reg(1) + prod_pipe(1) + s_array_regs(1) + result_out(1) = 4
+    LATENCY = 4  (CRITICAL: Requires 1 pipeline register between multiplier and adder to close ASIC timing > 100MHz).
+    NEVER use LATENCY = 3. It forces multiplier + adder in 1 cycle, limiting clock to ~50MHz.
     NO pipe_depth scaling. The latency DOES NOT scale with TAPS.
-    NEVER use TAPS + 1 — that is fundamentally wrong for transposed form.
-    Example: TAPS=8 → LATENCY = 3
-    LATENCY_RULE = "3 (transposed_direct_form fixed latency)"
+    Example: TAPS=8 → LATENCY = 4
+    LATENCY_RULE = "4 (transposed_direct_form pipelined)"
 
     ── folded ───────────────────────────────────────────────
    Pipeline: data_reg(1) + FOLD_FACTOR MAC cycles + result_out(1)
@@ -153,7 +153,7 @@ ARCHITECT RULES:
    LATENCY_RULE = "cascaded: SECTIONS * 1 = N"
 
    MANDATORY SELF-CHECK BEFORE OUTPUTTING:
-   [ ] transposed topology → LATENCY == 3 exactly?
+   [ ] transposed topology → LATENCY == 4 exactly?
    [ ] symmetric topology  → LATENCY == 2 + ceil(log2((TAPS+1)/2))?
    [ ] direct topology     → LATENCY == 2 + ceil(log2(TAPS))?
    [ ] IIR single section  → LATENCY == 1?
@@ -178,11 +178,11 @@ ARCHITECT RULES:
      Multiplier count = (TAPS+1)/2 for odd TAPS, TAPS/2 for even.
      Store only unique coefficients [0..CENTER].
 
-   FIR transposed_direct_form:
-    LATENCY = 3 (HARD RULE — fixed latency, never TAPS+1)
+    FIR transposed_direct_form:
+    LATENCY = 4 (HARD RULE — pipelined for timing, never 3)
     ACCUM_TYPE = registered
     s[k] registers ARE the delay line — TAPS of them, all always_ff.
-    For TAPS=4: LATENCY=3. For TAPS=16: LATENCY=3.
+    For TAPS=4: LATENCY=4. For TAPS=16: LATENCY=4.
     
     FIR folded:
      FOLD_FACTOR = TAPS (one multiplier, one accumulator, reused TAPS times per output)
@@ -447,12 +447,13 @@ FIR: symmetric (SYMMETRIC=YES)
 ──────────────────────────────────────────────
 FIR: transposed
 ──────────────────────────────────────────────
-LATENCY OVERRIDE (CRITICAL FOR TRANSPOSED FORM):
+LATENCY OVERRIDE (CRITICAL FOR TRANSPOSED FORM TIMING):
 The general BASE_LATENCY=2 rule DOES NOT APPLY to transposed form.
-Transposed form has exactly 3 register stages: data_in_reg(1) + s[k](1) + result_out(1).
+To achieve >100MHz ASIC timing, the Multiplier and Adder MUST be split into separate clock cycles.
+Transposed form has exactly 4 register stages: data_in_reg(1) + prod_reg(1) + s[k](1) + result_out(1).
 You MUST define parameters EXACTLY like this for transposed form, IGNORING the LATENCY value from the plan:
-  localparam LATENCY      = 3; // FORCE LATENCY to 3 for transposed!
-  localparam BASE_LATENCY = 3;
+  localparam LATENCY      = 4; // FORCE LATENCY to 4 for transposed!
+  localparam BASE_LATENCY = 4;
   localparam PIPE_DEPTH   = 0; // ALWAYS 0 for transposed
 NEVER instantiate a `pipe_reg` array for transposed form. 
 Adding a pipe_reg adds a 4th cycle, breaking the result_valid alignment.
@@ -466,7 +467,7 @@ INPUT REGISTER RULE (CRITICAL):
 Transposed form broadcasts the input to ALL multipliers in parallel.
 Therefore, it ONLY needs a SINGLE input register, NOT a shift register array.
 WRONG: logic signed [DATA_WIDTH-1:0] data_reg [0:TAPS-1]; // Wastes logic
-RIGHT: (* max_fanout = 16 *) logic signed [DATA_WIDTH-1:0] data_in_reg; // Single register, buffered for ASIC timing
+RIGHT: (* max_fanout = 8 *) logic signed [DATA_WIDTH-1:0] data_in_reg; // Single register, buffered for ASIC timing
 MANDATORY: The module port list MUST declare rst_n with the max_fanout attribute to prevent -55ns recovery violations:
   input wire clk,
   (* max_fanout = 50 *) input wire rst_n,
@@ -478,7 +479,7 @@ CORRECT signal flow — every s[k] is always_ff (MANDATORY GENERATE BLOCK):
    // CRITICAL: MUST use a generate block and the get_coeff() function.
    // This forces Yosys to see the coefficients as constants, resulting in
    // small, fast constant-multipliers instead of massive variable multipliers.
-      genvar g;
+    genvar g;
    generate
      for (g = 0; g < TAPS; g = g + 1) begin : gen_tap
        wire signed [DATA_WIDTH+COEFF_WIDTH-1:0] prod; // Exact 30-bit product width
@@ -486,15 +487,20 @@ CORRECT signal flow — every s[k] is always_ff (MANDATORY GENERATE BLOCK):
        // Constant-coefficient multiplication
        assign prod = data_in_reg * get_coeff(g);
        
-      // Reset normally. The (* max_fanout = 50 *) on the port fixes ASIC timing.
+       // CRITICAL PIPELINE REGISTER: Register the product to break the critical path!
+       logic signed [DATA_WIDTH+COEFF_WIDTH-1:0] prod_reg;
+       
+       // Reset normally. The (* max_fanout = 50 *) on the port fixes ASIC timing.
        always_ff @(posedge clk or negedge rst_n) begin
          if (!rst_n) begin
-           s[g] <= '0;
+           prod_reg <= '0;
+           s[g]     <= '0;
          end else begin
+           prod_reg <= prod;
            if (g == TAPS-1) begin
-             s[g] <= prod;
+             s[g] <= prod_reg; // Use pipelined product!
            end else begin
-             s[g] <= prod + s[g+1];
+             s[g] <= prod_reg + s[g+1]; // Use pipelined product!
            end
          end
        end
@@ -503,31 +509,31 @@ CORRECT OUTPUT LOGIC (NO PIPE_REG):
   // scaled_acc MUST come directly from s[0], NOT from a pipe_reg!
   assign scaled_acc = s[0] >>> COEFF_FRAC_BITS;
 
-VALID SIGNAL PIPELINE FOR TRANSPOSED (LATENCY=3):
-Because LATENCY is forced to 3, you MUST use exactly this 3-stage valid pipeline to match the data path exactly:
-  logic [1:0] valid_sr;
+VALID SIGNAL PIPELINE FOR TRANSPOSED (LATENCY=4):
+Because LATENCY is forced to 4, you MUST use exactly this 4-stage valid pipeline to match the data path exactly:
+  logic [2:0] valid_sr;
 
   always_ff @(posedge clk or negedge rst_n) begin
     if (!rst_n) valid_sr <= '0;
-    else        valid_sr <= {{valid_sr[0], sample_valid}};
+    else        valid_sr <= {{valid_sr[1:0], sample_valid}};
   end
 
   always_ff @(posedge clk or negedge rst_n) begin
     if (!rst_n) result_valid <= 1'b0;
-    else        result_valid <= valid_sr[1];
+    else        result_valid <= valid_sr[2];
   end
 
 SELF-CHECK for transposed form:
- [ ] BASE_LATENCY == 3 and PIPE_DEPTH == 0?
- [ ] NO pipe_reg array instantiated?
+ [ ] LATENCY == 4 and BASE_LATENCY == 4?
+ [ ] NO pipe_reg array instantiated (prod_reg is used inside the generate block instead)?
  [ ] scaled_acc sourced directly from s[0]?
  [ ] s array driven by a generate block using the get_coeff(g) function?
- [ ] s[g] always_ff block omits `negedge rst_n` and `if (!rst_n)` to prevent high-fanout reset timing violations?
+ [ ] prod_reg instantiated inside the generate block to split the multiplier and adder into separate cycles?
+ [ ] s[g] and prod_reg reset normally using `negedge rst_n` (port has `(* max_fanout = 50 *)` to fix ASIC timing)?
  [ ] Multiplier output (prod) is exactly DATA_WIDTH+COEFF_WIDTH bits?
  [ ] s array width is ACC_WIDTH (NOT DATA_WIDTH + COEFF_WIDTH)?
  [ ] Only ONE input register declared (data_in_reg), NOT an array?
  [ ] No always_comb block computing s[k]?
- [ ] LATENCY == 3?
  [ ] NO ACC_WIDTH casts inside the multiplication? (Causes massive ASIC multipliers)
 
 ──────────────────────────────────────────────
@@ -940,8 +946,7 @@ Before outputting, verify ALL boxes:
 
 LATENCY:
 [ ] Counted every always_ff stage input→output. Total == LATENCY?
-[ ] IF transposed: LATENCY == 3? s[k] driven by always_ff? s[k] is ACC_WIDTH?
-[ ] IF direct/symmetric: ACCUM_TYPE matches plan (registered=base 3, combinational=base 2)?
+[ ] IF transposed: LATENCY == 4? prod_reg instantiated to split multiplier/adder? s[k] driven by always_ff? s[k] is ACC_WIDTH?[ ] IF direct/symmetric: ACCUM_TYPE matches plan (registered=base 3, combinational=base 2)?
 [ ] IF direct/symmetric: scaled_acc sources from pipe_reg[PIPE_DEPTH-1], NOT accum directly?
 [ ] IF folded: LATENCY == TAPS + 2? tap_cnt wraps at TAPS-1? accum_reg clears at tap_cnt==0?
 [ ] IF folded: MAC uses sample_in (NOT data_reg[0]) when tap_cnt==0? (non-blocking hazard)
@@ -1060,7 +1065,7 @@ State: s0, s1 at ACC_WIDTH UNSATURATED. Compute y_out FIRST.
 
   wire signed [ACC_WIDTH-1:0] y_out, s0_next, s1_next;
   
-    // CRITICAL: Use exact product width wires to prevent multiplier truncation!
+  // CRITICAL: Use exact product width wires to prevent multiplier truncation!
   wire signed [DATA_WIDTH+COEFF_WIDTH-1:0] b0_prod = B0 * sample_in;
   wire signed [DATA_WIDTH+COEFF_WIDTH-1:0] b1_prod = B1 * sample_in;
   wire signed [DATA_WIDTH+COEFF_WIDTH-1:0] b2_prod = B2 * sample_in;
@@ -1104,6 +1109,51 @@ State: s0, s1 at ACC_WIDTH UNSATURATED. Compute y_out FIRST.
     end else begin
       result_valid <= 1'b0;
     end
+  end
+
+── df2t (ORDER>=2, single section) ──────────────────────────
+State: s0..s{{N-1}} at ACC_WIDTH UNSATURATED. Compute y_out FIRST.
+
+  wire signed [ACC_WIDTH-1:0] y_out, s0_next, s1_next, ...;
+  
+  // CRITICAL: Use exact product width wires to prevent multiplier truncation!
+  wire signed [DATA_WIDTH+COEFF_WIDTH-1:0] b0_prod = B0 * sample_in;
+  wire signed [DATA_WIDTH+COEFF_WIDTH-1:0] b1_prod = B1 * sample_in;
+  wire signed [DATA_WIDTH+COEFF_WIDTH-1:0] b2_prod = B2 * sample_in;
+  // ... declare all b_prod wires ...
+  
+  // MANDATORY: Feedback coefficients (A1, A2, ...) MUST multiply the OUTPUT (y_out).
+  wire signed [ACC_WIDTH+COEFF_WIDTH-1:0]  a1_prod = A1 * y_out;
+  wire signed [ACC_WIDTH+COEFF_WIDTH-1:0]  a2_prod = A2 * y_out;
+  // ... declare all a_prod wires ...
+
+  assign y_out   = (b0_prod >>> COEFF_FRAC_BITS) + s0;         // FIRST
+  assign s0_next = (b1_prod >>> COEFF_FRAC_BITS) - (a1_prod >>> COEFF_FRAC_BITS) + s1;
+  assign s1_next = (b2_prod >>> COEFF_FRAC_BITS) - (a2_prod >>> COEFF_FRAC_BITS) + s2;
+  // ... assign all s_next wires ...
+
+  // SATURATION LOGIC (Icarus-safe, ASIC-fast XOR tree)
+  localparam signed [DATA_WIDTH-1:0] SAT_MAX_DW = (1 << (DATA_WIDTH-1)) - 1;
+  localparam signed [DATA_WIDTH-1:0] SAT_MIN_DW = -(1 << (DATA_WIDTH-1));
+  logic signed [DATA_WIDTH-1:0] y_sat;
+  logic signed [ACC_WIDTH-1:0] y_sat_ext;
+
+  always @(*) begin
+    y_sat = y_out;                  // Implicit truncate to DATA_WIDTH
+    y_sat_ext = y_sat;              // Sign-extend back to ACC_WIDTH
+
+    if (y_out != y_sat_ext) begin
+      if (y_out[ACC_WIDTH-1] == 1'b0) y_sat = SAT_MAX_DW;
+      else                            y_sat = SAT_MIN_DW;
+    end
+  end
+
+  always_ff @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin s0<=0; s1<=0; ... result_out<=0; result_valid<=1'b0; end
+    else if (sample_valid) begin
+      s0<=s0_next; s1<=s1_next; ...     // UNSATURATED
+      result_out<=y_sat; result_valid<=1'b1;
+    end else begin result_valid<=1'b0; end
   end
 
 ── biquad_df1 (ORDER=2, single section) ─────────────────────
@@ -1206,7 +1256,6 @@ If ANY box unchecked → fix before outputting.
 
 OUTPUT: Code only.
 """
-
 
 
 RTL_ERROR_FEEDBACK_TEMPLATE = """
@@ -1998,6 +2047,57 @@ State: s0_tb, s1_tb (ACC_WIDTH, signed).
     begin
         s0_tb = s0_next_tb;
         s1_tb = s1_next_tb;
+    end
+  endtask
+
+── df2t (ORDER≥2, single section) ────────────────────────────
+RTL stores UNSATURATED s_k_next at ACC_WIDTH.
+
+  reg signed [ACC_WIDTH-1:0] s0_tb=0, s1_tb=0, s2_tb=0, s3_tb=0;
+  reg signed [ACC_WIDTH-1:0] s0_next_tb, s1_next_tb, s2_next_tb, s3_next_tb;
+
+  function signed [DATA_WIDTH-1:0] calculate_golden_output;
+    input signed [DATA_WIDTH-1:0] sample;
+    reg signed [ACC_WIDTH-1:0] y_out;
+    // CRITICAL: Exact-width intermediate products to prevent Verilog truncation!
+    reg signed [DATA_WIDTH+COEFF_WIDTH-1:0] b0_prod;
+    reg signed [DATA_WIDTH+COEFF_WIDTH-1:0] b1_prod;
+    reg signed [DATA_WIDTH+COEFF_WIDTH-1:0] b2_prod;
+    reg signed [DATA_WIDTH+COEFF_WIDTH-1:0] b3_prod;
+    reg signed [DATA_WIDTH+COEFF_WIDTH-1:0] b4_prod;
+    reg signed [ACC_WIDTH+COEFF_WIDTH-1:0]  a1_prod;
+    reg signed [ACC_WIDTH+COEFF_WIDTH-1:0]  a2_prod;
+    reg signed [ACC_WIDTH+COEFF_WIDTH-1:0]  a3_prod;
+    reg signed [ACC_WIDTH+COEFF_WIDTH-1:0]  a4_prod;
+    begin
+      b0_prod = B0 * sample;
+      b1_prod = B1 * sample;
+      b2_prod = B2 * sample;
+      b3_prod = B3 * sample;
+      b4_prod = B4 * sample;
+      
+      y_out      = (b0_prod >>> COEFF_FRAC_BITS) + s0_tb;
+      
+      a1_prod = A1 * y_out;
+      a2_prod = A2 * y_out;
+      a3_prod = A3 * y_out;
+      a4_prod = A4 * y_out;
+      
+      s0_next_tb = (b1_prod >>> COEFF_FRAC_BITS) - (a1_prod >>> COEFF_FRAC_BITS) + s1_tb;
+      s1_next_tb = (b2_prod >>> COEFF_FRAC_BITS) - (a2_prod >>> COEFF_FRAC_BITS) + s2_tb;
+      s2_next_tb = (b3_prod >>> COEFF_FRAC_BITS) - (a3_prod >>> COEFF_FRAC_BITS) + s3_tb;
+      s3_next_tb = (b4_prod >>> COEFF_FRAC_BITS) - (a4_prod >>> COEFF_FRAC_BITS);
+      
+      if      (y_out > SAT_MAX_TB) calculate_golden_output = SAT_MAX_TB[DATA_WIDTH-1:0];
+      else if (y_out < SAT_MIN_TB) calculate_golden_output = SAT_MIN_TB[DATA_WIDTH-1:0];
+      else                         calculate_golden_output = y_out[DATA_WIDTH-1:0];
+    end
+  endfunction
+
+  task update_tb_state;
+    begin
+      s0_tb=s0_next_tb; s1_tb=s1_next_tb;
+      s2_tb=s2_next_tb; s3_tb=s3_next_tb;
     end
   endtask
 
