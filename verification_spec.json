@@ -1,0 +1,37 @@
+{
+  "verification_framework": {
+    "linter": "verilator",
+    "simulator": "iverilog"
+  },
+  "testbench_settings": {
+    "filename": "output/test_filter",
+    "method": "systemverilog"
+  },
+  "verification_methods": {
+    "cocotb": {
+      "makefile_sim": "icarus"
+    },
+    "systemverilog": {
+      "testbench_style": "class_based"
+    },
+    "pyuvm": {
+      "uvm_version": "pyuvm"
+    }
+  },
+  "golden_model": {
+    "type": "scipy",
+    "language": "python",
+    "implementation": "scipy.signal.lfilter"
+  },
+  "self_checking": {
+    "enabled": true,
+    "comparison_method": "mse",
+    "tolerance_absolute": 1e-6,
+    "tolerance_relative_percent": 0.1
+  },
+  "test_coverage": {
+    "corner_cases": ["max_positive_input", "max_negative_input", "alternating"],
+    "edge_cases": ["reset_during_processing", "back_to_back_samples"],
+    "num_random_vectors": 1000
+  }
+}

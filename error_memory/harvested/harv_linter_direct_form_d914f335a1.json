@@ -1,0 +1,17 @@
+{
+  "id": "harv_linter_direct_form_d914f335a1",
+  "source": "linter",
+  "topology": "direct_form",
+  "filter_class": "FIR",
+  "error_signature": "<file>:<n>: error: cannot override localparam `acc_width` in `test_filter.dut`. <file>:<n>: error: cannot override localparam `coeff_frac_bits` in `test_filter.dut`. <file>:<n>: error: cannot override localparam `coeff_width` in `test_filter.dut`. <file>:<n>: error: cannot override localparam `data_width` in `test_filter.dut`. <file>:<n>: error: cannot override localparam `taps` in `test_filter.dut`. <n> error(s) during elaboration",
+  "raw_error_example": "output/test_filter.sv:177: error: Cannot override localparam `ACC_WIDTH` in `test_filter.dut`.\noutput/test_filter.sv:179: error: Cannot override localparam `COEFF_FRAC_BITS` in `test_filter.dut`.\noutput/test_filter.sv:178: error: Cannot override localparam `COEFF_WIDTH` in `test_filter.dut`.\noutput/test_filter.sv:176: error: Cannot override localparam `DATA_WIDTH` in `test_filter.dut`.\noutput/test_filter.sv:180: error: Cannot override localparam `TAPS` in `test_filter.dut`.\n6 error(s) during elaboration.",
+  "root_cause": "The design under test uses `localparam` for parameters that the testbench attempted to override via hierarchical override, which is not allowed.",
+  "fix_rule": "In the testbench, use `defparam` statements to override the DUT's local parameters, or change the DUT's localparams to parameters. Alternatively, instantiate the DUT with parameter port mapping.",
+  "fix_snippet": "defparam test_filter.dut.DATA_WIDTH = DATA_WIDTH;\ndefparam test_filter.dut.ACC_WIDTH = ACC_WIDTH;\ndefparam test_filter.dut.COEFF_WIDTH = COEFF_WIDTH;\ndefparam test_filter.dut.COEFF_FRAC_BITS = COEFF_FRAC_BITS;\ndefparam test_filter.dut.TAPS = TAPS;",
+  "tags": [
+    "harvested",
+    "tb_fix"
+  ],
+  "source_notes": "harvested",
+  "date": "2026-06-20"
+}

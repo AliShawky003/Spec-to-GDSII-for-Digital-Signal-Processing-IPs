@@ -1,0 +1,17 @@
+{
+  "id": "harv_linter_direct_form_50359aa452",
+  "source": "linter",
+  "topology": "direct_form",
+  "filter_class": "FIR",
+  "error_signature": "%error: <file>:<n>: syntax error, unexpected generate <n> | generate | ^~~~~~~~ %error: <file>:<n>: syntax error, unexpected '[', expecting identifier or randomize <n> | for (p = <n>; p < pipe_depth; p = p + <n>) pipe_reg[p] <= pipe_reg[p-<n>]; | ^ %error: <file>:<n>: syntax error, unexpected endmodule <n> | endmodule | ^~~~~~~~~ %error: cannot continue",
+  "raw_error_example": "%Error: output/direct_4.sv:89:13: syntax error, unexpected generate\n   89 |             generate\n      |             ^~~~~~~~\n%Error: output/direct_4.sv:95:76: syntax error, unexpected '[', expecting IDENTIFIER or randomize\n   95 |                             for (p = 1; p < PIPE_DEPTH; p = p + 1) pipe_reg[p] <= pipe_reg[p-1];\n      |                                                                            ^\n%Error: output/direct_4.sv:147:1: syntax error, unexpected endmodule\n  147 | endmodule\n      | ^~~~~~~~~\n%Error: Cannot continue",
+  "root_cause": "The verilog generate block was used incorrectly for conditional pipeline instantiation, but the loop variable \"p\" was not declared as an integer.",
+  "fix_rule": "Declare all loop variables (integer i, k, p) before use. Replace generate/endgenerate with an always_ff block and conditional if statement for pipeline stages.",
+  "fix_snippet": "integer p;\n    always_ff @(posedge clk or negedge rst_n) begin : pipe_stages\n        if (!rst_n) begin\n            for (p = 0; p < PIPE_DEPTH; p = p + 1) pipe_reg[p] <= '0;\n        end else begin\n            pipe_reg[0] <= accum;\n            for (p = 1; p < PIPE_DEPTH; p = p + 1) pipe_reg[p] <= pipe_reg[p-1];\n        end\n    end",
+  "tags": [
+    "harvested",
+    "rtl_fix"
+  ],
+  "source_notes": "harvested",
+  "date": "2026-06-21"
+}

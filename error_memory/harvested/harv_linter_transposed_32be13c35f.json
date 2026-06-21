@@ -1,0 +1,17 @@
+{
+  "id": "harv_linter_transposed_32be13c35f",
+  "source": "linter",
+  "topology": "transposed",
+  "filter_class": "FIR",
+  "error_signature": "%error-procasswire: <file>:<n>: procedural assignment to wire, perhaps intended var (ieee <n>-<n> <n>.<n>): <ident> : ... note: in instance <ident> <n> | result_out <= '<n>; | ^~~~~~~~~~ ... for error description see https://verilator.org/warn/procasswire?v=<n>.<n> %error-procasswire: <file>:<n>: procedural assignment to wire, perhaps intended var (ieee <n>-<n> <n>.<n>): <ident> : ... note: in instance <ident> <n> | result_out <= result_temp; | ^~~~~~~~~~ %error-procasswire: <file>:<n>: procedural assignment to wire, perhaps intended var (ieee <n>-<n> <n>.<n>): <ident> : ... note: in instance <ident> <n> | result_valid <= <n>'b0; | ^~~~~~~~~~~~ %error-procasswire: <file>:<n>: procedural assignment to wire, perhaps intended var (ieee <n>-<n> <n>.<n>): <ident> : ... note: in instance <ident> <n> | result_valid <= valid_sr[<n>]; | ^~~~~~~~~~~~ %error: exiting due to <n> error(s) ... see the manual at https://verilator.org/verilator_doc.html for more assistance",
+  "raw_error_example": "%Error-PROCASSWIRE: output/transposed_4.sv:92:13: Procedural assignment to wire, perhaps intended var (IEEE 1800-2017 6.5): 'result_out'\n                                                : ... note: In instance 'transposed_4'\n   92 |             result_out <= '0;\n      |             ^~~~~~~~~~\n                    ... For error description see https://verilator.org/warn/PROCASSWIRE?v=5.020\n%Error-PROCASSWIRE: output/transposed_4.sv:94:13: Procedural assignment to wire, perhaps intended var (IEEE 1800-2017 6.5): 'result_out'\n                                                : ... note: In instance 'transposed_4'\n   94 |             result_out <= result_temp;\n      |             ^~~~~~~~~~\n%Error-PROCASSWIRE: output/transposed_4.sv:108:13: Procedural assignment to wire, perhaps intended var (IEEE 1800-2017 6.5): 'result_valid'\n                                                 : ... note: In instance 'transposed_4'\n  108 |             result_valid <= 1'b0;\n      |             ^~~~~~~~~~~~\n%Error-PROCASSWIRE: output/transposed_4.sv:110:13: Procedural assignment to wire, perhaps intended var (IEEE 1800-2017 6.5): 'result_valid'\n                                                 : ... note: In instance 'transposed_4'\n  110 |             result_valid <= valid_sr[1];\n      |             ^~~~~~~~~~~~\n%Error: Exiting due to 4 error(s)\n        ... See the manual at https://verilator.org/verilator_doc.html for more assistance.",
+  "root_cause": "Output ports declared as `wire` cannot be assigned inside procedural blocks (e.g., always_ff or always @(*)).",
+  "fix_rule": "Declare output ports as `reg` if they are assigned in procedural blocks, or use a separate internal register and assign it to the output wire.",
+  "fix_snippet": "output reg signed [15:0] result_out,\noutput reg result_valid",
+  "tags": [
+    "harvested",
+    "rtl_fix"
+  ],
+  "source_notes": "harvested",
+  "date": "2026-06-21"
+}

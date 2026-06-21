@@ -1,0 +1,17 @@
+{
+  "id": "harv_linter_direct_form_a4df19144c",
+  "source": "linter",
+  "topology": "direct_form",
+  "filter_class": "FIR",
+  "error_signature": "%error: <file>:<n>: can't find definition of variable: <ident> : ... suggested alternative: <ident> <n> | if (!rstn) valid_sr[<n>] <= '<n>; | ^~~~ %error: exiting due to <n> error(s)",
+  "raw_error_example": "%Error: output/fir_filter.sv:173:22: Can't find definition of variable: 'rstn'\n                                   : ... Suggested alternative: 'rst_n'\n  173 |                 if (!rstn) valid_sr[0] <= '0;\n      |                      ^~~~\n%Error: Exiting due to 1 error(s)",
+  "root_cause": "The code referenced a signal `rstn` that does not exist, while the correct port name is `rst_n`.",
+  "fix_rule": "Use the exact signal name as declared in the module port list. When referencing reset, ensure the identifier matches the port name exactly.",
+  "fix_snippet": "if (!rst_n) valid_sr[0] <= '0;",
+  "tags": [
+    "harvested",
+    "rtl_fix"
+  ],
+  "source_notes": "harvested",
+  "date": "2026-06-20"
+}

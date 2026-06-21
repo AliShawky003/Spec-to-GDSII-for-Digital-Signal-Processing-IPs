@@ -1,0 +1,14 @@
+{
+  "id": "err_transposed_latency_off_by_taps",
+  "source": "simulator",
+  "topology": "transposed_direct_form",
+  "filter_class": "FIR",
+  "error_signature": "transposed latency mismatch golden leads lags output offset by taps sample alignment <n>",
+  "raw_error_example": "Total errors: <N>/<N>\nPattern: sustained mismatch starting at sample <N>; golden leads RTL by approximately TAPS cycles\nFirst mismatch expected=<N> got=<N>",
+  "root_cause": "LATENCY field set to TAPS+1 or a direct-form formula. Transposed direct form has a fixed pipeline latency of exactly 3 cycles (input register + state chain + output register), independent of TAPS. The TB uses LATENCY for its capture-offset alignment — setting it to TAPS+1 shifts the comparison window by TAPS cycles.",
+  "fix_rule": "For TOPOLOGY=transposed_direct_form, LATENCY must be exactly 3 in the DESIGN_PLAN, regardless of TAPS. Do not derive it from ceil(log2(TAPS)). Do not set BASE_LATENCY.",
+  "fix_snippet": "# In the architect's DESIGN_PLAN output:\nTOPOLOGY=transposed_direct_form\nLATENCY=3\nLATENCY_RULE=3 (transposed fixed pipeline: input_reg + s_chain + output_reg)\n# BASE_LATENCY is intentionally omitted for transposed",
+  "tags": ["transposed", "latency", "timing", "tb_offset", "design_plan", "fir"],
+  "source_notes": "seed",
+  "date": "2026-04-11"
+}

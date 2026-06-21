@@ -1,0 +1,57 @@
+{
+  "project_settings": {
+    "project_name": "folded_4",
+    "output_file": "output/folded_4.sv",
+    "target_clock_freq_mhz": 50
+  },
+  "filter_design_specification": {
+    "filter_type": "lowpass",
+    "filter_class": "FIR",
+    "structure": "folded",
+    "order": 4,
+    "design_method": "firwin",
+
+    "common": {
+      "sampling_frequency_hz": 48000,
+      "cutoff_frequency_hz": 3500,
+      "passband_ripple_db": [],
+      "stopband_attenuation_db": [],
+      "transition_width_hz": []
+    },
+
+    "fir_methods": {
+      "remez": {
+        "passband_weight": 1.0,
+        "stopband_weight": 1.0
+      },
+      "firwin": {
+        "window_type": "hamming"
+      },
+      "firls": {
+        "passband_weight": 1.0,
+        "stopband_weight": 1.0
+      },
+      "kaiser": {}
+    },
+
+    "iir_methods": {
+      "butter": {},
+      "cheby1": {},
+      "cheby2": {},
+      "ellip": {},
+      "bessel": {}
+    }
+  },
+  "mathematical_model": {
+    "forward_coefficients": [],
+    "feedback_coefficients": [],
+    "z_transform_expression": ""
+  },
+  "hardware_specifications": {
+    "data_width": 16,
+    "coefficient_width": 10,
+    "accumulator_width": 24,
+    "reset_type": "asynchronous_active_low",
+    "max_area_um2":"" 
+  }
+}

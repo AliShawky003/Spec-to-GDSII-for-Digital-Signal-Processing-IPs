@@ -1,0 +1,17 @@
+{
+  "id": "harv_linter_transposed_44513c1dc1",
+  "source": "linter",
+  "topology": "transposed",
+  "filter_class": "FIR",
+  "error_signature": "%error: <file>:<n>: can't find definition of variable: <ident> <n> | accum = '<n>; | ^~~~~ %error: exiting due to <n> error(s)",
+  "raw_error_example": "%Error: output/transposed_32.sv:80:9: Can't find definition of variable: 'accum'\n   80 |         accum = '0;\n      |         ^~~~~\n%Error: Exiting due to 1 error(s)",
+  "root_cause": "An undeclared variable 'accum' was used in the RTL code, likely from a cut-off or incomplete line causing a missing variable definition.",
+  "fix_rule": "Ensure all variables used in always blocks are declared before use, and verify that multi-line expressions are complete without truncation. Avoid leaving partial assignments or references to non-existent variables.",
+  "fix_snippet": "`accum` not declared; remove or define it:\n// Delete or comment out: accum = '0;",
+  "tags": [
+    "harvested",
+    "rtl_fix"
+  ],
+  "source_notes": "harvested",
+  "date": "2026-06-17"
+}

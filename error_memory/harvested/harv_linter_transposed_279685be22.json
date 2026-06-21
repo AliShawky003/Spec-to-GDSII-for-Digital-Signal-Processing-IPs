@@ -1,0 +1,17 @@
+{
+  "id": "harv_linter_transposed_279685be22",
+  "source": "linter",
+  "topology": "transposed",
+  "filter_class": "FIR",
+  "error_signature": "%error-blkloopinit: <file>:<n>: unsupported: delayed assignment to array inside for loops (non-delayed is ok - see docs) <n> | for (i = <n>; i < <n>; i = i + <n>) s[i] <= '<n>; | ^ ... for error description see https://verilator.org/warn/blkloopinit?v=<n>.<n> %error: exiting due to <n> error(s) ... see the manual at https://verilator.org/verilator_doc.html for more assistance",
+  "raw_error_example": "%Error-BLKLOOPINIT: output/transposed_64.sv:114:45: Unsupported: Delayed assignment to array inside for loops (non-delayed is ok - see docs)\n  114 |             for (i = 0; i < 65; i = i + 1) s[i] <= '0;\n      |                                             ^\n                    ... For error description see https://verilator.org/warn/BLKLOOPINIT?v=5.020\n%Error: Exiting due to 1 error(s)\n        ... See the manual at https://verilator.org/verilator_doc.html for more assistance.",
+  "root_cause": "Verilator does not support non-blocking assignments (<=) to array elements inside for loops.",
+  "fix_rule": "Use blocking assignments (=) when initializing arrays inside loops, or unroll the loop manually.",
+  "fix_snippet": "for (i = 0; i < 65; i = i + 1) s[i] = '0;",
+  "tags": [
+    "harvested",
+    "rtl_fix"
+  ],
+  "source_notes": "harvested",
+  "date": "2026-06-19"
+}

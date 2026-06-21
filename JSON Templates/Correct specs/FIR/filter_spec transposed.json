@@ -1,0 +1,33 @@
+{
+  "project_settings": {
+    "project_name": "non_symmetric_fir_4tap",
+    "output_file": "output/fir_non_sym.sv",
+    "target_clock_freq_mhz": 100
+  },
+  "filter_design_specification": {
+    "filter_type": "lowpass",
+    "filter_class": "FIR",
+    "structure": "",
+    "order": 3,
+    "design_method": "custom",
+    "common": {
+      "sampling_frequency_hz": 48000,
+      "cutoff_frequency_hz": 5000,
+      "passband_ripple_db": 1.0,
+      "stopband_attenuation_db": 20,
+      "transition_width_hz": 15000
+    }
+  },
+  "mathematical_model": {
+    "forward_coefficients": [0.45, 0.32, -0.15, 0.08],
+    "feedback_coefficients": [1.0],
+    "z_transform_expression": ""
+  },
+  "hardware_specifications": {
+    "data_width": 16,
+    "coefficient_width": 12,
+    "accumulator_width": 32,
+    "reset_type": "asynchronous_active_low",
+    "max_area_um2": 40000
+  }
+}

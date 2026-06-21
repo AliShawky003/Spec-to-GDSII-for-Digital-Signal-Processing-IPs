@@ -1,0 +1,57 @@
+{
+  "project_settings": {
+    "project_name": "fir_lowpass_demo",
+    "output_file": "output/fir_filter.sv",
+    "target_clock_freq_mhz": 100
+  },
+  "filter_design_specification": {
+    "filter_type": "lowpass",
+    "filter_class": "FIR",
+    "structure": "direct_form",
+    "order": 50,
+    "design_method": "firwin",
+
+    "common": {
+      "sampling_frequency_hz": 48000,
+      "cutoff_frequency_hz": 3500,
+      "passband_ripple_db": [],
+      "stopband_attenuation_db": [],
+      "transition_width_hz": []
+    },
+
+    "fir_methods": {
+      "remez": {
+        "passband_weight": 1.0,
+        "stopband_weight": 1.0
+      },
+      "firwin": {
+        "window_type": "hamming"
+      },
+      "firls": {
+        "passband_weight": 1.0,
+        "stopband_weight": 1.0
+      },
+      "kaiser": {}
+    },
+
+    "iir_methods": {
+      "butter": {},
+      "cheby1": {},
+      "cheby2": {},
+      "ellip": {},
+      "bessel": {}
+    }
+  },
+  "mathematical_model": {
+    "forward_coefficients": [],
+    "feedback_coefficients": [],
+    "z_transform_expression": ""
+  },
+  "hardware_specifications": {
+    "data_width": 16,
+    "coefficient_width": 8,
+    "accumulator_width": 24,
+    "reset_type": "asynchronous_active_low",
+    "max_area_um2": 60000
+  }
+}

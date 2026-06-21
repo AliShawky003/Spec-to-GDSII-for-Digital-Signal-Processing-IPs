@@ -1,0 +1,17 @@
+{
+  "id": "harv_linter_direct_form_c8d9f54233",
+  "source": "linter",
+  "topology": "direct_form",
+  "filter_class": "FIR",
+  "error_signature": "%error: <file>:<n>: unknown verilator lint message code: 'unused signals', in '/*verilator lint_off unused signals*/' <n> | /*verilator lint_off unused signals*/ | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %error: exiting due to <n> error(s)",
+  "raw_error_example": "%Error: output/fir_filter.sv:129:5: Unknown verilator lint message code: 'UNUSED signals', in '/*verilator lint_off UNUSED signals*/'\n  129 |     /*verilator lint_off UNUSED signals*/ \n      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n%Error: Exiting due to 1 error(s)",
+  "root_cause": "Verilator lint pragma `/*verilator lint_off UNUSED signals*/` was incorrectly spelled with a space in \"UNUSED signals\" instead of \"UNUSEDSIGNAL\".",
+  "fix_rule": "Use correct Verilator lint message codes without spaces; for example, use `/*verilator lint_off UNUSEDSIGNAL*/` instead of `/*verilator lint_off UNUSED signals*/`.",
+  "fix_snippet": "// Replace malformed pragma:\n    // /* verilator lint_off UNUSED signals */\n    // With correct pragma:\n    /* verilator lint_off UNUSEDSIGNAL */",
+  "tags": [
+    "harvested",
+    "rtl_fix"
+  ],
+  "source_notes": "harvested",
+  "date": "2026-06-19"
+}

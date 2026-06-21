@@ -1,0 +1,14 @@
+{
+  "id": "err_wire_var_procedural_assign",
+  "source": "linter",
+  "topology": "any",
+  "filter_class": "any",
+  "error_signature": "cannot assign to <ident> in procedural block declared as wire signal written in always must be logic reg",
+  "raw_error_example": "%Error: <FILE>:<N>: Cannot assign to 'accum' in procedural block (declared as wire)\n%Error: <FILE>:<N>: Signal written in always block must be declared as 'logic' or 'reg'",
+  "root_cause": "Signal declared as `wire` (or left implicit, defaulting to wire) but written inside an always_ff/always_comb block. In SystemVerilog, procedural writes require `logic` or `reg`; `wire` is only valid for continuous `assign` statements.",
+  "fix_rule": "If a signal is assigned inside any always block, declare it as `logic` (or `reg` in pure Verilog). Use `wire` only for continuous `assign`. Never mix.",
+  "fix_snippet": "// WRONG:\nwire signed [ACC_WIDTH-1:0] accum;\nalways_ff @(posedge clk) accum <= accum + mult_result;\n\n// RIGHT:\nlogic signed [ACC_WIDTH-1:0] accum;\nalways_ff @(posedge clk) accum <= accum + mult_result;\n\n// ALSO RIGHT (continuous assign only):\nwire signed [ACC_WIDTH-1:0] scaled_out;\nassign scaled_out = accum >>> COEFF_FRAC_BITS;",
+  "tags": ["wire", "logic", "reg", "procedural_assignment", "declaration", "verilator", "icarus"],
+  "source_notes": "seed",
+  "date": "2026-04-11"
+}

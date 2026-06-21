@@ -1,0 +1,14 @@
+{
+  "id": "err_tb_golden_model_topology_blind",
+  "source": "simulator",
+  "topology": "transposed_direct_form,systolic",
+  "filter_class": "FIR",
+  "error_signature": "testbench golden model direct form mismatch all samples topology pipeline latency alignment shifted",
+  "raw_error_example": "Total errors: <N>/<N>\nRTL output shape matches spec expectation but is consistently shifted by 1-3 samples relative to golden\nSim report: frequency response looks correct, sample-by-sample comparison fails",
+  "root_cause": "TB generator produces a direct-form Python golden model (np.convolve) regardless of the RTL's TOPOLOGY. Transposed and systolic structures produce mathematically identical outputs but with different pipeline latencies. The TB's sample-aligned comparison does not account for topology-specific latency, reporting false mismatches even when the RTL is correct.",
+  "fix_rule": "In the TB generator, read LATENCY from the DESIGN_PLAN and shift the golden-vs-RTL comparison index by (LATENCY - GOLDEN_INHERENT_LATENCY). Keep the golden model as np.convolve — do not regenerate math per topology. Only the comparison offset changes.",
+  "fix_snippet": "# In cocotb TB:\nLATENCY = int(os.environ.get('FILTER_LATENCY', 1))\ngolden = np.convolve(stimulus, coeffs)[:len(stimulus)]\n\n# Sample-align: compare golden[n] vs rtl_out[n + LATENCY]\nfor n in range(len(stimulus) - LATENCY):\n    expected = golden[n]\n    actual   = rtl_out[n + LATENCY]\n    if expected != actual:\n        errors += 1",
+  "tags": ["testbench", "golden_model", "latency_alignment", "transposed", "systolic", "tb_generator"],
+  "source_notes": "seed",
+  "date": "2026-04-11"
+}

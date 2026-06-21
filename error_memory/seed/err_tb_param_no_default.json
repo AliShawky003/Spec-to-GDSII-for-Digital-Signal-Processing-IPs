@@ -1,0 +1,14 @@
+{
+  "id": "err_tb_param_no_default",
+  "source": "linter",
+  "topology": "any",
+  "filter_class": "any",
+  "error_signature": "parameter declared outside parameter port list must have a default value syntax error invalid module item",
+  "raw_error_example": "<FILE>:<N>: error: parameter declared outside parameter port list must have a default value.\n<FILE>:<N>: syntax error\n<FILE>:<N>: error: Invalid module item.",
+  "root_cause": "A module-level `parameter` (declared inside the module body, not in the #(...) port list) was written without a default value, e.g. `parameter W;`. Icarus Verilog rejects this — all body-level parameters must have an explicit default.",
+  "fix_rule": "Every `parameter` declared inside a module body must have `= <value>` in the same declaration. If the value is meant to be set externally, move it into the `#( ... )` parameter port list or add a sensible default like `= 16`.",
+  "fix_snippet": "// WRONG — no default value:\n// module test;\n//   parameter DATA_WIDTH;\n//   parameter LATENCY;\n// endmodule\n\n// RIGHT — defaults on every body-level parameter:\nmodule test;\n  parameter DATA_WIDTH = 16;\n  parameter LATENCY   = 7;\n  // ...\nendmodule\n\n// ALSO RIGHT — move to port list for override from outside:\nmodule test #(\n  parameter DATA_WIDTH = 16,\n  parameter LATENCY   = 7\n) ();",
+  "tags": ["parameter", "default_value", "module_body", "testbench", "iverilog", "syntax_error"],
+  "source_notes": "seed",
+  "date": "2026-04-11"
+}

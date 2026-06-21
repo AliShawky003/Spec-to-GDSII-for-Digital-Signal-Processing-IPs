@@ -1,0 +1,17 @@
+{
+  "id": "harv_linter_transposed_e9785dfc24",
+  "source": "linter",
+  "topology": "transposed",
+  "filter_class": "FIR",
+  "error_signature": "<file>:<n>: error: cannot override localparam `acc_width` in `output_test_filter.dut_inst`. <file>:<n>: error: cannot override localparam `coeff_frac_bits` in `output_test_filter.dut_inst`. <file>:<n>: error: cannot override localparam `coeff_width` in `output_test_filter.dut_inst`. <file>:<n>: error: cannot override localparam `data_width` in `output_test_filter.dut_inst`. <file>:<n>: error: parameter `order` not found in `output_test_filter.dut_inst`. <file>:<n>: error: cannot override localparam `taps` in `output_test_filter.dut_inst`. <n> error(s) during elaboration",
+  "raw_error_example": "output/test_filter.sv:155: error: Cannot override localparam `ACC_WIDTH` in `output_test_filter.dut_inst`.\noutput/test_filter.sv:157: error: Cannot override localparam `COEFF_FRAC_BITS` in `output_test_filter.dut_inst`.\noutput/test_filter.sv:156: error: Cannot override localparam `COEFF_WIDTH` in `output_test_filter.dut_inst`.\noutput/test_filter.sv:154: error: Cannot override localparam `DATA_WIDTH` in `output_test_filter.dut_inst`.\noutput/test_filter.sv:159: error: parameter `ORDER` not found in `output_test_filter.dut_inst`.\noutput/test_filter.sv:158: error: Cannot override localparam `TAPS` in `output_test_filter.dut_inst`.\n7 error(s) during elaboration.",
+  "root_cause": "The testbench module incorrectly attempted to override parameters of the DUT using localparam instead of parameter, and passed undefined localparam ORDER.",
+  "fix_rule": "Declare all DUT parameters as `parameter` in the testbench, not `localparam`, and ensure only parameters defined in the DUT module are overridden\u2014remove any stray parameter like ORDER that does not exist in the DUT.",
+  "fix_snippet": "module output_test_filter;\n    parameter DATA_WIDTH = 16;\n    parameter ACC_WIDTH = 29;\n    parameter COEFF_WIDTH = 10;\n    parameter COEFF_FRAC_BITS = 9;\n    parameter TAPS = 5;\n    parameter VECTOR_COUNT = 200;\n    parameter LATENCY = 3;\n    parameter CLOCK_PERIOD_NS = 20;",
+  "tags": [
+    "harvested",
+    "tb_fix"
+  ],
+  "source_notes": "harvested",
+  "date": "2026-06-21"
+}

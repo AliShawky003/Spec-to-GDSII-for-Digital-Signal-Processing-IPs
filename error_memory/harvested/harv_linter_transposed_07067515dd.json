@@ -1,0 +1,17 @@
+{
+  "id": "harv_linter_transposed_07067515dd",
+  "source": "linter",
+  "topology": "transposed",
+  "filter_class": "FIR",
+  "error_signature": "<file>:<n>: error: could not find variable ``random_val'' in ``tb_transposed_16'' <file>:<n>: error: unable to bind wire/reg/memory `random_val' in `tb_transposed_16' <file>:<n>: error: unable to bind wire/reg/memory `random_val' in `tb_transposed_16' <n> error(s) during elaboration",
+  "raw_error_example": "output/test_filter.sv:106: error: Could not find variable ``random_val'' in ``tb_transposed_16''\noutput/test_filter.sv:107: error: Unable to bind wire/reg/memory `random_val' in `tb_transposed_16'\noutput/test_filter.sv:110: error: Unable to bind wire/reg/memory `random_val' in `tb_transposed_16'\n3 error(s) during elaboration.",
+  "root_cause": "The variable `random_val` was used in the testbench code without being declared.",
+  "fix_rule": "Declare any variable before using it; add an integer declaration for `random_val` in the module's signal list.",
+  "fix_snippet": "integer error_count;\n  integer checker_index;\n  integer sample_count;\n  integer random_val;",
+  "tags": [
+    "harvested",
+    "tb_fix"
+  ],
+  "source_notes": "harvested",
+  "date": "2026-06-21"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "err_symmetric_center_tap_doubled",
+  "source": "simulator",
+  "topology": "symmetric_direct_form",
+  "filter_class": "FIR",
+  "error_signature": "symmetric fir odd taps golden mismatch center tap pre_add doubled total errors <n>",
+  "raw_error_example": "Total samples tested: <N>\nTotal errors: <N>\nFirst mismatch at sample <N>: expected=<N>, got=<N> (delta=<N>)\nPattern: RTL output is systematically larger than golden",
+  "root_cause": "Symmetric FIR with odd TAPS added the center tap to itself inside the pre-adder loop. The center tap at index TAPS/2 has no symmetric pair and must be multiplied directly, not pre-added.",
+  "fix_rule": "For symmetric FIR with odd TAPS, exclude index CENTER=TAPS/2 from the pre-adder for-loop. Multiply it directly: mult[CENTER] = data_reg[CENTER] * coeff[CENTER]. The pre-adder loop iterates i from 0 to CENTER-1 only.",
+  "fix_snippet": "localparam CENTER = TAPS / 2;\n\n// Pre-add symmetric pairs — skip the center tap\nalways_comb begin\n  for (int i = 0; i < CENTER; i++)\n    pre_add[i] = data_reg[i] + data_reg[TAPS-1-i];\nend\n\n// Multiply\nalways_comb begin\n  for (int i = 0; i < CENTER; i++)\n    mult[i] = pre_add[i] * coeff[i];\n  // Center tap multiplied directly (odd TAPS only)\n  mult[CENTER] = data_reg[CENTER] * coeff[CENTER];\nend",
+  "tags": ["symmetric", "odd_taps", "pre_add", "center_tap", "golden_mismatch", "fir"],
+  "source_notes": "seed",
+  "date": "2026-04-11"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "harv_linter_direct_form_e328889346",
+  "source": "linter",
+  "topology": "direct_form",
+  "filter_class": "FIR",
+  "error_signature": "%error: <file>:<n>: number is missing value digits: <n>'d <n> | <n>: get_coeff = <n>'d -<n>; | ^~~~~ %error: <file>:<n>: number is missing value digits: <n>'d <n> | <n>: get_coeff = <n>'d -<n>; | ^~~~~ %error: exiting due to <n> error(s)",
+  "raw_error_example": "%Error: output/direct_16.sv:25:32: Number is missing value digits: 10'd \n   25 |                 0: get_coeff = 10'd -1;\n      |                                ^~~~~\n%Error: output/direct_16.sv:41:33: Number is missing value digits: 10'd \n   41 |                 16: get_coeff = 10'd -1;\n      |                                 ^~~~~\n%Error: Exiting due to 2 error(s)",
+  "root_cause": "The compiler cannot parse the negative number literal because the minus sign is placed after the base specifier (e.g., `10'd -1`), which is invalid syntax.",
+  "fix_rule": "Move the minus sign before the width and base specifier to write a negative constant (e.g., `-10'd1`). For a zero coefficient, use only the positive form (e.g., `10'd0`).",
+  "fix_snippet": "0: get_coeff = -10'd1;\n1: get_coeff = 10'd0;\n16: get_coeff = -10'd1;\ndefault: get_coeff = 10'd0;",
+  "tags": [
+    "harvested",
+    "rtl_fix"
+  ],
+  "source_notes": "harvested",
+  "date": "2026-06-21"
+}

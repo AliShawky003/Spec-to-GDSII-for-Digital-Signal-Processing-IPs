@@ -1,0 +1,14 @@
+{
+  "id": "err_verilator_blkloopinit",
+  "source": "linter",
+  "topology": "any",
+  "filter_class": "any",
+  "error_signature": "blkloopinit unsupported delayed assignment to array inside for loops non-delayed is ok",
+  "raw_error_example": "%Error-BLKLOOPINIT: <FILE>:<N>: Unsupported: Delayed assignment to array inside for loops (non-delayed is ok - see docs)\n  s[i] <= '0;",
+  "root_cause": "Verilator does not support non-blocking (delayed) assignment to an unpacked array element inside a `for` loop within an `always_ff` block. The RTL typically resets an accumulator/state array like `for (i=0; i<TAPS; i++) s[i] <= '0;` which Icarus Verilog accepts but Verilator rejects. Blocking assignment (`=`) inside the loop is fine; non-blocking (`<=`) is not.",
+  "fix_rule": "Replace the for-loop of non-blocking array writes with ONE of: (1) a `generate` block that produces a separate `always_ff` per array element, (2) a manually unrolled sequence of `s[0] <= '0; s[1] <= '0; ...`, or (3) a packed array that can be assigned as a whole (`s <= '0;`). Do NOT try to mix blocking and non-blocking — keep the reset style consistent with the rest of the always_ff block.",
+  "fix_snippet": "// WRONG (Verilator rejects):\nalways_ff @(posedge clk or negedge rst_n) begin\n  if (!rst_n) begin\n    for (int i = 0; i < TAPS; i++) s[i] <= '0;\n  end else begin\n    ...\n  end\n end\n\n// FIX A — generate block (preferred, scales cleanly):\ngenerate\n  for (genvar g = 0; g < TAPS; g++) begin : reset_s\n    always_ff @(posedge clk or negedge rst_n) begin\n      if (!rst_n) s[g] <= '0;\n      else        s[g] <= next_s[g];\n    end\n  end\nendgenerate\n\n// FIX B — packed array reset as a whole:\nlogic signed [TAPS-1:0][ACC_WIDTH-1:0] s;\nalways_ff @(posedge clk or negedge rst_n) begin\n  if (!rst_n) s <= '0;   // one-shot reset, legal in Verilator\n  else begin\n    for (int i = 0; i < TAPS; i++) s[i] <= next_s[i];  // still illegal — see FIX A\n  end\nend",
+  "tags": ["verilator", "BLKLOOPINIT", "for_loop", "non_blocking", "array_reset", "always_ff", "generate", "unpacked_array"],
+  "source_notes": "seed",
+  "date": "2026-04-12"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "harv_linter_folding_a951e3eb21",
+  "source": "linter",
+  "topology": "folding",
+  "filter_class": "FIR",
+  "error_signature": "<file>:<n>: error: unknown module type: dut <n> error(s) during elaboration. *** these modules were missing: dut referenced <n> times. ***",
+  "raw_error_example": "output/test_filter.sv:150: error: Unknown module type: dut\n2 error(s) during elaboration.\n*** These modules were missing:\n        dut referenced 1 times.\n***",
+  "root_cause": "The testbench instantiates a module named \"dut\" that is not compiled or included in the simulation.",
+  "fix_rule": "Ensure the DUT module is compiled by including the design file in the simulation command or using `include to add the module definition.",
+  "fix_snippet": "// Add DUT instantiation to testbench after adding module definition:\n// `include \"filter.sv\" // or compile filter.sv with simulator\ndut u_dut ( .clk(clk), .rst_n(rst_n), .sample_in(sample_in), .sample_valid(sample_valid), .result_out(result_out), .result_valid(result_valid), .dut_ready(dut_ready) );",
+  "tags": [
+    "harvested",
+    "tb_fix"
+  ],
+  "source_notes": "harvested",
+  "date": "2026-06-17"
+}

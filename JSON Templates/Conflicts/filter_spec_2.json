@@ -1,0 +1,31 @@
+{
+  "project_settings": {
+    "project_name": "fir_bandpass_demo",
+    "output_file": "output/fir_bandpass.sv",
+    "target_clock_freq_mhz": 100
+  },
+  "filter_design_specification": {
+    "filter_type": "bandpass",
+    "filter_class": "FIR",
+    "structure": "",
+    "order": 40,
+    "design_method": "firwin",
+    "common": {
+      "sampling_frequency_hz": 48000,
+      "cutoff_frequency_hz": [4000, 8000],
+      "transition_width_hz": 500,
+      "passband_ripple_db": 0.2,
+      "stopband_attenuation_db": 65
+    },
+    "fir_methods": {
+      "firwin": { "window_type": "hamming" }
+    }
+  },
+  "hardware_specifications": {
+    "data_width": 16,
+    "coefficient_width": 12,
+    "accumulator_width": 32,
+    "reset_type": "asynchronous_active_low",
+    "max_area_um2": 150000
+  }
+}

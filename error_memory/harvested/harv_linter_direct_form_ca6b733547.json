@@ -1,0 +1,17 @@
+{
+  "id": "harv_linter_direct_form_ca6b733547",
+  "source": "linter",
+  "topology": "direct_form",
+  "filter_class": "FIR",
+  "error_signature": "<file>:<n>: error: could not find variable ``golden_val'' in ``test_filter'' <file>:<n>: error: unable to bind wire/reg/memory `golden_val' in `test_filter' <file>:<n>: warning: a for statement must use the index (p) in the condition expression to be synthesized in an always_ff process. <n> error(s) during elaboration",
+  "raw_error_example": "output/test_filter.sv:148: error: Could not find variable ``golden_val'' in ``test_filter''\noutput/test_filter.sv:149: error: Unable to bind wire/reg/memory `golden_val' in `test_filter'\noutput/fir_filter.sv:131: warning: A for statement must use the index (p) in the condition expression to be synthesized in an always_ff process.\n2 error(s) during elaboration.",
+  "root_cause": "Testbench used an undeclared wire/reg `golden_val` that was not declared in the module.",
+  "fix_rule": "Declare any signal used in the testbench before referencing it; add the declaration `reg signed [DATA_WIDTH-1:0] golden_val;` along with other local reg/integer declarations.",
+  "fix_snippet": "reg signed [DATA_WIDTH-1:0] golden_val;",
+  "tags": [
+    "harvested",
+    "tb_fix"
+  ],
+  "source_notes": "harvested",
+  "date": "2026-06-19"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "harv_linter_transposed_direct_form_c34e6c9bc6",
+  "source": "linter",
+  "topology": "transposed_direct_form",
+  "filter_class": "FIR",
+  "error_signature": "%error-blkloopinit: <file>:<n>: unsupported: delayed assignment to array inside for loops (non-delayed is ok - see docs) <n> | s[i] <= '<n>; | ^ ... for error description see https://verilator.org/warn/blkloopinit?v=<n>.<n> %error: exiting due to <n> error(s) ... see the manual at https://verilator.org/verilator_doc.html for more assistance",
+  "raw_error_example": "%Error-BLKLOOPINIT: output/fir_bandpass_xposed_rand.sv:123:18: Unsupported: Delayed assignment to array inside for loops (non-delayed is ok - see docs)\n  123 |                 s[i] <= '0;\n      |                  ^\n                    ... For error description see https://verilator.org/warn/BLKLOOPINIT?v=5.020\n%Error: Exiting due to 1 error(s)\n        ... See the manual at https://verilator.org/verilator_doc.html for more assistance.",
+  "root_cause": "Verilator does not support non-blocking assignments to array elements inside for loops in sequential logic due to limitations in its static analysis.",
+  "fix_rule": "Replace non-blocking assignments with blocking assignments when initializing arrays inside for loops in sequential blocks. Use a separate always block with blocking assignments for initialization.",
+  "fix_snippet": "always @(posedge clk or negedge rst_n) begin\n    if (!rst_n) begin\n        for (i = 0; i < TAPS; i = i + 1) begin\n            s[i] = '0;\n        end\n        data_reg <= '0;\n        scaled_acc <= '0;\n        result_temp <= '0;\n        result_out <= '0;\n        result_valid <= 1'b0;\n        for (i = 0; i < LATENCY-1; i = i + 1) begin\n            valid_pipe[i] = 1'b0;\n        end\n    end else begin\n        // Original sequential logic\n        data_reg <= sample_valid ? sample_in : data_reg;\n        // ... rest of the code\n    end\nend",
+  "tags": [
+    "harvested",
+    "rtl_fix"
+  ],
+  "source_notes": "harvested",
+  "date": "2026-04-13"
+}

@@ -1,0 +1,31 @@
+{
+  "project_settings": {
+    "project_name": "fir_lowpass_narrow",
+    "output_file": "output/fir_lowpass_narrow.sv",
+    "target_clock_freq_mhz": 100
+  },
+  "filter_design_specification": {
+    "filter_type": "lowpass",
+    "filter_class": "FIR",
+    "structure": "",
+    "order": 32,
+    "design_method": "firwin",
+    "common": {
+      "sampling_frequency_hz": 48000,
+      "cutoff_frequency_hz": 2000,
+      "transition_width_hz": 2800,
+      "passband_ripple_db": 0.1,
+      "stopband_attenuation_db": 40
+    },
+    "fir_methods": {
+      "firwin": { "window_type": "hamming" }
+    }
+  },
+  "hardware_specifications": {
+    "data_width": 16,
+    "coefficient_width": 12,
+    "accumulator_width": 32,
+    "reset_type": "asynchronous_active_low",
+    "max_area_um2": 105000       
+  }
+}

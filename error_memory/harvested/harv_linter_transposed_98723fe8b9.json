@@ -1,0 +1,17 @@
+{
+  "id": "harv_linter_transposed_98723fe8b9",
+  "source": "linter",
+  "topology": "transposed",
+  "filter_class": "FIR",
+  "error_signature": "<file>:<n>: syntax error i give up",
+  "raw_error_example": "output/test_filter.sv:1: syntax error\nI give up.",
+  "root_cause": "The module name \u201coutput/test_filter\u201d contains a slash character, which is illegal in SystemVerilog identifiers and causes a syntax error.",
+  "fix_rule": "Use only valid identifier characters (letters, digits, underscores) for module names; replace any path separators like slashes with underscores or remove them.",
+  "fix_snippet": "module test_filter;",
+  "tags": [
+    "harvested",
+    "tb_fix"
+  ],
+  "source_notes": "harvested",
+  "date": "2026-06-19"
+}

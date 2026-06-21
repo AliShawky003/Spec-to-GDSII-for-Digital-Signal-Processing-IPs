@@ -1,0 +1,17 @@
+topology,taps,data_width,total_area_um2,cell_count,symmetry,critical_path_ns,f_max_mhz
+direct_form,4,16,69913,12848,yes,10.2349,97.7
+direct_form,8,16,104908,6640,yes,11.44,87.4
+direct_form,16,16,136542,26189,yes,12.0139,83.2
+direct_form,32,16,296373.7,,yes,21.7,45.9
+symmetric,4,16,56629.6,10420,yes,11,90.9
+symmetric,8,16,81640.8,,yes,10.5,95.238
+symmetric,16,16,148426.5,,yes,11.5,86.9
+symmetric,32,16,102335.648,,yes,21.59,46.3
+transposed,4,16,52280,,yes,8.6,116.27
+transposed,8,16,64256.42,,yes,12.5,80
+transposed,16,16,151916.18,,yes,17.5770,56.89
+transposed,32,16,332651.032,,yes,38.260,26.136
+folded,4,16,49001.4,,yes,9.5,105.2
+folded,8,16,65039.856,,yes,10,100
+folded,16,16,109423.944,,yes,13.5,74.07
+folded,32,16,148938.342,,yes,19.459715,51.39

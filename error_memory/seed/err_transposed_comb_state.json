@@ -1,0 +1,14 @@
+{
+  "id": "err_transposed_comb_state",
+  "source": "linter",
+  "topology": "transposed_direct_form",
+  "filter_class": "FIR",
+  "error_signature": "unoptflat signal unoptimizable feedback to clocked signal transposed state <ident>",
+  "raw_error_example": "%Warning-UNOPTFLAT: filter.sv:42: Signal unoptimizable: Feedback to clocked signal: 'filter.s[3]'\n%Warning-UNOPTFLAT: filter.sv:43: Signal unoptimizable: Feedback to clocked signal: 'filter.s[2]'",
+  "root_cause": "Transposed-form state register s[k] assigned inside always_comb, creating a combinational feedback loop. The transposed structure requires s[k] to be a clocked (always_ff) register, not combinational.",
+  "fix_rule": "Move all s[k] updates into always_ff @(posedge clk). The tail element s[TAPS-1] gets data_in*coeff[TAPS-1]; all others get s[i] <= s[i+1] + data_in*coeff[i]. Never put s[k] assignments in always_comb.",
+  "fix_snippet": "// WRONG — s[k] in always_comb creates a combinational loop\n// always_comb begin\n//   s[0] = data_in * coeff[0];\n//   s[1] = s[0] + data_in * coeff[1];\n// end\n\n// RIGHT — s[k] must be registered\nalways_ff @(posedge clk or negedge rst_n) begin\n  if (!rst_n) begin\n    for (int i = 0; i < TAPS; i++) s[i] <= '0;\n  end else if (valid_in) begin\n    s[TAPS-1] <= data_in * coeff[TAPS-1];\n    for (int i = TAPS-2; i >= 0; i--)\n      s[i] <= s[i+1] + data_in * coeff[i];\n  end\nend",
+  "tags": ["transposed", "always_comb", "always_ff", "state_register", "combinational_loop", "unoptflat"],
+  "source_notes": "seed",
+  "date": "2026-04-11"
+}

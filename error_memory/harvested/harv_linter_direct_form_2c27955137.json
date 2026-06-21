@@ -1,0 +1,17 @@
+{
+  "id": "harv_linter_direct_form_2c27955137",
+  "source": "linter",
+  "topology": "direct_form",
+  "filter_class": "FIR",
+  "error_signature": "<file>:<n>: sorry: constant selects in always_* processes are not currently supported (all bits will be included). <file>:<n>: error: could not find variable ``random_val'' in ``test_filter'' <file>:<n>: error: unable to bind wire/reg/memory `random_val' in `test_filter' <file>:<n>: error: unable to bind wire/reg/memory `random_val' in `test_filter' <file>:<n>: warning: a for statement must use the index (p) in the condition expression to be synthesized in an always_ff process. <file>:<n>: warning: a for statement must use the index (p) in the condition expression to be synthesized in an always_ff process. <n> error(s) during elaboration",
+  "raw_error_example": "output/fir_filter.sv:82: sorry: constant selects in always_* processes are not currently supported (all bits will be included).\noutput/test_filter.sv:141: error: Could not find variable ``random_val'' in ``test_filter''\noutput/test_filter.sv:142: error: Unable to bind wire/reg/memory `random_val' in `test_filter'\noutput/test_filter.sv:145: error: Unable to bind wire/reg/memory `random_val' in `test_filter'\noutput/fir_filter.sv:67: warning: A for statement must use the index (p) in the condition expression to be synthesized in an always_ff process.\noutput/fir_filter.sv:71: warning: A for statement must use the index (p) in the condition expression to be synthesized in an always_ff process.\n3 error(s) during elaboration.",
+  "root_cause": "Variable `random_val` was undeclared in the testbench module, and the `calculate_golden` function was incomplete/truncated with missing end and proper declarations.",
+  "fix_rule": "Declare all variables before use and ensure functions are complete with proper begin/end and port declarations. For testbench code, always declare the variable at module level (e.g., `reg signed [DATA_WIDTH-1:0] random_val;`) before referencing it in procedural blocks.",
+  "fix_snippet": "reg signed [DATA_WIDTH-1:0] random_val;\n    integer t;\n\n    localparam signed [ACC_WIDTH-1:0] SAT_MAX = (1 << (DATA_WIDTH-1)) - 1;\n    localparam signed [ACC_WIDTH-1:0] SAT_MIN = -(1 << (DATA_WIDTH-1));",
+  "tags": [
+    "harvested",
+    "tb_fix"
+  ],
+  "source_notes": "harvested",
+  "date": "2026-06-19"
+}
