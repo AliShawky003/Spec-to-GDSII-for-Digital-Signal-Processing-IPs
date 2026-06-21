@@ -1,0 +1,9 @@
+{
+    "nl": "/mnt/d/Learing_Python/GP/Submission_inshallah/runs/fir_filter_synexp/1-synthesis-area-0/fir_filter.nl.v",
+    "metrics": {
+        "design__instance__count": 3719,
+        "design__instance__area": 41882.6688,
+        "design__instance_unmapped__count": 0,
+        "synthesis__check_error__count": 0
+    }
+}

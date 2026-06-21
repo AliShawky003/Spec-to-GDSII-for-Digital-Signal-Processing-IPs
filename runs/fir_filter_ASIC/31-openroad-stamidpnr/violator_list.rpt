@@ -1,0 +1,64 @@
+
+===========================================================================
+Violator List
+============================================================================
+[hold in-reg] sample_valid -> _9199_/D : -0.386145
+[hold in-reg] sample_in[14] -> _9252_/D : -0.354768
+[hold in-reg] sample_in[1] -> _9239_/D : -0.352158
+[hold in-reg] sample_in[15] -> _9253_/D : -0.351879
+[hold in-reg] sample_in[12] -> _9250_/D : -0.351276
+[hold in-reg] sample_in[0] -> _9238_/D : -0.351271
+[hold in-reg] sample_in[2] -> _9240_/D : -0.349498
+[hold in-reg] sample_in[3] -> _9241_/D : -0.349430
+[hold in-reg] sample_in[9] -> _9247_/D : -0.343356
+[hold in-reg] sample_in[13] -> _9251_/D : -0.337437
+[hold in-reg] sample_in[7] -> _9245_/D : -0.337302
+[hold in-reg] sample_in[4] -> _9242_/D : -0.337041
+[hold in-reg] sample_in[11] -> _9249_/D : -0.336215
+[hold in-reg] sample_in[6] -> _9244_/D : -0.335666
+[hold in-reg] sample_in[8] -> _9246_/D : -0.335276
+[hold in-reg] sample_in[10] -> _9248_/D : -0.334577
+[hold in-reg] sample_in[5] -> _9243_/D : -0.333206
+[hold in-reg] sample_valid -> _9224_/D : -0.329155
+[hold in-reg] sample_valid -> _9223_/D : -0.328148
+[hold in-reg] sample_valid -> _9225_/D : -0.328135
+[hold in-reg] sample_valid -> _9232_/D : -0.326300
+[hold in-reg] sample_valid -> _9226_/D : -0.326223
+[hold in-reg] sample_valid -> _9228_/D : -0.325876
+[hold in-reg] sample_valid -> _9204_/D : -0.319425
+[hold in-reg] sample_valid -> _9231_/D : -0.319198
+[hold in-reg] sample_valid -> _9230_/D : -0.295139
+[hold in-reg] sample_valid -> _9197_/D : -0.245100
+[hold in-reg] sample_valid -> _9196_/D : -0.243707
+[hold in-reg] sample_valid -> _9208_/D : -0.234275
+[hold in-reg] sample_valid -> _9210_/D : -0.232672
+[hold in-reg] sample_valid -> _9206_/D : -0.231718
+[hold in-reg] sample_valid -> _9207_/D : -0.229898
+[hold in-reg] sample_valid -> _9202_/D : -0.229853
+[hold in-reg] sample_valid -> _9209_/D : -0.228477
+[hold in-reg] sample_valid -> _9200_/D : -0.228081
+[hold in-reg] sample_valid -> _9211_/D : -0.227665
+[hold in-reg] sample_valid -> _9213_/D : -0.227624
+[hold in-reg] sample_valid -> _9212_/D : -0.227021
+[hold in-reg] sample_valid -> _9201_/D : -0.225420
+[hold in-reg] sample_valid -> _9198_/D : -0.220683
+[hold in-reg] sample_valid -> _9221_/D : -0.215715
+[hold in-reg] sample_valid -> _9205_/D : -0.212933
+[hold in-reg] sample_valid -> _9214_/D : -0.212658
+[hold in-reg] sample_valid -> _9222_/D : -0.211874
+[hold in-reg] sample_valid -> _9215_/D : -0.208353
+[hold in-reg] sample_valid -> _9217_/D : -0.207569
+[hold in-reg] sample_valid -> _9227_/D : -0.207001
+[hold in-reg] sample_valid -> _9229_/D : -0.205100
+[hold in-reg] sample_valid -> _9203_/D : -0.204504
+[hold in-reg] sample_valid -> _9218_/D : -0.203966
+[hold in-reg] sample_valid -> _9216_/D : -0.202827
+[hold in-reg] sample_valid -> _9219_/D : -0.202110
+[hold in-reg] sample_valid -> _9220_/D : -0.189479
+[hold reg-reg] _9179_/Q -> _9178_/D : -0.044592
+Writing metric timing__hold_vio__count__corner:nom_tt_025C_1v80: 54
+Writing metric timing__hold_r2r__ws__corner:nom_tt_025C_1v80: -0.044592
+Writing metric timing__hold_r2r_vio__count__corner:nom_tt_025C_1v80: 1
+Writing metric timing__setup_vio__count__corner:nom_tt_025C_1v80: 0
+Writing metric timing__setup_r2r__ws__corner:nom_tt_025C_1v80: 2.014256
+Writing metric timing__setup_r2r_vio__count__corner:nom_tt_025C_1v80: 0

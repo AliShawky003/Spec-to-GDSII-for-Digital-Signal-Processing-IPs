@@ -1,6 +1,6 @@
 {
   "data_width": 16,
-  "latency": 7,
+  "latency": 17,
   "fs": 48000.0,
   "n_impulse": 256,
   "sweep_freqs": [
@@ -69,10 +69,10 @@
     23261.54,
     23630.77
   ],
-  "warmup_cycles": 70,
+  "warmup_cycles": 578,
   "measurement_min_samples": 32,
-  "fold_factor": 5,
-  "taps": 5,
+  "fold_factor": 17,
+  "taps": 17,
   "topology": "folded",
   "impulse_amplitude": 16384
 }

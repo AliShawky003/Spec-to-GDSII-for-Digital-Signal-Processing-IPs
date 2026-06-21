@@ -1209,8 +1209,6 @@ def _build_plans(specs: dict, verif_specs: dict) -> tuple[str, str, list]:
 
     # determine topology: either explicitly requested or auto‑select based on area
     topology = structure or "direct_form"
-    folding = "YES" if topology == "folded" else "NO"
-    fold_factor = taps if folding == "YES" else 0
 
     topology_from_llm = False
     llm_topology_result = None
@@ -1500,6 +1498,8 @@ def _build_plans(specs: dict, verif_specs: dict) -> tuple[str, str, list]:
     est_slack_ns = _compute_slack_ns(est_cp_ns, clock_mhz)
     topology_is_symmetric = _topology_is_symmetric(topology)
     metric_is_symmetric = is_symmetric and topology_is_symmetric
+    folding = "YES" if topology == "folded" else "NO"
+    fold_factor = taps if topology == "folded" else 0
     if est_cp_ns is not None and est_cp_ns > 0:
         fmax_msg = f", est_fmax={1000.0 / est_cp_ns:.1f} MHz"
         slack_msg = (

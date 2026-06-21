@@ -1,8 +1,8 @@
 # Makefile_summary - frequency response characterization
 SIM ?= icarus
 TOPLEVEL_LANG ?= verilog
-VERILOG_SOURCES += ../../output/folded_4.sv
-TOPLEVEL = folded_4
+VERILOG_SOURCES += ../../output/fir_filter.sv
+TOPLEVEL = fir_filter
 COCOTB_TEST_MODULES = summary_tb
 export PYTHONPATH := $(shell cd .. && pwd):$(PYTHONPATH)
 include $(shell cocotb-config --makefiles)/Makefile.sim

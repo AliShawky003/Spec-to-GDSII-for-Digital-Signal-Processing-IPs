@@ -1,0 +1,27 @@
+// DESCRIPTION: Verilator output: Waivers generated with --waiver-output
+
+`verilator_config
+
+// Below are suggested waivers. You have three options:
+//   1. Fix the reason for the linter warning in the Verilog sources
+//   2. Keep the waiver permanently if you are sure it is okay
+//   3. Keep the waiver temporarily to suppress the output
+
+// lint_off -rule WIDTHEXPAND -file "*/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv" -match "Operator ASSIGNDLY expects 37 bits on the Assign RHS, but Assign RHS's VARREF 'prod' generates 32 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv" -match "Operator ADD expects 37 bits on the RHS, but RHS's VARREF 'prod' generates 32 bits.*"
+
+// lint_off -rule BLKSEQ -file "*/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv" -match "Blocking assignment '=' in sequential logic process*"
+
+// lint_off -rule BLKSEQ -file "*/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv" -match "Blocking assignment '=' in sequential logic process*"
+
+// lint_off -rule UNUSEDPARAM -file "*/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv" -match "Parameter is not used: 'ORDER'*"
+
+// lint_off -rule UNUSEDPARAM -file "*/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv" -match "Parameter is not used: 'PIPE_DEPTH'*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv" -match "Signal is not driven, nor used: 'k'*"
+
+// lint_off -rule UNUSEDPARAM -file "*/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv" -match "Parameter is not used: 'SAT_MAX'*"
+
+// lint_off -rule UNUSEDPARAM -file "*/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv" -match "Parameter is not used: 'SAT_MIN'*"
+

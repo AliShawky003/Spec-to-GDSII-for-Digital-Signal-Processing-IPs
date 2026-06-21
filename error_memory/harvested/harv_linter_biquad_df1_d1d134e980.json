@@ -1,0 +1,17 @@
+{
+  "id": "harv_linter_biquad_df1_d1d134e980",
+  "source": "linter",
+  "topology": "biquad_df1",
+  "filter_class": "IIR",
+  "error_signature": "%error: <file>:<n>: number is missing value digits: <n>'sd <n> | localparam signed <bits> a1 = <n>'sd-<n>; | ^~~~~ %error: exiting due to <n> error(s)",
+  "raw_error_example": "%Error: output/biquad_df1.sv:20:46: Number is missing value digits: 16'sd\n   20 |     localparam signed [COEFF_WIDTH-1:0] A1 = 16'sd-22387;\n      |                                              ^~~~~\n%Error: Exiting due to 1 error(s)",
+  "root_cause": "A negative signed literal was incorrectly written with the sign inside the unsized literal (e.g., 16'sd-22387), which is not valid SystemVerilog syntax.",
+  "fix_rule": "When declaring negative signed literals, place the minus sign before the width specifier (e.g., -16'sd22387) instead of after the base specifier. Ensure all literals follow proper Verilog/SystemVerilog numeric syntax.",
+  "fix_snippet": "localparam signed [COEFF_WIDTH-1:0] A1 = -16'sd22387;\nlocalparam signed [COEFF_WIDTH-1:0] A2 = 16'sd8577;",
+  "tags": [
+    "harvested",
+    "rtl_fix"
+  ],
+  "source_notes": "harvested",
+  "date": "2026-06-21"
+}

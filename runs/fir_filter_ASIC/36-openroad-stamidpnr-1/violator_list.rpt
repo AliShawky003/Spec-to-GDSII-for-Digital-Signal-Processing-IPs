@@ -1,0 +1,37 @@
+
+===========================================================================
+Violator List
+============================================================================
+[hold in-reg] sample_in[6] -> _9244_/D : -0.533134
+[hold in-reg] sample_in[2] -> _9240_/D : -0.461664
+[hold in-reg] sample_in[0] -> _9238_/D : -0.460304
+[hold in-reg] sample_in[3] -> _9241_/D : -0.456571
+[hold in-reg] sample_in[1] -> _9239_/D : -0.453285
+[hold in-reg] sample_in[8] -> _9246_/D : -0.446725
+[hold in-reg] sample_in[13] -> _9251_/D : -0.334745
+[hold in-reg] sample_in[5] -> _9243_/D : -0.332943
+[hold reg-reg] _9179_/Q -> _9178_/D : -0.075726
+[hold in-reg] sample_in[4] -> _9242_/D : -0.064572
+[hold in-reg] sample_in[15] -> _9253_/D : -0.063778
+[hold in-reg] sample_in[11] -> _9249_/D : -0.023163
+[hold reg-reg] _9187_/Q -> _9187_/D : -0.011769
+[hold reg-reg] _9194_/Q -> _9194_/D : -0.011711
+[hold reg-reg] _9182_/Q -> _9182_/D : -0.011668
+[hold reg-reg] _9189_/Q -> _9189_/D : -0.011285
+[hold reg-reg] _9183_/Q -> _9183_/D : -0.011112
+[hold reg-reg] _9188_/Q -> _9188_/D : -0.011069
+[hold reg-reg] _9180_/Q -> _9180_/D : -0.010539
+[hold reg-reg] _9184_/Q -> _9184_/D : -0.010095
+[hold reg-reg] _9193_/Q -> _9193_/D : -0.009905
+[hold reg-reg] _9186_/Q -> _9186_/D : -0.009768
+[hold reg-reg] _9181_/Q -> _9181_/D : -0.008989
+[hold reg-reg] _9185_/Q -> _9185_/D : -0.007606
+[hold reg-reg] _9190_/Q -> _9190_/D : -0.005356
+[hold reg-reg] _9192_/Q -> _9192_/D : -0.003387
+[hold in-reg] sample_in[14] -> _9252_/D : -0.001360
+Writing metric timing__hold_vio__count__corner:nom_tt_025C_1v80: 27
+Writing metric timing__hold_r2r__ws__corner:nom_tt_025C_1v80: -0.075726
+Writing metric timing__hold_r2r_vio__count__corner:nom_tt_025C_1v80: 15
+Writing metric timing__setup_vio__count__corner:nom_tt_025C_1v80: 0
+Writing metric timing__setup_r2r__ws__corner:nom_tt_025C_1v80: 1.778078
+Writing metric timing__setup_r2r_vio__count__corner:nom_tt_025C_1v80: 0

@@ -1,0 +1,155 @@
+Reading timing models for corner max_tt_025C_1v80…
+Reading timing library for the 'max_tt_025C_1v80' corner at '/home/alishawky/.ciel/ciel/sky130/versions/8afc8346a57fe1ab7934ba5a6056ea8b43078e71/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib'…
+Reading timing models for corner min_ss_100C_1v60…
+Reading timing library for the 'min_ss_100C_1v60' corner at '/home/alishawky/.ciel/ciel/sky130/versions/8afc8346a57fe1ab7934ba5a6056ea8b43078e71/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ss_100C_1v60.lib'…
+Reading timing models for corner nom_tt_025C_1v80…
+Reading timing library for the 'nom_tt_025C_1v80' corner at '/home/alishawky/.ciel/ciel/sky130/versions/8afc8346a57fe1ab7934ba5a6056ea8b43078e71/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib'…
+[WARNING STA-1140] /home/alishawky/.ciel/ciel/sky130/versions/8afc8346a57fe1ab7934ba5a6056ea8b43078e71/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib line 1, library sky130_fd_sc_hd__tt_025C_1v80 already exists.
+Reading timing models for corner max_ff_n40C_1v95…
+Reading timing library for the 'max_ff_n40C_1v95' corner at '/home/alishawky/.ciel/ciel/sky130/versions/8afc8346a57fe1ab7934ba5a6056ea8b43078e71/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ff_n40C_1v95.lib'…
+Reading timing models for corner nom_ff_n40C_1v95…
+Reading timing library for the 'nom_ff_n40C_1v95' corner at '/home/alishawky/.ciel/ciel/sky130/versions/8afc8346a57fe1ab7934ba5a6056ea8b43078e71/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ff_n40C_1v95.lib'…
+[WARNING STA-1140] /home/alishawky/.ciel/ciel/sky130/versions/8afc8346a57fe1ab7934ba5a6056ea8b43078e71/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ff_n40C_1v95.lib line 1, library sky130_fd_sc_hd__ff_n40C_1v95 already exists.
+Reading timing models for corner max_ss_100C_1v60…
+Reading timing library for the 'max_ss_100C_1v60' corner at '/home/alishawky/.ciel/ciel/sky130/versions/8afc8346a57fe1ab7934ba5a6056ea8b43078e71/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ss_100C_1v60.lib'…
+[WARNING STA-1140] /home/alishawky/.ciel/ciel/sky130/versions/8afc8346a57fe1ab7934ba5a6056ea8b43078e71/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ss_100C_1v60.lib line 1, library sky130_fd_sc_hd__ss_100C_1v60 already exists.
+Reading timing models for corner min_tt_025C_1v80…
+Reading timing library for the 'min_tt_025C_1v80' corner at '/home/alishawky/.ciel/ciel/sky130/versions/8afc8346a57fe1ab7934ba5a6056ea8b43078e71/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib'…
+[WARNING STA-1140] /home/alishawky/.ciel/ciel/sky130/versions/8afc8346a57fe1ab7934ba5a6056ea8b43078e71/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib line 1, library sky130_fd_sc_hd__tt_025C_1v80 already exists.
+Reading timing models for corner nom_ss_100C_1v60…
+Reading timing library for the 'nom_ss_100C_1v60' corner at '/home/alishawky/.ciel/ciel/sky130/versions/8afc8346a57fe1ab7934ba5a6056ea8b43078e71/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ss_100C_1v60.lib'…
+[WARNING STA-1140] /home/alishawky/.ciel/ciel/sky130/versions/8afc8346a57fe1ab7934ba5a6056ea8b43078e71/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ss_100C_1v60.lib line 1, library sky130_fd_sc_hd__ss_100C_1v60 already exists.
+Reading timing models for corner min_ff_n40C_1v95…
+Reading timing library for the 'min_ff_n40C_1v95' corner at '/home/alishawky/.ciel/ciel/sky130/versions/8afc8346a57fe1ab7934ba5a6056ea8b43078e71/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ff_n40C_1v95.lib'…
+[WARNING STA-1140] /home/alishawky/.ciel/ciel/sky130/versions/8afc8346a57fe1ab7934ba5a6056ea8b43078e71/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ff_n40C_1v95.lib line 1, library sky130_fd_sc_hd__ff_n40C_1v95 already exists.
+Reading OpenROAD database at '/mnt/d/Learing_Python/GP/Submission_inshallah/runs/fir_filter_ASIC/34-openroad-detailedplacement/fir_filter.odb'…
+Reading design constraints file at '/mnt/d/Learing_Python/GP/Submission_inshallah/pnr.sdc'…
+[INFO] Configuring cts characterization…
++ configure_cts_characterization 
+[INFO] Performing clock tree synthesis…
+[INFO] Looking for the following net(s): clk
+[INFO] Running Clock Tree Synthesis…
++ clock_tree_synthesis -buf_list sky130_fd_sc_hd__clkbuf_8 sky130_fd_sc_hd__clkbuf_4 sky130_fd_sc_hd__clkbuf_2 -root_buf sky130_fd_sc_hd__clkbuf_16 -sink_clustering_enable -apply_ndr half
+[INFO CTS-0050] Root buffer is sky130_fd_sc_hd__clkbuf_16.
+[INFO CTS-0051] Sink buffer is sky130_fd_sc_hd__clkbuf_8.
+[INFO CTS-0052] The following clock buffers will be used for CTS:
+                    sky130_fd_sc_hd__clkbuf_2
+                    sky130_fd_sc_hd__clkbuf_4
+                    sky130_fd_sc_hd__clkbuf_8
+[INFO CTS-0049] Characterization buffer is sky130_fd_sc_hd__clkbuf_8.
+[INFO CTS-0007] Net "clk" found for clock "clk".
+[INFO CTS-0010]  Clock net "clk" has 332 sinks.
+[INFO CTS-0008] TritonCTS found 1 clock nets.
+[INFO CTS-0097] Characterization used 3 buffer(s) types.
+[INFO CTS-0201] 0 blockages from hard placement blockages and placed macros will be used.
+[INFO CTS-0027] Generating H-Tree topology for net clk.
+[INFO CTS-0028]  Total number of sinks: 332.
+[INFO CTS-0090]  Sinks will be clustered based on buffer max cap.
+[INFO CTS-0030]  Number of static layers: 0.
+[INFO CTS-0020]  Wire segment unit: 13600  dbu (13 um).
+[INFO CTS-0206] Best clustering solution was found from clustering size of 10 and clustering diameter of 50.
+[INFO CTS-0019]  Total number of sinks after clustering: 40.
+[INFO CTS-0024]  Normalized sink region: [(1.03727, 2.81912), (26.0355, 26.3261)].
+[INFO CTS-0025]     Width:  24.9983.
+[INFO CTS-0026]     Height: 23.5070.
+ Level 1
+    Direction: Horizontal
+    Sinks per sub-region: 20
+    Sub-region size: 12.4991 X 23.5070
+[INFO CTS-0034]     Segment length (rounded): 6.
+ Level 2
+    Direction: Vertical
+    Sinks per sub-region: 10
+    Sub-region size: 12.4991 X 11.7535
+[INFO CTS-0034]     Segment length (rounded): 6.
+[INFO CTS-0032]  Stop criterion found. Max number of sinks is 15.
+[INFO CTS-0035]  Number of sinks covered: 40.
+[INFO CTS-0018]     Created 45 clock buffers.
+[INFO CTS-0012]     Minimum number of buffers in the clock path: 3.
+[INFO CTS-0013]     Maximum number of buffers in the clock path: 3.
+[INFO CTS-0015]     Created 45 clock nets.
+[INFO CTS-0016]     Fanout distribution for the current clock = 3:2, 5:3, 6:4, 7:3, 8:7, 9:9, 10:9, 11:6, 13:1..
+[INFO CTS-0017]     Max level of the clock tree: 2.
+[INFO CTS-0098] Clock net "clk"
+[INFO CTS-0099]  Sinks 364
+[INFO CTS-0100]  Leaf buffers 40
+[INFO CTS-0101]  Average sink wire length 557.80 um
+[INFO CTS-0102]  Path depth 2 - 3
+[INFO CTS-0207]  Dummy loads inserted 32
+[INFO] Repairing long wires on clock nets…
+[INFO RSZ-0058] Using max wire length 6884um.
+Setting global connections for newly added cells…
+[INFO] Setting global connections...
+[INFO ODB-0403] 308 connections made, 0 conflicts skipped.
+Updating metrics…
+Cell type report:                       Count       Area
+  Fill cell                               262     983.44
+  Tap cell                               1795    2245.90
+  Buffer                                  495    2053.22
+  Clock buffer                             59     799.52
+  Timing Repair Buffer                    420    2910.29
+  Inverter                                 97     376.61
+  Clock inverter                           18     151.40
+  Sequential cell                         332    8723.37
+  Multi-Input combinational cell         3912   40600.19
+  Total                                  7390   58843.94
+Writing OpenROAD database to '/mnt/d/Learing_Python/GP/Submission_inshallah/runs/fir_filter_ASIC/35-openroad-cts/fir_filter.odb'…
+Writing netlist to '/mnt/d/Learing_Python/GP/Submission_inshallah/runs/fir_filter_ASIC/35-openroad-cts/fir_filter.nl.v'…
+Writing powered netlist to '/mnt/d/Learing_Python/GP/Submission_inshallah/runs/fir_filter_ASIC/35-openroad-cts/fir_filter.pnl.v'…
+Writing layout to '/mnt/d/Learing_Python/GP/Submission_inshallah/runs/fir_filter_ASIC/35-openroad-cts/fir_filter.def'…
+Writing timing constraints to '/mnt/d/Learing_Python/GP/Submission_inshallah/runs/fir_filter_ASIC/35-openroad-cts/fir_filter.sdc'…
+[INFO] Legalizing…
++ detailed_placement -max_displacement  500 100 
+Placement Analysis
+---------------------------------
+total displacement        396.6 u
+average displacement        0.1 u
+max displacement            7.4 u
+original HPWL          152118.2 u
+legalized HPWL         155257.1 u
+delta HPWL                    2 %
+
+[INFO DPL-0020] Mirrored 1735 instances
+[INFO DPL-0021] HPWL before          155257.1 u
+[INFO DPL-0022] HPWL after           152236.0 u
+[INFO DPL-0023] HPWL delta               -1.9 %
+Setting global connections for newly added cells…
+[INFO] Setting global connections...
+[INFO ODB-0403] 0 connections made, 0 conflicts skipped.
+Updating metrics…
+Cell type report:                       Count       Area
+  Fill cell                               262     983.44
+  Tap cell                               1795    2245.90
+  Buffer                                  495    2053.22
+  Clock buffer                             59     799.52
+  Timing Repair Buffer                    420    2910.29
+  Inverter                                 97     376.61
+  Clock inverter                           18     151.40
+  Sequential cell                         332    8723.37
+  Multi-Input combinational cell         3912   40600.19
+  Total                                  7390   58843.94
+Writing OpenROAD database to '/mnt/d/Learing_Python/GP/Submission_inshallah/runs/fir_filter_ASIC/35-openroad-cts/fir_filter.odb'…
+Writing netlist to '/mnt/d/Learing_Python/GP/Submission_inshallah/runs/fir_filter_ASIC/35-openroad-cts/fir_filter.nl.v'…
+Writing powered netlist to '/mnt/d/Learing_Python/GP/Submission_inshallah/runs/fir_filter_ASIC/35-openroad-cts/fir_filter.pnl.v'…
+Writing layout to '/mnt/d/Learing_Python/GP/Submission_inshallah/runs/fir_filter_ASIC/35-openroad-cts/fir_filter.def'…
+Writing timing constraints to '/mnt/d/Learing_Python/GP/Submission_inshallah/runs/fir_filter_ASIC/35-openroad-cts/fir_filter.sdc'…
+%OL_CREATE_REPORT cts.rpt
+Total number of Clock Roots: 1.
+Total number of Buffers Inserted: 45.
+Total number of Clock Subnets: 45.
+Total number of Sinks: 332.
+Cells used:
+  sky130_fd_sc_hd__clkbuf_8: 40
+  sky130_fd_sc_hd__clkbuf_16: 5
+Dummys used:
+  sky130_fd_sc_hd__bufinv_16: 1
+  sky130_fd_sc_hd__clkbuf_4: 11
+  sky130_fd_sc_hd__clkbuf_8: 3
+  sky130_fd_sc_hd__clkinv_2: 7
+  sky130_fd_sc_hd__clkinv_4: 1
+  sky130_fd_sc_hd__clkinvlp_4: 1
+  sky130_fd_sc_hd__inv_4: 4
+  sky130_fd_sc_hd__inv_6: 2
+  sky130_fd_sc_hd__inv_8: 1
+  sky130_fd_sc_hd__inv_12: 1
+%OL_END_REPORT

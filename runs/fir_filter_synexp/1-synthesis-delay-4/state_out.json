@@ -1,0 +1,9 @@
+{
+    "nl": "/mnt/d/Learing_Python/GP/Submission_inshallah/runs/fir_filter_synexp/1-synthesis-delay-4/fir_filter.nl.v",
+    "metrics": {
+        "design__instance__count": 4836,
+        "design__instance__area": 51514.4064,
+        "design__instance_unmapped__count": 0,
+        "synthesis__check_error__count": 0
+    }
+}

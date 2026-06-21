@@ -1,0 +1,43 @@
+Reading technology LEF file at '/home/alishawky/.ciel/ciel/sky130/versions/8afc8346a57fe1ab7934ba5a6056ea8b43078e71/sky130A/libs.ref/sky130_fd_sc_hd/techlef/sky130_fd_sc_hd__nom.tlef'…
+[INFO ODB-0227] LEF file: /home/alishawky/.ciel/ciel/sky130/versions/8afc8346a57fe1ab7934ba5a6056ea8b43078e71/sky130A/libs.ref/sky130_fd_sc_hd/techlef/sky130_fd_sc_hd__nom.tlef, created 14 layers, 25 vias
+Reading cell LEF file at '/home/alishawky/.ciel/ciel/sky130/versions/8afc8346a57fe1ab7934ba5a6056ea8b43078e71/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_ef_sc_hd.lef'…
+[WARNING ODB-0220] WARNING (LEFPARS-2008): NOWIREEXTENSIONATPIN statement is obsolete in version 5.6 or later.
+The NOWIREEXTENSIONATPIN statement will be ignored. See file /home/alishawky/.ciel/ciel/sky130/versions/8afc8346a57fe1ab7934ba5a6056ea8b43078e71/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_ef_sc_hd.lef at line 2.
+
+[INFO ODB-0227] LEF file: /home/alishawky/.ciel/ciel/sky130/versions/8afc8346a57fe1ab7934ba5a6056ea8b43078e71/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_ef_sc_hd.lef, created 8 library cells
+Reading cell LEF file at '/home/alishawky/.ciel/ciel/sky130/versions/8afc8346a57fe1ab7934ba5a6056ea8b43078e71/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_fd_sc_hd.lef'…
+[WARNING ODB-0220] WARNING (LEFPARS-2008): NOWIREEXTENSIONATPIN statement is obsolete in version 5.6 or later.
+The NOWIREEXTENSIONATPIN statement will be ignored. See file /home/alishawky/.ciel/ciel/sky130/versions/8afc8346a57fe1ab7934ba5a6056ea8b43078e71/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_fd_sc_hd.lef at line 2.
+
+[INFO ODB-0227] LEF file: /home/alishawky/.ciel/ciel/sky130/versions/8afc8346a57fe1ab7934ba5a6056ea8b43078e71/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_fd_sc_hd.lef, created 437 library cells
+[INFO ODB-0127] Reading DEF file: /mnt/d/Learing_Python/GP/Submission_inshallah/runs/fir_filter_ASIC/53-odb-cellfrequencytables/fir_filter.def
+[INFO ODB-0128] Design: fir_filter
+[INFO ODB-0130]     Created 39 pins.
+[INFO ODB-0131]     Created 25946 components and 120128 component-terminals.
+[INFO ODB-0132]     Created 2 special nets and 100194 connections.
+[INFO ODB-0133]     Created 6018 nets and 19926 connections.
+[INFO ODB-0134] Finished DEF file: /mnt/d/Learing_Python/GP/Submission_inshallah/runs/fir_filter_ASIC/53-odb-cellfrequencytables/fir_filter.def
+Using RCX ruleset '/home/alishawky/.ciel/ciel/sky130/versions/8afc8346a57fe1ab7934ba5a6056ea8b43078e71/sky130A/libs.tech/openlane/rules.openrcx.sky130A.nom.calibre'…
+[INFO RCX-0431] Defined process_corner CURRENT_CORNER with ext_model_index 0
+[INFO RCX-0029] Defined extraction corner CURRENT_CORNER
++ extract_parasitics  -ext_model_file /home/alishawky/.ciel/ciel/sky130/versions/8afc8346a57fe1ab7934ba5a6056ea8b43078e71/sky130A/libs.tech/openlane/rules.openrcx.sky130A.nom.calibre -lef_res
+[INFO RCX-0435] Reading extraction model file /home/alishawky/.ciel/ciel/sky130/versions/8afc8346a57fe1ab7934ba5a6056ea8b43078e71/sky130A/libs.tech/openlane/rules.openrcx.sky130A.nom.calibre ...
+[INFO RCX-0436] RC segment generation fir_filter (max_merge_res 50.0) ...
+[INFO RCX-0040] Final 22530 rc segments
+[INFO RCX-0439] Coupling Cap extraction fir_filter ...
+[INFO RCX-0440] Coupling threshhold is 0.1000 fF, coupling capacitance less than 0.1000 fF will be grounded.
+[INFO RCX-0442] 51% of 41717 wires extracted
+[INFO RCX-0442] 100% of 41717 wires extracted
+[INFO RCX-0045] Extract 6016 nets, 28545 rsegs, 28545 caps, 51012 ccs
+Setting global connections for newly added cells…
+[INFO] Setting global connections...
+[INFO ODB-0403] 0 connections made, 0 conflicts skipped.
+Updating metrics…
+Cell type report:                       Count       Area
+  Fill cell                             18115   61280.02
+  Tap cell                               1795    2245.90
+  Antenna cell                              7      17.52
+  Standard cell                          6029   64304.17
+  Total                                 25946  127847.62
+Writing extracted parasitics to '/mnt/d/Learing_Python/GP/Submission_inshallah/runs/fir_filter_ASIC/54-openroad-rcx/nom/fir_filter.nom.spef'…
+[INFO RCX-0443] 6016 nets finished

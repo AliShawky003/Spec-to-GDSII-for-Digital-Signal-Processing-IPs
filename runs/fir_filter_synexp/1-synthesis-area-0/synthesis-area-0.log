@@ -1,0 +1,1743 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.62 (git sha1 7326bb7d6641500ecb285c291a54a662cb1e76cf, clang++ 21.1.2 -fPIC -O3)
+
+1. Executing Liberty frontend: /home/alishawky/.ciel/ciel/sky130/versions/8afc8346a57fe1ab7934ba5a6056ea8b43078e71/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+Imported 428 cell types from liberty file.
+[INFO] Using SDC file '/mnt/d/Learing_Python/GP/Submission_inshallah/runs/fir_filter_synexp/1-synthesis-area-0/synthesis.abc.sdc' for ABC…wtaf
+
+2. Executing Verilog-2005 frontend: /mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv
+Parsing SystemVerilog input from `/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv' to AST representation.
+Storing AST representation for module `$abstract\fir_filter'.
+Successfully finished Verilog frontend.
+
+3. Executing HIERARCHY pass (managing design hierarchy).
+
+4. Executing AST frontend in derive mode using pre-parsed AST for module `\fir_filter'.
+Generating RTLIL representation for module `\fir_filter'.
+Warning: Replacing memory \data_reg with list of registers. See /mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:63
+
+4.1. Analyzing design hierarchy..
+Top module:  \fir_filter
+
+4.2. Analyzing design hierarchy..
+Top module:  \fir_filter
+Removing unused module `$abstract\fir_filter'.
+Removed 1 unused modules.
+Renaming module fir_filter to fir_filter.
+
+5. Executing ATTRMAP pass (move or copy attributes).
+
+6. Executing TRIBUF pass.
+
+7. Executing HIERARCHY pass (managing design hierarchy).
+
+7.1. Analyzing design hierarchy..
+Top module:  \fir_filter
+
+7.2. Analyzing design hierarchy..
+Top module:  \fir_filter
+Removed 0 unused modules.
+
+8. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+9. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:129$61 in module fir_filter.
+Marked 1 switch rules as full_case in process $proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:123$59 in module fir_filter.
+Marked 2 switch rules as full_case in process $proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:113$58 in module fir_filter.
+Marked 4 switch rules as full_case in process $proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:84$31 in module fir_filter.
+Marked 3 switch rules as full_case in process $proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:72$25 in module fir_filter.
+Marked 2 switch rules as full_case in process $proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:60$22 in module fir_filter.
+Removed a total of 0 dead cases.
+
+10. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 2 redundant assignments.
+Promoted 22 assignments to connections.
+
+11. Executing PROC_INIT pass (extract init attributes).
+
+12. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst_n in `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:129$61'.
+Found async reset \rst_n in `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:123$59'.
+Found async reset \rst_n in `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:84$31'.
+Found async reset \rst_n in `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:72$25'.
+Found async reset \rst_n in `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:60$22'.
+
+13. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~10 debug messages>
+
+14. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:25$80'.
+Creating decoders for process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:129$61'.
+     1/1: $0\result_valid[0:0]
+Creating decoders for process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:123$59'.
+     1/1: $0\result_out[15:0]
+Creating decoders for process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:113$58'.
+     1/2: $2\result_temp[15:0]
+     2/2: $1\result_temp[15:0]
+Creating decoders for process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:84$31'.
+     1/12: $4$mem2reg_rd$\data_reg$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:94$3_DATA[15:0]$47
+     2/12: $3\prod[31:0]
+     3/12: $3$mem2reg_rd$\data_reg$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:94$3_DATA[15:0]$46
+     4/12: $3$mem2reg_rd$\data_reg$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:94$3_ADDR[4:0]$45
+     5/12: $2\prod[31:0]
+     6/12: $2$mem2reg_rd$\data_reg$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:94$3_DATA[15:0]$41
+     7/12: $2$mem2reg_rd$\data_reg$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:94$3_ADDR[4:0]$40
+     8/12: $1$mem2reg_rd$\data_reg$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:94$3_DATA[15:0]$36
+     9/12: $1$mem2reg_rd$\data_reg$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:94$3_ADDR[4:0]$35
+    10/12: $1\prod[31:0]
+    11/12: $0\mac_valid[0:0]
+    12/12: $0\accum_reg[36:0]
+Creating decoders for process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:72$25'.
+     1/1: $0\tap_cnt[4:0]
+Creating decoders for process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:60$22'.
+     1/19: $2\i[31:0]
+     2/19: $1\i[31:0]
+     3/19: $0\data_reg[16][15:0]
+     4/19: $0\data_reg[15][15:0]
+     5/19: $0\data_reg[14][15:0]
+     6/19: $0\data_reg[13][15:0]
+     7/19: $0\data_reg[12][15:0]
+     8/19: $0\data_reg[11][15:0]
+     9/19: $0\data_reg[10][15:0]
+    10/19: $0\data_reg[9][15:0]
+    11/19: $0\data_reg[8][15:0]
+    12/19: $0\data_reg[7][15:0]
+    13/19: $0\data_reg[6][15:0]
+    14/19: $0\data_reg[5][15:0]
+    15/19: $0\data_reg[4][15:0]
+    16/19: $0\data_reg[3][15:0]
+    17/19: $0\data_reg[2][15:0]
+    18/19: $0\data_reg[1][15:0]
+    19/19: $0\data_reg[0][15:0]
+
+15. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\fir_filter.$memwr$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:26$4_EN' from process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:25$80'.
+No latch inferred for signal `\fir_filter.$memwr$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:27$5_EN' from process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:25$80'.
+No latch inferred for signal `\fir_filter.$memwr$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:28$6_EN' from process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:25$80'.
+No latch inferred for signal `\fir_filter.$memwr$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:29$7_EN' from process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:25$80'.
+No latch inferred for signal `\fir_filter.$memwr$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:30$8_EN' from process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:25$80'.
+No latch inferred for signal `\fir_filter.$memwr$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:31$9_EN' from process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:25$80'.
+No latch inferred for signal `\fir_filter.$memwr$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:32$10_EN' from process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:25$80'.
+No latch inferred for signal `\fir_filter.$memwr$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:33$11_EN' from process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:25$80'.
+No latch inferred for signal `\fir_filter.$memwr$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:34$12_EN' from process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:25$80'.
+No latch inferred for signal `\fir_filter.$memwr$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:35$13_EN' from process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:25$80'.
+No latch inferred for signal `\fir_filter.$memwr$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:36$14_EN' from process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:25$80'.
+No latch inferred for signal `\fir_filter.$memwr$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:37$15_EN' from process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:25$80'.
+No latch inferred for signal `\fir_filter.$memwr$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:38$16_EN' from process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:25$80'.
+No latch inferred for signal `\fir_filter.$memwr$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:39$17_EN' from process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:25$80'.
+No latch inferred for signal `\fir_filter.$memwr$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:40$18_EN' from process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:25$80'.
+No latch inferred for signal `\fir_filter.$memwr$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:41$19_EN' from process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:25$80'.
+No latch inferred for signal `\fir_filter.$memwr$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:42$20_EN' from process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:25$80'.
+No latch inferred for signal `\fir_filter.\result_temp' from process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:113$58'.
+
+16. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\fir_filter.\result_valid' using process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:129$61'.
+  created $adff cell `$procdff$233' with positive edge clock and positive level reset.
+Creating register for signal `\fir_filter.\result_out' using process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:123$59'.
+  created $adff cell `$procdff$238' with positive edge clock and positive level reset.
+Creating register for signal `\fir_filter.\accum_reg' using process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:84$31'.
+  created $adff cell `$procdff$243' with positive edge clock and positive level reset.
+Creating register for signal `\fir_filter.\mac_valid' using process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:84$31'.
+  created $adff cell `$procdff$248' with positive edge clock and positive level reset.
+Creating register for signal `\fir_filter.\prod' using process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:84$31'.
+  created $dff cell `$procdff$255' with positive edge clock.
+Creating register for signal `\fir_filter.$mem2reg_rd$\data_reg$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:94$3_ADDR' using process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:84$31'.
+  created $adff cell `$procdff$260' with positive edge clock and positive level reset.
+Creating register for signal `\fir_filter.$mem2reg_rd$\data_reg$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:94$3_DATA' using process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:84$31'.
+  created $adff cell `$procdff$265' with positive edge clock and positive level reset.
+Creating register for signal `\fir_filter.\tap_cnt' using process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:72$25'.
+  created $adff cell `$procdff$270' with positive edge clock and positive level reset.
+Creating register for signal `\fir_filter.\i' using process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:60$22'.
+  created $adff cell `$procdff$275' with positive edge clock and positive level reset.
+Creating register for signal `\fir_filter.\data_reg[0]' using process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:60$22'.
+  created $adff cell `$procdff$280' with positive edge clock and positive level reset.
+Creating register for signal `\fir_filter.\data_reg[1]' using process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:60$22'.
+  created $adff cell `$procdff$285' with positive edge clock and positive level reset.
+Creating register for signal `\fir_filter.\data_reg[2]' using process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:60$22'.
+  created $adff cell `$procdff$290' with positive edge clock and positive level reset.
+Creating register for signal `\fir_filter.\data_reg[3]' using process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:60$22'.
+  created $adff cell `$procdff$295' with positive edge clock and positive level reset.
+Creating register for signal `\fir_filter.\data_reg[4]' using process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:60$22'.
+  created $adff cell `$procdff$300' with positive edge clock and positive level reset.
+Creating register for signal `\fir_filter.\data_reg[5]' using process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:60$22'.
+  created $adff cell `$procdff$305' with positive edge clock and positive level reset.
+Creating register for signal `\fir_filter.\data_reg[6]' using process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:60$22'.
+  created $adff cell `$procdff$310' with positive edge clock and positive level reset.
+Creating register for signal `\fir_filter.\data_reg[7]' using process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:60$22'.
+  created $adff cell `$procdff$315' with positive edge clock and positive level reset.
+Creating register for signal `\fir_filter.\data_reg[8]' using process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:60$22'.
+  created $adff cell `$procdff$320' with positive edge clock and positive level reset.
+Creating register for signal `\fir_filter.\data_reg[9]' using process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:60$22'.
+  created $adff cell `$procdff$325' with positive edge clock and positive level reset.
+Creating register for signal `\fir_filter.\data_reg[10]' using process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:60$22'.
+  created $adff cell `$procdff$330' with positive edge clock and positive level reset.
+Creating register for signal `\fir_filter.\data_reg[11]' using process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:60$22'.
+  created $adff cell `$procdff$335' with positive edge clock and positive level reset.
+Creating register for signal `\fir_filter.\data_reg[12]' using process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:60$22'.
+  created $adff cell `$procdff$340' with positive edge clock and positive level reset.
+Creating register for signal `\fir_filter.\data_reg[13]' using process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:60$22'.
+  created $adff cell `$procdff$345' with positive edge clock and positive level reset.
+Creating register for signal `\fir_filter.\data_reg[14]' using process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:60$22'.
+  created $adff cell `$procdff$350' with positive edge clock and positive level reset.
+Creating register for signal `\fir_filter.\data_reg[15]' using process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:60$22'.
+  created $adff cell `$procdff$355' with positive edge clock and positive level reset.
+Creating register for signal `\fir_filter.\data_reg[16]' using process `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:60$22'.
+  created $adff cell `$procdff$360' with positive edge clock and positive level reset.
+
+17. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+18. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:25$80'.
+Removing empty process `fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:129$61'.
+Found and cleaned up 1 empty switch in `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:123$59'.
+Removing empty process `fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:123$59'.
+Found and cleaned up 2 empty switches in `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:113$58'.
+Removing empty process `fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:113$58'.
+Found and cleaned up 3 empty switches in `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:84$31'.
+Removing empty process `fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:84$31'.
+Found and cleaned up 3 empty switches in `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:72$25'.
+Removing empty process `fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:72$25'.
+Found and cleaned up 1 empty switch in `\fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:60$22'.
+Removing empty process `fir_filter.$proc$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:60$22'.
+Cleaned up 10 empty switches.
+
+19. Executing CHECK pass (checking for obvious problems).
+Checking module fir_filter...
+Found and reported 0 problems.
+
+20. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fir_filter.
+<suppressed ~58 debug messages>
+
+21. Executing FLATTEN pass (flatten design).
+
+22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fir_filter.
+
+23. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fir_filter..
+Removed 46 unused cells and 191 unused wires.
+<suppressed ~50 debug messages>
+
+24. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fir_filter.
+
+25. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fir_filter'.
+Computing hashes of 106 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+Computing hashes of 100 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+Computing hashes of 99 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+<suppressed ~21 debug messages>
+Removed a total of 7 cells.
+
+26. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fir_filter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$104.
+Removed 1 multiplexer ports.
+<suppressed ~50 debug messages>
+
+27. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fir_filter.
+    New input vector for $reduce_or cell $reduce_or$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:107$53: \accum_reg [36:30]
+    New input vector for $reduce_and cell $reduce_and$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:108$55: \accum_reg [36:30]
+  Optimizing cells in module \fir_filter.
+Performed a total of 2 changes.
+
+28. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fir_filter'.
+Computing hashes of 98 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+Removed a total of 0 cells.
+
+29. Executing OPT_DFF pass (perform DFF optimizations).
+
+30. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fir_filter..
+Removed 0 unused cells and 8 unused wires.
+<suppressed ~1 debug messages>
+
+31. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fir_filter.
+
+32. Rerunning OPT passes. (Maybe there is more to do…)
+
+33. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fir_filter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~49 debug messages>
+
+34. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fir_filter.
+Performed a total of 0 changes.
+
+35. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fir_filter'.
+Computing hashes of 98 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+Removed a total of 0 cells.
+
+36. Executing OPT_DFF pass (perform DFF optimizations).
+
+37. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fir_filter..
+
+38. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fir_filter.
+
+39. Executing FSM pass (extract and optimize FSM).
+
+39.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+39.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+39.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+39.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fir_filter..
+
+39.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+39.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+39.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+39.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+40. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fir_filter.
+
+41. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fir_filter'.
+Computing hashes of 98 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+Removed a total of 0 cells.
+
+42. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fir_filter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~49 debug messages>
+
+43. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fir_filter.
+Performed a total of 0 changes.
+
+44. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fir_filter'.
+Computing hashes of 98 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+Removed a total of 0 cells.
+
+45. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $procdff$360 ($adff) from module fir_filter (D = \data_reg[15], Q = \data_reg[16]).
+Adding EN signal on $procdff$355 ($adff) from module fir_filter (D = \data_reg[14], Q = \data_reg[15]).
+Adding EN signal on $procdff$350 ($adff) from module fir_filter (D = \data_reg[13], Q = \data_reg[14]).
+Adding EN signal on $procdff$345 ($adff) from module fir_filter (D = \data_reg[12], Q = \data_reg[13]).
+Adding EN signal on $procdff$340 ($adff) from module fir_filter (D = \data_reg[11], Q = \data_reg[12]).
+Adding EN signal on $procdff$335 ($adff) from module fir_filter (D = \data_reg[10], Q = \data_reg[11]).
+Adding EN signal on $procdff$330 ($adff) from module fir_filter (D = \data_reg[9], Q = \data_reg[10]).
+Adding EN signal on $procdff$325 ($adff) from module fir_filter (D = \data_reg[8], Q = \data_reg[9]).
+Adding EN signal on $procdff$320 ($adff) from module fir_filter (D = \data_reg[7], Q = \data_reg[8]).
+Adding EN signal on $procdff$315 ($adff) from module fir_filter (D = \data_reg[6], Q = \data_reg[7]).
+Adding EN signal on $procdff$310 ($adff) from module fir_filter (D = \data_reg[5], Q = \data_reg[6]).
+Adding EN signal on $procdff$305 ($adff) from module fir_filter (D = \data_reg[4], Q = \data_reg[5]).
+Adding EN signal on $procdff$300 ($adff) from module fir_filter (D = \data_reg[3], Q = \data_reg[4]).
+Adding EN signal on $procdff$295 ($adff) from module fir_filter (D = \data_reg[2], Q = \data_reg[3]).
+Adding EN signal on $procdff$290 ($adff) from module fir_filter (D = \data_reg[1], Q = \data_reg[2]).
+Adding EN signal on $procdff$285 ($adff) from module fir_filter (D = \data_reg[0], Q = \data_reg[1]).
+Adding EN signal on $procdff$280 ($adff) from module fir_filter (D = \sample_in, Q = \data_reg[0]).
+Adding EN signal on $procdff$270 ($adff) from module fir_filter (D = $0\tap_cnt[4:0], Q = \tap_cnt).
+Adding EN signal on $procdff$243 ($adff) from module fir_filter (D = $0\accum_reg[36:0], Q = \accum_reg).
+Adding EN signal on $procdff$238 ($adff) from module fir_filter (D = \result_temp, Q = \result_out).
+
+46. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fir_filter..
+Removed 18 unused cells and 18 unused wires.
+<suppressed ~19 debug messages>
+
+47. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fir_filter.
+<suppressed ~2 debug messages>
+
+48. Rerunning OPT passes. (Maybe there is more to do…)
+
+49. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fir_filter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~14 debug messages>
+
+50. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fir_filter.
+Performed a total of 0 changes.
+
+51. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fir_filter'.
+Computing hashes of 82 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+Computing hashes of 81 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+<suppressed ~3 debug messages>
+Removed a total of 1 cells.
+
+52. Executing OPT_DFF pass (perform DFF optimizations).
+
+53. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fir_filter..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+54. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fir_filter.
+
+55. Rerunning OPT passes. (Maybe there is more to do…)
+
+56. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fir_filter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~14 debug messages>
+
+57. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fir_filter.
+Performed a total of 0 changes.
+
+58. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fir_filter'.
+Computing hashes of 81 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+Removed a total of 0 cells.
+
+59. Executing OPT_DFF pass (perform DFF optimizations).
+
+60. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fir_filter..
+
+61. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fir_filter.
+
+62. Executing WREDUCE pass (reducing word size of cells).
+Removed top 27 address bits (of 32) from memory init port fir_filter.$meminit$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:26$63 (coeffs).
+Removed top 27 address bits (of 32) from memory init port fir_filter.$meminit$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:27$64 (coeffs).
+Removed top 27 address bits (of 32) from memory init port fir_filter.$meminit$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:28$65 (coeffs).
+Removed top 27 address bits (of 32) from memory init port fir_filter.$meminit$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:29$66 (coeffs).
+Removed top 27 address bits (of 32) from memory init port fir_filter.$meminit$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:30$67 (coeffs).
+Removed top 27 address bits (of 32) from memory init port fir_filter.$meminit$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:31$68 (coeffs).
+Removed top 27 address bits (of 32) from memory init port fir_filter.$meminit$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:32$69 (coeffs).
+Removed top 27 address bits (of 32) from memory init port fir_filter.$meminit$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:33$70 (coeffs).
+Removed top 27 address bits (of 32) from memory init port fir_filter.$meminit$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:34$71 (coeffs).
+Removed top 27 address bits (of 32) from memory init port fir_filter.$meminit$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:35$72 (coeffs).
+Removed top 27 address bits (of 32) from memory init port fir_filter.$meminit$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:36$73 (coeffs).
+Removed top 27 address bits (of 32) from memory init port fir_filter.$meminit$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:37$74 (coeffs).
+Removed top 27 address bits (of 32) from memory init port fir_filter.$meminit$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:38$75 (coeffs).
+Removed top 27 address bits (of 32) from memory init port fir_filter.$meminit$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:39$76 (coeffs).
+Removed top 27 address bits (of 32) from memory init port fir_filter.$meminit$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:40$77 (coeffs).
+Removed top 27 address bits (of 32) from memory init port fir_filter.$meminit$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:41$78 (coeffs).
+Removed top 27 address bits (of 32) from memory init port fir_filter.$meminit$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:42$79 (coeffs).
+Removed top 27 address bits (of 32) from memory read port fir_filter.$memrd$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:91$42 (coeffs).
+Removed top 31 bits (of 32) from port B of cell fir_filter.$add$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:79$30 ($add).
+Removed top 27 bits (of 32) from port Y of cell fir_filter.$add$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:79$30 ($add).
+Removed top 1 bits (of 5) from port B of cell fir_filter.$procmux$113_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell fir_filter.$procmux$114_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell fir_filter.$procmux$115_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell fir_filter.$procmux$116_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell fir_filter.$procmux$117_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell fir_filter.$procmux$118_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell fir_filter.$procmux$119_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell fir_filter.$procmux$120_CMP0 ($eq).
+Removed top 2 bits (of 5) from port B of cell fir_filter.$procmux$121_CMP0 ($eq).
+Removed top 2 bits (of 5) from port B of cell fir_filter.$procmux$122_CMP0 ($eq).
+Removed top 2 bits (of 5) from port B of cell fir_filter.$procmux$123_CMP0 ($eq).
+Removed top 2 bits (of 5) from port B of cell fir_filter.$procmux$124_CMP0 ($eq).
+Removed top 3 bits (of 5) from port B of cell fir_filter.$procmux$125_CMP0 ($eq).
+Removed top 3 bits (of 5) from port B of cell fir_filter.$procmux$126_CMP0 ($eq).
+Removed top 4 bits (of 5) from port B of cell fir_filter.$procmux$127_CMP0 ($eq).
+Removed top 27 bits (of 32) from wire fir_filter.$add$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:79$30_Y.
+Removed top 10 bits (of 16) from wire fir_filter.data_reg[14].
+
+63. Executing PEEPOPT pass (run peephole optimizers).
+
+64. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fir_filter..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+65. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module fir_filter:
+  creating $macc model for $add$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:79$30 ($add).
+  creating $macc model for $add$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:95$50 ($add).
+  creating $macc model for $mul$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:91$43 ($mul).
+  creating $macc model for $mul$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:94$49 ($mul).
+  merging $macc model for $mul$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:94$49 into $add$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:95$50.
+  creating $alu model for $macc $add$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:79$30.
+  creating $macc cell for $add$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:95$50: $auto$alumacc.cc:382:replace_macc$387
+  creating $macc cell for $mul$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:91$43: $auto$alumacc.cc:382:replace_macc$388
+  creating $alu cell for $add$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:79$30: $auto$alumacc.cc:512:replace_alu$389
+  created 1 $alu and 2 $macc cells.
+
+66. Executing SHARE pass (SAT-based resource sharing).
+Found 2 cells in module fir_filter that may be considered for resource sharing.
+  Analyzing resource sharing options for $mul$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:94$49 ($mul):
+    Found cell that is never activated: $mul$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:94$49
+    Cell is never active. Sharing is pointless, we simply remove it.
+  Analyzing resource sharing options for $memrd$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:94$48 ($memrd):
+    Found 1 activation_patterns using ctrl signal { $ne$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:77$28_Y $logic_and$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:65$24_Y }.
+    No candidates found.
+Removing 1 cells in module fir_filter:
+  Removing cell $mul$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:94$49 ($mul).
+
+67. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fir_filter.
+
+68. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fir_filter'.
+Computing hashes of 80 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+Removed a total of 0 cells.
+
+69. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fir_filter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~14 debug messages>
+
+70. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fir_filter.
+Performed a total of 0 changes.
+
+71. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fir_filter'.
+Computing hashes of 80 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+Removed a total of 0 cells.
+
+72. Executing OPT_DFF pass (perform DFF optimizations).
+
+73. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fir_filter..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+74. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fir_filter.
+
+75. Rerunning OPT passes. (Maybe there is more to do…)
+
+76. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fir_filter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~14 debug messages>
+
+77. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fir_filter.
+Performed a total of 0 changes.
+
+78. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fir_filter'.
+Computing hashes of 80 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+Removed a total of 0 cells.
+
+79. Executing OPT_DFF pass (perform DFF optimizations).
+
+80. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fir_filter..
+
+81. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fir_filter.
+
+82. Executing MEMORY pass.
+
+82.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+82.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+82.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+82.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+82.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+Checking read port `\coeffs'[0] in module `\fir_filter': no output FF found.
+Checking read port `\coeffs'[1] in module `\fir_filter': no output FF found.
+Checking read port address `\coeffs'[0] in module `\fir_filter': address FF has async set and/or reset, not supported.
+Checking read port address `\coeffs'[1] in module `\fir_filter': no address FF found.
+
+82.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fir_filter..
+
+82.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+Consolidating read ports of memory fir_filter.coeffs by address:
+
+82.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+82.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fir_filter..
+
+82.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+83. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fir_filter..
+
+84. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fir_filter.
+<suppressed ~5 debug messages>
+
+85. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fir_filter'.
+Computing hashes of 58 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+Removed a total of 0 cells.
+
+86. Executing OPT_DFF pass (perform DFF optimizations).
+
+87. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fir_filter..
+Removed 0 unused cells and 4 unused wires.
+<suppressed ~1 debug messages>
+
+88. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+Mapping memory \coeffs in module \fir_filter:
+  created 17 $dff cells and 0 static cells of width 16.
+  read interface: 0 $dff and 62 $mux cells.
+  write interface: 0 write mux blocks.
+
+89. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fir_filter.
+<suppressed ~79 debug messages>
+
+90. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fir_filter'.
+Computing hashes of 77 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+Removed a total of 0 cells.
+
+91. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fir_filter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~31 debug messages>
+
+92. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fir_filter.
+    Consolidated identical input bits for $mux cell $memory\coeffs$rdmux[0][4][3]$450:
+      Old ports: A=16'0000111101101000, B=16'0001001100101000, Y=$memory\coeffs$rdmux[0][3][1]$b$422
+      New ports: A=2'01, B=2'10, Y={ $memory\coeffs$rdmux[0][3][1]$b$422 [12] $memory\coeffs$rdmux[0][3][1]$b$422 [6] }
+      New connections: { $memory\coeffs$rdmux[0][3][1]$b$422 [15:13] $memory\coeffs$rdmux[0][3][1]$b$422 [11:7] $memory\coeffs$rdmux[0][3][1]$b$422 [5:0] } = { 3'000 $memory\coeffs$rdmux[0][3][1]$b$422 [6] $memory\coeffs$rdmux[0][3][1]$b$422 [6] 9'110101000 }
+    Consolidated identical input bits for $mux cell $memory\coeffs$rdmux[0][4][2]$447:
+      Old ports: A=16'0000010111011010, B=16'0000101010000010, Y=$memory\coeffs$rdmux[0][3][1]$a$421
+      New ports: A=2'01, B=2'10, Y={ $memory\coeffs$rdmux[0][3][1]$a$421 [9] $memory\coeffs$rdmux[0][3][1]$a$421 [3] }
+      New connections: { $memory\coeffs$rdmux[0][3][1]$a$421 [15:10] $memory\coeffs$rdmux[0][3][1]$a$421 [8:4] $memory\coeffs$rdmux[0][3][1]$a$421 [2:0] } = { 4'0000 $memory\coeffs$rdmux[0][3][1]$a$421 [9] $memory\coeffs$rdmux[0][3][1]$a$421 [3] $memory\coeffs$rdmux[0][3][1]$a$421 [3] 1'1 $memory\coeffs$rdmux[0][3][1]$a$421 [3] 1'0 $memory\coeffs$rdmux[0][3][1]$a$421 [3] 3'010 }
+    Consolidated identical input bits for $mux cell $memory\coeffs$rdmux[0][4][1]$444:
+      Old ports: A=16'0000000010011101, B=16'0000001001110101, Y=$memory\coeffs$rdmux[0][3][0]$b$419
+      New ports: A=2'01, B=2'10, Y={ $memory\coeffs$rdmux[0][3][0]$b$419 [5] $memory\coeffs$rdmux[0][3][0]$b$419 [3] }
+      New connections: { $memory\coeffs$rdmux[0][3][0]$b$419 [15:6] $memory\coeffs$rdmux[0][3][0]$b$419 [4] $memory\coeffs$rdmux[0][3][0]$b$419 [2:0] } = { 6'000000 $memory\coeffs$rdmux[0][3][0]$b$419 [5] 1'0 $memory\coeffs$rdmux[0][3][0]$b$419 [3] $memory\coeffs$rdmux[0][3][0]$b$419 [5] 4'1101 }
+    Consolidated identical input bits for $mux cell $memory\coeffs$rdmux[0][4][0]$441:
+      Old ports: A=16'1111111111000111, B=16'1111111111110100, Y=$memory\coeffs$rdmux[0][3][0]$a$418
+      New ports: A=2'01, B=2'10, Y={ $memory\coeffs$rdmux[0][3][0]$a$418 [4] $memory\coeffs$rdmux[0][3][0]$a$418 [0] }
+      New connections: { $memory\coeffs$rdmux[0][3][0]$a$418 [15:5] $memory\coeffs$rdmux[0][3][0]$a$418 [3:1] } = { 10'1111111111 $memory\coeffs$rdmux[0][3][0]$a$418 [4] 2'01 $memory\coeffs$rdmux[0][3][0]$a$418 [0] }
+    Consolidated identical input bits for $mux cell $memory\coeffs$rdmux[0][4][6]$459:
+      Old ports: A=16'0000010111011010, B=16'0000001001110101, Y=$memory\coeffs$rdmux[0][3][3]$a$427
+      New ports: A=2'10, B=2'01, Y=$memory\coeffs$rdmux[0][3][3]$a$427 [1:0]
+      New connections: $memory\coeffs$rdmux[0][3][3]$a$427 [15:2] = { 5'00000 $memory\coeffs$rdmux[0][3][3]$a$427 [1:0] $memory\coeffs$rdmux[0][3][3]$a$427 [1] $memory\coeffs$rdmux[0][3][3]$a$427 [1] 1'1 $memory\coeffs$rdmux[0][3][3]$a$427 [0] 1'1 $memory\coeffs$rdmux[0][3][3]$a$427 [1:0] }
+    Consolidated identical input bits for $mux cell $memory\coeffs$rdmux[0][4][4]$453:
+      Old ports: A=16'0001010010010000, B=16'0001001100101000, Y=$memory\coeffs$rdmux[0][3][2]$a$424
+      New ports: A=2'10, B=2'01, Y=$memory\coeffs$rdmux[0][3][2]$a$424 [4:3]
+      New connections: { $memory\coeffs$rdmux[0][3][2]$a$424 [15:5] $memory\coeffs$rdmux[0][3][2]$a$424 [2:0] } = { 5'00010 $memory\coeffs$rdmux[0][3][2]$a$424 [4:3] $memory\coeffs$rdmux[0][3][2]$a$424 [3] $memory\coeffs$rdmux[0][3][2]$a$424 [4] 1'0 $memory\coeffs$rdmux[0][3][2]$a$424 [3] 3'000 }
+    Consolidated identical input bits for $mux cell $memory\coeffs$rdmux[0][4][5]$456:
+      Old ports: A=16'0000111101101000, B=16'0000101010000010, Y=$memory\coeffs$rdmux[0][3][2]$b$425
+      New ports: A=2'10, B=2'01, Y={ $memory\coeffs$rdmux[0][3][2]$b$425 [3] $memory\coeffs$rdmux[0][3][2]$b$425 [1] }
+      New connections: { $memory\coeffs$rdmux[0][3][2]$b$425 [15:4] $memory\coeffs$rdmux[0][3][2]$b$425 [2] $memory\coeffs$rdmux[0][3][2]$b$425 [0] } = { 5'00001 $memory\coeffs$rdmux[0][3][2]$b$425 [3] 1'1 $memory\coeffs$rdmux[0][3][2]$b$425 [3] $memory\coeffs$rdmux[0][3][2]$b$425 [1] $memory\coeffs$rdmux[0][3][2]$b$425 [3] $memory\coeffs$rdmux[0][3][2]$b$425 [3] 3'000 }
+    Consolidated identical input bits for $mux cell $memory\coeffs$rdmux[0][4][8]$465:
+      Old ports: A=16'1111111111000111, B=16'x, Y=$memory\coeffs$rdmux[0][3][4]$a$430
+      New ports: A=2'01, B=2'x, Y={ $memory\coeffs$rdmux[0][3][4]$a$430 [3] $memory\coeffs$rdmux[0][3][4]$a$430 [0] }
+      New connections: { $memory\coeffs$rdmux[0][3][4]$a$430 [15:4] $memory\coeffs$rdmux[0][3][4]$a$430 [2:1] } = { $memory\coeffs$rdmux[0][3][4]$a$430 [0] $memory\coeffs$rdmux[0][3][4]$a$430 [0] $memory\coeffs$rdmux[0][3][4]$a$430 [0] $memory\coeffs$rdmux[0][3][4]$a$430 [0] $memory\coeffs$rdmux[0][3][4]$a$430 [0] $memory\coeffs$rdmux[0][3][4]$a$430 [0] $memory\coeffs$rdmux[0][3][4]$a$430 [0] $memory\coeffs$rdmux[0][3][4]$a$430 [0] $memory\coeffs$rdmux[0][3][4]$a$430 [0] $memory\coeffs$rdmux[0][3][4]$a$430 [0] $memory\coeffs$rdmux[0][3][4]$a$430 [3] $memory\coeffs$rdmux[0][3][4]$a$430 [3] $memory\coeffs$rdmux[0][3][4]$a$430 [0] $memory\coeffs$rdmux[0][3][4]$a$430 [0] }
+    Consolidated identical input bits for $mux cell $memory\coeffs$rdmux[0][4][7]$462:
+      Old ports: A=16'0000000010011101, B=16'1111111111110100, Y=$memory\coeffs$rdmux[0][3][3]$b$428
+      New ports: A=2'01, B=2'10, Y={ $memory\coeffs$rdmux[0][3][3]$b$428 [5] $memory\coeffs$rdmux[0][3][3]$b$428 [0] }
+      New connections: { $memory\coeffs$rdmux[0][3][3]$b$428 [15:6] $memory\coeffs$rdmux[0][3][3]$b$428 [4:1] } = { $memory\coeffs$rdmux[0][3][3]$b$428 [5] $memory\coeffs$rdmux[0][3][3]$b$428 [5] $memory\coeffs$rdmux[0][3][3]$b$428 [5] $memory\coeffs$rdmux[0][3][3]$b$428 [5] $memory\coeffs$rdmux[0][3][3]$b$428 [5] $memory\coeffs$rdmux[0][3][3]$b$428 [5] $memory\coeffs$rdmux[0][3][3]$b$428 [5] $memory\coeffs$rdmux[0][3][3]$b$428 [5] 1'1 $memory\coeffs$rdmux[0][3][3]$b$428 [5] 1'1 $memory\coeffs$rdmux[0][3][3]$b$428 [0] 2'10 }
+  Optimizing cells in module \fir_filter.
+    Consolidated identical input bits for $mux cell $memory\coeffs$rdmux[0][3][4]$429:
+      Old ports: A=$memory\coeffs$rdmux[0][3][4]$a$430, B=16'x, Y=$memory\coeffs$rdmux[0][2][2]$a$412
+      New ports: A={ $memory\coeffs$rdmux[0][3][4]$a$430 [3] $memory\coeffs$rdmux[0][3][4]$a$430 [0] }, B=2'x, Y={ $memory\coeffs$rdmux[0][2][2]$a$412 [3] $memory\coeffs$rdmux[0][2][2]$a$412 [0] }
+      New connections: { $memory\coeffs$rdmux[0][2][2]$a$412 [15:4] $memory\coeffs$rdmux[0][2][2]$a$412 [2:1] } = { $memory\coeffs$rdmux[0][2][2]$a$412 [0] $memory\coeffs$rdmux[0][2][2]$a$412 [0] $memory\coeffs$rdmux[0][2][2]$a$412 [0] $memory\coeffs$rdmux[0][2][2]$a$412 [0] $memory\coeffs$rdmux[0][2][2]$a$412 [0] $memory\coeffs$rdmux[0][2][2]$a$412 [0] $memory\coeffs$rdmux[0][2][2]$a$412 [0] $memory\coeffs$rdmux[0][2][2]$a$412 [0] $memory\coeffs$rdmux[0][2][2]$a$412 [0] $memory\coeffs$rdmux[0][2][2]$a$412 [0] $memory\coeffs$rdmux[0][2][2]$a$412 [3] $memory\coeffs$rdmux[0][2][2]$a$412 [3] $memory\coeffs$rdmux[0][2][2]$a$412 [0] $memory\coeffs$rdmux[0][2][2]$a$412 [0] }
+    Consolidated identical input bits for $mux cell $memory\coeffs$rdmux[0][3][3]$426:
+      Old ports: A=$memory\coeffs$rdmux[0][3][3]$a$427, B=$memory\coeffs$rdmux[0][3][3]$b$428, Y=$memory\coeffs$rdmux[0][2][1]$b$410
+      New ports: A={ 1'0 $memory\coeffs$rdmux[0][3][3]$a$427 [1] $memory\coeffs$rdmux[0][3][3]$a$427 [1] 1'1 $memory\coeffs$rdmux[0][3][3]$a$427 [0] $memory\coeffs$rdmux[0][3][3]$a$427 [1:0] $memory\coeffs$rdmux[0][3][3]$a$427 [1:0] }, B={ $memory\coeffs$rdmux[0][3][3]$b$428 [5] $memory\coeffs$rdmux[0][3][3]$b$428 [5] 1'1 $memory\coeffs$rdmux[0][3][3]$b$428 [5] $memory\coeffs$rdmux[0][3][3]$b$428 [5] $memory\coeffs$rdmux[0][3][3]$b$428 [0] 2'10 $memory\coeffs$rdmux[0][3][3]$b$428 [0] }, Y={ $memory\coeffs$rdmux[0][2][1]$b$410 [11] $memory\coeffs$rdmux[0][2][1]$b$410 [8:5] $memory\coeffs$rdmux[0][2][1]$b$410 [3:0] }
+      New connections: { $memory\coeffs$rdmux[0][2][1]$b$410 [15:12] $memory\coeffs$rdmux[0][2][1]$b$410 [10:9] $memory\coeffs$rdmux[0][2][1]$b$410 [4] } = { $memory\coeffs$rdmux[0][2][1]$b$410 [11] $memory\coeffs$rdmux[0][2][1]$b$410 [11] $memory\coeffs$rdmux[0][2][1]$b$410 [11] $memory\coeffs$rdmux[0][2][1]$b$410 [11] $memory\coeffs$rdmux[0][2][1]$b$410 [8] $memory\coeffs$rdmux[0][2][1]$b$410 [5] 1'1 }
+    Consolidated identical input bits for $mux cell $memory\coeffs$rdmux[0][3][2]$423:
+      Old ports: A=$memory\coeffs$rdmux[0][3][2]$a$424, B=$memory\coeffs$rdmux[0][3][2]$b$425, Y=$memory\coeffs$rdmux[0][2][1]$a$409
+      New ports: A={ 2'10 $memory\coeffs$rdmux[0][3][2]$a$424 [4:3] $memory\coeffs$rdmux[0][3][2]$a$424 [4] 1'0 $memory\coeffs$rdmux[0][3][2]$a$424 [4:3] 1'0 }, B={ 2'01 $memory\coeffs$rdmux[0][3][2]$b$425 [3] 1'1 $memory\coeffs$rdmux[0][3][2]$b$425 [1] $memory\coeffs$rdmux[0][3][2]$b$425 [3] 1'0 $memory\coeffs$rdmux[0][3][2]$b$425 [3] $memory\coeffs$rdmux[0][3][2]$b$425 [1] }, Y={ $memory\coeffs$rdmux[0][2][1]$a$409 [12:9] $memory\coeffs$rdmux[0][2][1]$a$409 [7:6] $memory\coeffs$rdmux[0][2][1]$a$409 [4:3] $memory\coeffs$rdmux[0][2][1]$a$409 [1] }
+      New connections: { $memory\coeffs$rdmux[0][2][1]$a$409 [15:13] $memory\coeffs$rdmux[0][2][1]$a$409 [8] $memory\coeffs$rdmux[0][2][1]$a$409 [5] $memory\coeffs$rdmux[0][2][1]$a$409 [2] $memory\coeffs$rdmux[0][2][1]$a$409 [0] } = { 3'000 $memory\coeffs$rdmux[0][2][1]$a$409 [3] $memory\coeffs$rdmux[0][2][1]$a$409 [3] 2'00 }
+    Consolidated identical input bits for $mux cell $memory\coeffs$rdmux[0][3][1]$420:
+      Old ports: A=$memory\coeffs$rdmux[0][3][1]$a$421, B=$memory\coeffs$rdmux[0][3][1]$b$422, Y=$memory\coeffs$rdmux[0][2][0]$b$407
+      New ports: A={ 1'0 $memory\coeffs$rdmux[0][3][1]$a$421 [9] $memory\coeffs$rdmux[0][3][1]$a$421 [9] $memory\coeffs$rdmux[0][3][1]$a$421 [3] 1'0 $memory\coeffs$rdmux[0][3][1]$a$421 [3] $memory\coeffs$rdmux[0][3][1]$a$421 [3] 1'1 }, B={ $memory\coeffs$rdmux[0][3][1]$b$422 [12] $memory\coeffs$rdmux[0][3][1]$b$422 [6] 1'1 $memory\coeffs$rdmux[0][3][1]$b$422 [6] 4'1010 }, Y={ $memory\coeffs$rdmux[0][2][0]$b$407 [12:11] $memory\coeffs$rdmux[0][2][0]$b$407 [9] $memory\coeffs$rdmux[0][2][0]$b$407 [6:3] $memory\coeffs$rdmux[0][2][0]$b$407 [1] }
+      New connections: { $memory\coeffs$rdmux[0][2][0]$b$407 [15:13] $memory\coeffs$rdmux[0][2][0]$b$407 [10] $memory\coeffs$rdmux[0][2][0]$b$407 [8:7] $memory\coeffs$rdmux[0][2][0]$b$407 [2] $memory\coeffs$rdmux[0][2][0]$b$407 [0] } = { 3'000 $memory\coeffs$rdmux[0][2][0]$b$407 [6] $memory\coeffs$rdmux[0][2][0]$b$407 [3] $memory\coeffs$rdmux[0][2][0]$b$407 [1] 2'00 }
+    Consolidated identical input bits for $mux cell $memory\coeffs$rdmux[0][3][0]$417:
+      Old ports: A=$memory\coeffs$rdmux[0][3][0]$a$418, B=$memory\coeffs$rdmux[0][3][0]$b$419, Y=$memory\coeffs$rdmux[0][2][0]$a$406
+      New ports: A={ 3'111 $memory\coeffs$rdmux[0][3][0]$a$418 [4] $memory\coeffs$rdmux[0][3][0]$a$418 [4] 1'0 $memory\coeffs$rdmux[0][3][0]$a$418 [0] $memory\coeffs$rdmux[0][3][0]$a$418 [0] }, B={ 1'0 $memory\coeffs$rdmux[0][3][0]$b$419 [3] $memory\coeffs$rdmux[0][3][0]$b$419 [5] $memory\coeffs$rdmux[0][3][0]$b$419 [5] 1'1 $memory\coeffs$rdmux[0][3][0]$b$419 [3] 2'01 }, Y={ $memory\coeffs$rdmux[0][2][0]$a$406 [8:3] $memory\coeffs$rdmux[0][2][0]$a$406 [1:0] }
+      New connections: { $memory\coeffs$rdmux[0][2][0]$a$406 [15:9] $memory\coeffs$rdmux[0][2][0]$a$406 [2] } = { $memory\coeffs$rdmux[0][2][0]$a$406 [8] $memory\coeffs$rdmux[0][2][0]$a$406 [8] $memory\coeffs$rdmux[0][2][0]$a$406 [8] $memory\coeffs$rdmux[0][2][0]$a$406 [8] $memory\coeffs$rdmux[0][2][0]$a$406 [8] $memory\coeffs$rdmux[0][2][0]$a$406 [8] $memory\coeffs$rdmux[0][2][0]$a$406 [6] 1'1 }
+  Optimizing cells in module \fir_filter.
+    Consolidated identical input bits for $mux cell $memory\coeffs$rdmux[0][2][2]$411:
+      Old ports: A=$memory\coeffs$rdmux[0][2][2]$a$412, B=16'x, Y=$memory\coeffs$rdmux[0][1][1]$a$403
+      New ports: A={ $memory\coeffs$rdmux[0][2][2]$a$412 [3] $memory\coeffs$rdmux[0][2][2]$a$412 [0] }, B=2'x, Y={ $memory\coeffs$rdmux[0][1][1]$a$403 [3] $memory\coeffs$rdmux[0][1][1]$a$403 [0] }
+      New connections: { $memory\coeffs$rdmux[0][1][1]$a$403 [15:4] $memory\coeffs$rdmux[0][1][1]$a$403 [2:1] } = { $memory\coeffs$rdmux[0][1][1]$a$403 [0] $memory\coeffs$rdmux[0][1][1]$a$403 [0] $memory\coeffs$rdmux[0][1][1]$a$403 [0] $memory\coeffs$rdmux[0][1][1]$a$403 [0] $memory\coeffs$rdmux[0][1][1]$a$403 [0] $memory\coeffs$rdmux[0][1][1]$a$403 [0] $memory\coeffs$rdmux[0][1][1]$a$403 [0] $memory\coeffs$rdmux[0][1][1]$a$403 [0] $memory\coeffs$rdmux[0][1][1]$a$403 [0] $memory\coeffs$rdmux[0][1][1]$a$403 [0] $memory\coeffs$rdmux[0][1][1]$a$403 [3] $memory\coeffs$rdmux[0][1][1]$a$403 [3] $memory\coeffs$rdmux[0][1][1]$a$403 [0] $memory\coeffs$rdmux[0][1][1]$a$403 [0] }
+    Consolidated identical input bits for $mux cell $memory\coeffs$rdmux[0][2][1]$408:
+      Old ports: A=$memory\coeffs$rdmux[0][2][1]$a$409, B=$memory\coeffs$rdmux[0][2][1]$b$410, Y=$memory\coeffs$rdmux[0][1][0]$b$401
+      New ports: A={ 1'0 $memory\coeffs$rdmux[0][2][1]$a$409 [12:9] $memory\coeffs$rdmux[0][2][1]$a$409 [3] $memory\coeffs$rdmux[0][2][1]$a$409 [7:6] $memory\coeffs$rdmux[0][2][1]$a$409 [3] $memory\coeffs$rdmux[0][2][1]$a$409 [4:3] 1'0 $memory\coeffs$rdmux[0][2][1]$a$409 [1] 1'0 }, B={ $memory\coeffs$rdmux[0][2][1]$b$410 [11] $memory\coeffs$rdmux[0][2][1]$b$410 [11] $memory\coeffs$rdmux[0][2][1]$b$410 [11] $memory\coeffs$rdmux[0][2][1]$b$410 [8] $memory\coeffs$rdmux[0][2][1]$b$410 [5] $memory\coeffs$rdmux[0][2][1]$b$410 [8:5] 1'1 $memory\coeffs$rdmux[0][2][1]$b$410 [3:0] }, Y=$memory\coeffs$rdmux[0][1][0]$b$401 [13:0]
+      New connections: $memory\coeffs$rdmux[0][1][0]$b$401 [15:14] = { $memory\coeffs$rdmux[0][1][0]$b$401 [13] $memory\coeffs$rdmux[0][1][0]$b$401 [13] }
+    Consolidated identical input bits for $mux cell $memory\coeffs$rdmux[0][2][0]$405:
+      Old ports: A=$memory\coeffs$rdmux[0][2][0]$a$406, B=$memory\coeffs$rdmux[0][2][0]$b$407, Y=$memory\coeffs$rdmux[0][1][0]$a$400
+      New ports: A={ $memory\coeffs$rdmux[0][2][0]$a$406 [8] $memory\coeffs$rdmux[0][2][0]$a$406 [8] $memory\coeffs$rdmux[0][2][0]$a$406 [8] $memory\coeffs$rdmux[0][2][0]$a$406 [8] $memory\coeffs$rdmux[0][2][0]$a$406 [6] $memory\coeffs$rdmux[0][2][0]$a$406 [8:3] 1'1 $memory\coeffs$rdmux[0][2][0]$a$406 [1:0] }, B={ 1'0 $memory\coeffs$rdmux[0][2][0]$b$407 [12:11] $memory\coeffs$rdmux[0][2][0]$b$407 [6] $memory\coeffs$rdmux[0][2][0]$b$407 [9] $memory\coeffs$rdmux[0][2][0]$b$407 [3] $memory\coeffs$rdmux[0][2][0]$b$407 [1] $memory\coeffs$rdmux[0][2][0]$b$407 [6:3] 1'0 $memory\coeffs$rdmux[0][2][0]$b$407 [1] 1'0 }, Y=$memory\coeffs$rdmux[0][1][0]$a$400 [13:0]
+      New connections: $memory\coeffs$rdmux[0][1][0]$a$400 [15:14] = { $memory\coeffs$rdmux[0][1][0]$a$400 [13] $memory\coeffs$rdmux[0][1][0]$a$400 [13] }
+  Optimizing cells in module \fir_filter.
+    Consolidated identical input bits for $mux cell $memory\coeffs$rdmux[0][1][1]$402:
+      Old ports: A=$memory\coeffs$rdmux[0][1][1]$a$403, B=16'x, Y=$memory\coeffs$rdmux[0][0][0]$b$398
+      New ports: A={ $memory\coeffs$rdmux[0][1][1]$a$403 [3] $memory\coeffs$rdmux[0][1][1]$a$403 [0] }, B=2'x, Y={ $memory\coeffs$rdmux[0][0][0]$b$398 [3] $memory\coeffs$rdmux[0][0][0]$b$398 [0] }
+      New connections: { $memory\coeffs$rdmux[0][0][0]$b$398 [15:4] $memory\coeffs$rdmux[0][0][0]$b$398 [2:1] } = { $memory\coeffs$rdmux[0][0][0]$b$398 [0] $memory\coeffs$rdmux[0][0][0]$b$398 [0] $memory\coeffs$rdmux[0][0][0]$b$398 [0] $memory\coeffs$rdmux[0][0][0]$b$398 [0] $memory\coeffs$rdmux[0][0][0]$b$398 [0] $memory\coeffs$rdmux[0][0][0]$b$398 [0] $memory\coeffs$rdmux[0][0][0]$b$398 [0] $memory\coeffs$rdmux[0][0][0]$b$398 [0] $memory\coeffs$rdmux[0][0][0]$b$398 [0] $memory\coeffs$rdmux[0][0][0]$b$398 [0] $memory\coeffs$rdmux[0][0][0]$b$398 [3] $memory\coeffs$rdmux[0][0][0]$b$398 [3] $memory\coeffs$rdmux[0][0][0]$b$398 [0] $memory\coeffs$rdmux[0][0][0]$b$398 [0] }
+    Consolidated identical input bits for $mux cell $memory\coeffs$rdmux[0][1][0]$399:
+      Old ports: A=$memory\coeffs$rdmux[0][1][0]$a$400, B=$memory\coeffs$rdmux[0][1][0]$b$401, Y=$memory\coeffs$rdmux[0][0][0]$a$397
+      New ports: A=$memory\coeffs$rdmux[0][1][0]$a$400 [13:0], B=$memory\coeffs$rdmux[0][1][0]$b$401 [13:0], Y=$memory\coeffs$rdmux[0][0][0]$a$397 [13:0]
+      New connections: $memory\coeffs$rdmux[0][0][0]$a$397 [15:14] = { $memory\coeffs$rdmux[0][0][0]$a$397 [13] $memory\coeffs$rdmux[0][0][0]$a$397 [13] }
+  Optimizing cells in module \fir_filter.
+    Consolidated identical input bits for $mux cell $memory\coeffs$rdmux[0][0][0]$396:
+      Old ports: A=$memory\coeffs$rdmux[0][0][0]$a$397, B=$memory\coeffs$rdmux[0][0][0]$b$398, Y=$memrd$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:94$48_DATA
+      New ports: A=$memory\coeffs$rdmux[0][0][0]$a$397 [13:0], B={ $memory\coeffs$rdmux[0][0][0]$b$398 [0] $memory\coeffs$rdmux[0][0][0]$b$398 [0] $memory\coeffs$rdmux[0][0][0]$b$398 [0] $memory\coeffs$rdmux[0][0][0]$b$398 [0] $memory\coeffs$rdmux[0][0][0]$b$398 [0] $memory\coeffs$rdmux[0][0][0]$b$398 [0] $memory\coeffs$rdmux[0][0][0]$b$398 [0] $memory\coeffs$rdmux[0][0][0]$b$398 [0] $memory\coeffs$rdmux[0][0][0]$b$398 [3] $memory\coeffs$rdmux[0][0][0]$b$398 [3] $memory\coeffs$rdmux[0][0][0]$b$398 [3] $memory\coeffs$rdmux[0][0][0]$b$398 [0] $memory\coeffs$rdmux[0][0][0]$b$398 [0] $memory\coeffs$rdmux[0][0][0]$b$398 [0] }, Y=$memrd$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:94$48_DATA [13:0]
+      New connections: $memrd$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:94$48_DATA [15:14] = { $memrd$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:94$48_DATA [13] $memrd$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:94$48_DATA [13] }
+  Optimizing cells in module \fir_filter.
+Performed a total of 20 changes.
+
+93. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fir_filter'.
+Computing hashes of 77 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+Computing hashes of 71 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+<suppressed ~18 debug messages>
+Removed a total of 6 cells.
+
+94. Executing OPT_SHARE pass.
+
+95. Executing OPT_DFF pass (perform DFF optimizations).
+
+96. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fir_filter..
+Removed 0 unused cells and 112 unused wires.
+<suppressed ~1 debug messages>
+
+97. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fir_filter.
+<suppressed ~4 debug messages>
+
+98. Rerunning OPT passes. (Maybe there is more to do…)
+
+99. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fir_filter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~31 debug messages>
+
+100. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fir_filter.
+    Consolidated identical input bits for $mux cell $memory\coeffs$rdmux[0][3][0]$417:
+      Old ports: A={ 3'111 $memory\coeffs$rdmux[0][3][0]$a$418 [5] $memory\coeffs$rdmux[0][3][0]$a$418 [5] 1'0 $memory\coeffs$rdmux[0][3][0]$a$418 [1] $memory\coeffs$rdmux[0][3][0]$a$418 [1] }, B={ 1'0 $memory\coeffs$rdmux[0][3][0]$a$418 [1] $memory\coeffs$rdmux[0][3][0]$a$418 [5] $memory\coeffs$rdmux[0][3][0]$a$418 [5] 1'1 $memory\coeffs$rdmux[0][3][0]$a$418 [1] 2'01 }, Y={ $memory\coeffs$rdmux[0][2][0]$a$406 [15] $memory\coeffs$rdmux[0][2][0]$a$406 [7] $memory\coeffs$rdmux[0][2][0]$a$406 [9] $memory\coeffs$rdmux[0][2][0]$a$406 [5:3] $memory\coeffs$rdmux[0][2][0]$a$406 [1:0] }
+      New ports: A={ 3'111 $memory\coeffs$rdmux[0][3][0]$a$418 [5] 1'0 $memory\coeffs$rdmux[0][3][0]$a$418 [1] $memory\coeffs$rdmux[0][3][0]$a$418 [1] }, B={ 1'0 $memory\coeffs$rdmux[0][3][0]$a$418 [1] $memory\coeffs$rdmux[0][3][0]$a$418 [5] 1'1 $memory\coeffs$rdmux[0][3][0]$a$418 [1] 2'01 }, Y={ $memory\coeffs$rdmux[0][2][0]$a$406 [15] $memory\coeffs$rdmux[0][2][0]$a$406 [7] $memory\coeffs$rdmux[0][2][0]$a$406 [9] $memory\coeffs$rdmux[0][2][0]$a$406 [4:3] $memory\coeffs$rdmux[0][2][0]$a$406 [1:0] }
+      New connections: $memory\coeffs$rdmux[0][2][0]$a$406 [5] = $memory\coeffs$rdmux[0][3][0]$a$418 [5]
+    Consolidated identical input bits for $mux cell $memory\coeffs$rdmux[0][3][1]$420:
+      Old ports: A={ 1'0 $memory\coeffs$rdmux[0][3][0]$a$418 [5] $memory\coeffs$rdmux[0][3][0]$a$418 [5] $memory\coeffs$rdmux[0][3][0]$a$418 [1] 1'0 $memory\coeffs$rdmux[0][3][0]$a$418 [1] $memory\coeffs$rdmux[0][3][0]$a$418 [1] 1'1 }, B={ $memory\coeffs$rdmux[0][3][0]$a$418 [5] $memory\coeffs$rdmux[0][3][0]$a$418 [1] 1'1 $memory\coeffs$rdmux[0][3][0]$a$418 [1] 4'1010 }, Y={ $memory\coeffs$rdmux[0][2][0]$b$407 [12:11] $memory\coeffs$rdmux[0][2][0]$b$407 [9] $memory\coeffs$rdmux[0][2][0]$b$407 [10] $memory\coeffs$rdmux[0][2][0]$b$407 [5:4] $memory\coeffs$rdmux[0][2][0]$b$407 [8:7] }
+      New ports: A={ 1'0 $memory\coeffs$rdmux[0][3][0]$a$418 [5] $memory\coeffs$rdmux[0][3][0]$a$418 [5] 1'0 $memory\coeffs$rdmux[0][3][0]$a$418 [1] $memory\coeffs$rdmux[0][3][0]$a$418 [1] 1'1 }, B={ $memory\coeffs$rdmux[0][3][0]$a$418 [5] $memory\coeffs$rdmux[0][3][0]$a$418 [1] 5'11010 }, Y={ $memory\coeffs$rdmux[0][2][0]$b$407 [12:11] $memory\coeffs$rdmux[0][2][0]$b$407 [9] $memory\coeffs$rdmux[0][2][0]$b$407 [5:4] $memory\coeffs$rdmux[0][2][0]$b$407 [8:7] }
+      New connections: $memory\coeffs$rdmux[0][2][0]$b$407 [10] = $memory\coeffs$rdmux[0][3][0]$a$418 [1]
+    Consolidated identical input bits for $mux cell $memory\coeffs$rdmux[0][3][2]$423:
+      Old ports: A={ 2'10 $memory\coeffs$rdmux[0][3][2]$a$424 [10:9] $memory\coeffs$rdmux[0][3][2]$a$424 [10] 1'0 $memory\coeffs$rdmux[0][3][2]$a$424 [10:9] 1'0 }, B={ 2'01 $memory\coeffs$rdmux[0][3][2]$a$424 [10] 1'1 $memory\coeffs$rdmux[0][3][2]$a$424 [9] $memory\coeffs$rdmux[0][3][2]$a$424 [10] 1'0 $memory\coeffs$rdmux[0][3][2]$a$424 [10:9] }, Y={ $memory\coeffs$rdmux[0][2][1]$a$409 [12:9] $memory\coeffs$rdmux[0][2][1]$a$409 [7:6] $memory\coeffs$rdmux[0][2][1]$a$409 [4] $memory\coeffs$rdmux[0][2][1]$a$409 [8] $memory\coeffs$rdmux[0][2][1]$a$409 [1] }
+      New ports: A={ 2'10 $memory\coeffs$rdmux[0][3][2]$a$424 [9] $memory\coeffs$rdmux[0][3][2]$a$424 [10] 1'0 $memory\coeffs$rdmux[0][3][2]$a$424 [10:9] 1'0 }, B={ 3'011 $memory\coeffs$rdmux[0][3][2]$a$424 [9] $memory\coeffs$rdmux[0][3][2]$a$424 [10] 1'0 $memory\coeffs$rdmux[0][3][2]$a$424 [10:9] }, Y={ $memory\coeffs$rdmux[0][2][1]$a$409 [12:11] $memory\coeffs$rdmux[0][2][1]$a$409 [9] $memory\coeffs$rdmux[0][2][1]$a$409 [7:6] $memory\coeffs$rdmux[0][2][1]$a$409 [4] $memory\coeffs$rdmux[0][2][1]$a$409 [8] $memory\coeffs$rdmux[0][2][1]$a$409 [1] }
+      New connections: $memory\coeffs$rdmux[0][2][1]$a$409 [10] = $memory\coeffs$rdmux[0][3][2]$a$424 [10]
+  Optimizing cells in module \fir_filter.
+Performed a total of 3 changes.
+
+101. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fir_filter'.
+Computing hashes of 67 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+Removed a total of 0 cells.
+
+102. Executing OPT_SHARE pass.
+
+103. Executing OPT_DFF pass (perform DFF optimizations).
+
+104. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fir_filter..
+Removed 0 unused cells and 5 unused wires.
+<suppressed ~1 debug messages>
+
+105. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fir_filter.
+
+106. Rerunning OPT passes. (Maybe there is more to do…)
+
+107. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fir_filter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~28 debug messages>
+
+108. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fir_filter.
+Performed a total of 0 changes.
+
+109. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fir_filter'.
+Computing hashes of 67 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+Removed a total of 0 cells.
+
+110. Executing OPT_SHARE pass.
+
+111. Executing OPT_DFF pass (perform DFF optimizations).
+
+112. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fir_filter..
+
+113. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fir_filter.
+
+114. Executing TECHMAP pass (map to technology primitives).
+
+114.1. Executing Verilog-2005 frontend: /nix/store/f1q0w7rd0a4ny4hqvfxlhs4cmariidcy-yosys-0.62/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/nix/store/f1q0w7rd0a4ny4hqvfxlhs4cmariidcy-yosys-0.62/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `$__div_mod_u'.
+Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `$connect'.
+Generating RTLIL representation for module `$input_port'.
+Successfully finished Verilog frontend.
+
+114.2. Continuing TECHMAP pass.
+Using template $paramod$672a140277c71df8314410f22acc08d55222c3c7\_90_alu for cells of type $alu.
+Using extmapper maccmap for cells of type $macc_v2.
+  add \sample_in * 16'1111111111000111 (16x16 bits, signed)
+  add $4$mem2reg_rd$\data_reg$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:94$3_DATA[15:0]$47 * { $memrd$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:94$48_DATA [15] $memrd$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:94$48_DATA [15] $memrd$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:94$48_DATA [15] $memrd$\coeffs$/mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:94$48_DATA [12:0] } (16x16 bits, signed)
+  add \accum_reg (37 bits, signed)
+Using extmapper simplemap for cells of type $adffe.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using extmapper simplemap for cells of type $logic_not.
+Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $eq.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $reduce_or.
+Using extmapper simplemap for cells of type $and.
+Using extmapper simplemap for cells of type $reduce_and.
+Using template $paramod$de91941a80104a781d89455c89227cbd386bf4f4\_90_pmux for cells of type $pmux.
+Using extmapper simplemap for cells of type $adff.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000100101 for cells of type $fa.
+Using template $paramod$7fa6970f0c97644a990ba1d0dcc56c6042128be7\_90_alu for cells of type $alu.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000100000 for cells of type $fa.
+Using template $paramod$fbc7873bff55778c0b3173955b7e4bce1d9d6834\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $xor.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000000101 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000101 for cells of type $lcu.
+Using extmapper simplemap for cells of type $pos.
+Using extmapper simplemap for cells of type $or.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000100101 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000100000 for cells of type $lcu.
+No more expansions possible.
+<suppressed ~1250 debug messages>
+
+115. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fir_filter.
+<suppressed ~3068 debug messages>
+
+116. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fir_filter'.
+Computing hashes of 5602 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+Computing hashes of 5238 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+Computing hashes of 5066 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+Computing hashes of 4926 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+Computing hashes of 4860 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+Computing hashes of 4810 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+Computing hashes of 4756 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+Computing hashes of 4724 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+Computing hashes of 4705 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+Computing hashes of 4683 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+Computing hashes of 4668 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+Computing hashes of 4664 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+Computing hashes of 4658 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+Computing hashes of 4652 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+Computing hashes of 4649 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+Computing hashes of 4645 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+<suppressed ~2871 debug messages>
+Removed a total of 957 cells.
+
+117. Executing OPT_DFF pass (perform DFF optimizations).
+
+118. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fir_filter..
+Removed 107 unused cells and 655 unused wires.
+<suppressed ~108 debug messages>
+
+119. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fir_filter.
+<suppressed ~2 debug messages>
+
+120. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fir_filter'.
+Computing hashes of 4536 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+Removed a total of 0 cells.
+
+121. Executing OPT_DFF pass (perform DFF optimizations).
+
+122. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fir_filter..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+123. Executing ABC pass (technology mapping using ABC).
+
+123.1. Extracting gate netlist of module `\fir_filter' to `<abc-temp-dir>/input.blif'..
+
+123.1.1. Executed ABC.
+Extracted 4204 gates and 4537 wires to a netlist network with 331 inputs and 62 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library /tmp/yosys-abc-ZkWp3B/stdcells.genlib 
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+123.1.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:       30
+ABC RESULTS:            ANDNOT cells:     1439
+ABC RESULTS:               MUX cells:       92
+ABC RESULTS:              NAND cells:       44
+ABC RESULTS:               NOR cells:      313
+ABC RESULTS:               NOT cells:      123
+ABC RESULTS:                OR cells:      821
+ABC RESULTS:             ORNOT cells:      133
+ABC RESULTS:              XNOR cells:      368
+ABC RESULTS:               XOR cells:      869
+ABC RESULTS:        internal signals:     4144
+ABC RESULTS:           input signals:      331
+ABC RESULTS:          output signals:       62
+Removing temp directory.
+Removing global temp directory.
+
+124. Executing OPT pass (performing simple optimizations).
+
+124.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fir_filter.
+<suppressed ~59 debug messages>
+
+124.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fir_filter'.
+Computing hashes of 4564 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+Computing hashes of 4556 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+Computing hashes of 4553 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+<suppressed ~33 debug messages>
+Removed a total of 11 cells.
+
+124.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+124.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fir_filter..
+Removed 1 unused cells and 904 unused wires.
+<suppressed ~4 debug messages>
+
+124.5. Finished fast OPT passes.
+
+125. Executing HIERARCHY pass (managing design hierarchy).
+
+125.1. Analyzing design hierarchy..
+Top module:  \fir_filter
+
+125.2. Analyzing design hierarchy..
+Top module:  \fir_filter
+Removed 0 unused modules.
+
+126. Executing CHECK pass (checking for obvious problems).
+Checking module fir_filter...
+Found and reported 0 problems.
+
+127. Printing statistics.
+
+=== fir_filter ===
+
+        +----------Local Count, excluding submodules.
+        | 
+     4194 wires
+     4885 wire bits
+       30 public wires
+      411 public wire bits
+        7 ports
+       37 port bits
+     4552 cells
+     1437   $_ANDNOT_
+       29   $_AND_
+      330   $_DFFE_PN0P_
+        2   $_DFF_PN0_
+       92   $_MUX_
+       43   $_NAND_
+      312   $_NOR_
+      122   $_NOT_
+      130   $_ORNOT_
+      821   $_OR_
+      367   $_XNOR_
+      867   $_XOR_
+
+128. Executing OPT pass (performing simple optimizations).
+
+128.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fir_filter.
+
+128.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fir_filter'.
+Computing hashes of 4552 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+Removed a total of 0 cells.
+
+128.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fir_filter..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+128.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fir_filter.
+Performed a total of 0 changes.
+
+128.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fir_filter'.
+Computing hashes of 4552 cells of `\fir_filter'.
+Finding duplicate cells in `\fir_filter'.
+Removed a total of 0 cells.
+
+128.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+128.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fir_filter..
+
+128.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fir_filter.
+
+128.9. Finished fast OPT passes. (There is nothing left to do.)
+
+129. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fir_filter..
+Removed 0 unused cells and 2 unused wires.
+<suppressed ~2 debug messages>
+{
+   "creator": "Yosys 0.62 (git sha1 7326bb7d6641500ecb285c291a54a662cb1e76cf, clang++ 21.1.2 -fPIC -O3)",
+   "invocation": "stat -json -liberty /mnt/d/Learing_Python/GP/Submission_inshallah/runs/fir_filter_synexp/tmp/559f346808c6456bbf5436d6ad67c5d8.lib ",
+   "modules": {
+      "\\fir_filter": {
+         "num_wires":         4192,
+         "num_wire_bits":     4832,
+         "num_pub_wires":     28,
+         "num_pub_wire_bits": 358,
+         "num_ports":         7,
+         "num_port_bits":     37,
+         "num_memories":      0,
+         "num_memory_bits":   0,
+         "num_processes":     0,
+         "num_cells":         4552,
+         "num_submodules":       0,
+         "num_cells_by_type": {
+            "$_ANDNOT_": 1437,
+            "$_AND_": 29,
+            "$_DFFE_PN0P_": 330,
+            "$_DFF_PN0_": 2,
+            "$_MUX_": 92,
+            "$_NAND_": 43,
+            "$_NOR_": 312,
+            "$_NOT_": 122,
+            "$_ORNOT_": 130,
+            "$_OR_": 821,
+            "$_XNOR_": 367,
+            "$_XOR_": 867
+         }
+      }
+   },
+      "design": {
+         "num_wires":         4192,
+         "num_wire_bits":     4832,
+         "num_pub_wires":     28,
+         "num_pub_wire_bits": 358,
+         "num_ports":         7,
+         "num_port_bits":     37,
+         "num_memories":      0,
+         "num_memory_bits":   0,
+         "num_processes":     0,
+         "num_cells":         4552,
+         "num_submodules":       0,
+         "num_cells_by_type": {
+            "$_ANDNOT_": 1437,
+            "$_AND_": 29,
+            "$_DFFE_PN0P_": 330,
+            "$_DFF_PN0_": 2,
+            "$_MUX_": 92,
+            "$_NAND_": 43,
+            "$_NOR_": 312,
+            "$_NOT_": 122,
+            "$_ORNOT_": 130,
+            "$_OR_": 821,
+            "$_XNOR_": 367,
+            "$_XOR_": 867
+         }
+      }
+}
+
+130. Printing statistics.
+
+=== fir_filter ===
+
+        +----------Local Count, excluding submodules.
+        | 
+     4192 wires
+     4832 wire bits
+       28 public wires
+      358 public wire bits
+        7 ports
+       37 port bits
+     4552 cells
+     1437   $_ANDNOT_
+       29   $_AND_
+      330   $_DFFE_PN0P_
+        2   $_DFF_PN0_
+       92   $_MUX_
+       43   $_NAND_
+      312   $_NOR_
+      122   $_NOT_
+      130   $_ORNOT_
+      821   $_OR_
+      367   $_XNOR_
+      867   $_XOR_
+
+   Area for cell type $_ANDNOT_ is unknown!
+   Area for cell type $_AND_ is unknown!
+   Area for cell type $_DFFE_PN0P_ is unknown!
+   Area for cell type $_DFF_PN0_ is unknown!
+   Area for cell type $_MUX_ is unknown!
+   Area for cell type $_NAND_ is unknown!
+   Area for cell type $_NOR_ is unknown!
+   Area for cell type $_NOT_ is unknown!
+   Area for cell type $_ORNOT_ is unknown!
+   Area for cell type $_OR_ is unknown!
+   Area for cell type $_XNOR_ is unknown!
+   Area for cell type $_XOR_ is unknown!
+
+[INFO] Applying tri-state buffer mapping from '/home/alishawky/.ciel/ciel/sky130/versions/8afc8346a57fe1ab7934ba5a6056ea8b43078e71/sky130A/libs.tech/openlane/sky130_fd_sc_hd/tribuff_map.v'…
+
+131. Executing TECHMAP pass (map to technology primitives).
+
+131.1. Executing Verilog-2005 frontend: /home/alishawky/.ciel/ciel/sky130/versions/8afc8346a57fe1ab7934ba5a6056ea8b43078e71/sky130A/libs.tech/openlane/sky130_fd_sc_hd/tribuff_map.v
+Parsing Verilog input from `/home/alishawky/.ciel/ciel/sky130/versions/8afc8346a57fe1ab7934ba5a6056ea8b43078e71/sky130A/libs.tech/openlane/sky130_fd_sc_hd/tribuff_map.v' to AST representation.
+Generating RTLIL representation for module `$_TBUF_'.
+Successfully finished Verilog frontend.
+
+131.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~3 debug messages>
+
+132. Executing SIMPLEMAP pass (map simple cells to gate primitives).
+[INFO] Applying latch mapping from '/home/alishawky/.ciel/ciel/sky130/versions/8afc8346a57fe1ab7934ba5a6056ea8b43078e71/sky130A/libs.tech/openlane/sky130_fd_sc_hd/latch_map.v'…
+
+133. Executing TECHMAP pass (map to technology primitives).
+
+133.1. Executing Verilog-2005 frontend: /home/alishawky/.ciel/ciel/sky130/versions/8afc8346a57fe1ab7934ba5a6056ea8b43078e71/sky130A/libs.tech/openlane/sky130_fd_sc_hd/latch_map.v
+Parsing Verilog input from `/home/alishawky/.ciel/ciel/sky130/versions/8afc8346a57fe1ab7934ba5a6056ea8b43078e71/sky130A/libs.tech/openlane/sky130_fd_sc_hd/latch_map.v' to AST representation.
+Generating RTLIL representation for module `$_DLATCH_P_'.
+Generating RTLIL representation for module `$_DLATCH_N_'.
+Successfully finished Verilog frontend.
+
+133.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~4 debug messages>
+
+134. Executing SIMPLEMAP pass (map simple cells to gate primitives).
+
+135. Executing DFFLIBMAP pass (mapping DFF cells to sequential cells from liberty file).
+  cell sky130_fd_sc_hd__dfxtp_2 (noninv, pins=3, area=21.27) is a direct match for cell type $_DFF_P_.
+  cell sky130_fd_sc_hd__dfrtp_2 (noninv, pins=4, area=26.28) is a direct match for cell type $_DFF_PN0_.
+  cell sky130_fd_sc_hd__dfstp_2 (noninv, pins=4, area=26.28) is a direct match for cell type $_DFF_PN1_.
+  cell sky130_fd_sc_hd__dfbbn_2 (noninv, pins=6, area=35.03) is a direct match for cell type $_DFFSR_NNN_.
+  final dff cell mappings:
+    unmapped dff cell: $_DFF_N_
+    \sky130_fd_sc_hd__dfxtp_2 _DFF_P_ (.CLK( C), .D( D), .Q( Q));
+    unmapped dff cell: $_DFF_NN0_
+    unmapped dff cell: $_DFF_NN1_
+    unmapped dff cell: $_DFF_NP0_
+    unmapped dff cell: $_DFF_NP1_
+    \sky130_fd_sc_hd__dfrtp_2 _DFF_PN0_ (.CLK( C), .D( D), .Q( Q), .RESET_B( R));
+    \sky130_fd_sc_hd__dfstp_2 _DFF_PN1_ (.CLK( C), .D( D), .Q( Q), .SET_B( R));
+    unmapped dff cell: $_DFF_PP0_
+    unmapped dff cell: $_DFF_PP1_
+    unmapped dff cell: $_DFFE_NN_
+    unmapped dff cell: $_DFFE_NP_
+    unmapped dff cell: $_DFFE_PN_
+    unmapped dff cell: $_DFFE_PP_
+    \sky130_fd_sc_hd__dfbbn_2 _DFFSR_NNN_ (.CLK_N( C), .D( D), .Q( Q), .Q_N(~Q), .RESET_B( R), .SET_B( S));
+    unmapped dff cell: $_DFFSR_NNP_
+    unmapped dff cell: $_DFFSR_NPN_
+    unmapped dff cell: $_DFFSR_NPP_
+    unmapped dff cell: $_DFFSR_PNN_
+    unmapped dff cell: $_DFFSR_PNP_
+    unmapped dff cell: $_DFFSR_PPN_
+    unmapped dff cell: $_DFFSR_PPP_
+
+135.1. Executing DFFLEGALIZE pass (convert FFs to types supported by the target).
+Mapping DFF cells in module `\fir_filter':
+  mapped 332 $_DFF_PN0_ cells to \sky130_fd_sc_hd__dfrtp_2 cells.
+{
+   "creator": "Yosys 0.62 (git sha1 7326bb7d6641500ecb285c291a54a662cb1e76cf, clang++ 21.1.2 -fPIC -O3)",
+   "invocation": "stat -json -liberty /mnt/d/Learing_Python/GP/Submission_inshallah/runs/fir_filter_synexp/tmp/559f346808c6456bbf5436d6ad67c5d8.lib ",
+   "modules": {
+      "\\fir_filter": {
+         "num_wires":         4522,
+         "num_wire_bits":     5162,
+         "num_pub_wires":     28,
+         "num_pub_wire_bits": 358,
+         "num_ports":         7,
+         "num_port_bits":     37,
+         "num_memories":      0,
+         "num_memory_bits":   0,
+         "num_processes":     0,
+         "num_cells":         4882,
+         "num_submodules":       0,
+         "area":              8723.366400,
+         "sequential_area":    8723.366400,
+         "num_cells_by_type": {
+            "$_ANDNOT_": 1437,
+            "$_AND_": 29,
+            "$_MUX_": 422,
+            "$_NAND_": 43,
+            "$_NOR_": 312,
+            "$_NOT_": 122,
+            "$_ORNOT_": 130,
+            "$_OR_": 821,
+            "$_XNOR_": 367,
+            "$_XOR_": 867,
+            "sky130_fd_sc_hd__dfrtp_2": 332
+         }
+      }
+   },
+      "design": {
+         "num_wires":         4522,
+         "num_wire_bits":     5162,
+         "num_pub_wires":     28,
+         "num_pub_wire_bits": 358,
+         "num_ports":         7,
+         "num_port_bits":     37,
+         "num_memories":      0,
+         "num_memory_bits":   0,
+         "num_processes":     0,
+         "num_cells":         4882,
+         "num_submodules":       0,
+         "area":              8723.366400,
+         "sequential_area":    8723.366400,
+         "num_cells_by_type": {
+            "$_ANDNOT_": 1437,
+            "$_AND_": 29,
+            "$_MUX_": 422,
+            "$_NAND_": 43,
+            "$_NOR_": 312,
+            "$_NOT_": 122,
+            "$_ORNOT_": 130,
+            "$_OR_": 821,
+            "$_XNOR_": 367,
+            "$_XOR_": 867,
+            "sky130_fd_sc_hd__dfrtp_2": 332
+         }
+      }
+}
+
+136. Printing statistics.
+
+=== fir_filter ===
+
+        +----------Local Count, excluding submodules.
+        |        +-Local Area, excluding submodules.
+        |        | 
+     4522        - wires
+     5162        - wire bits
+       28        - public wires
+      358        - public wire bits
+        7        - ports
+       37        - port bits
+     4882 8.72E+03 cells
+     1437        -   $_ANDNOT_
+       29        -   $_AND_
+      422        -   $_MUX_
+       43        -   $_NAND_
+      312        -   $_NOR_
+      122        -   $_NOT_
+      130        -   $_ORNOT_
+      821        -   $_OR_
+      367        -   $_XNOR_
+      867        -   $_XOR_
+      332 8.72E+03   sky130_fd_sc_hd__dfrtp_2
+
+   Area for cell type $_ANDNOT_ is unknown!
+   Area for cell type $_AND_ is unknown!
+   Area for cell type $_MUX_ is unknown!
+   Area for cell type $_NAND_ is unknown!
+   Area for cell type $_NOR_ is unknown!
+   Area for cell type $_NOT_ is unknown!
+   Area for cell type $_ORNOT_ is unknown!
+   Area for cell type $_OR_ is unknown!
+   Area for cell type $_XNOR_ is unknown!
+   Area for cell type $_XOR_ is unknown!
+
+   Chip area for module '\fir_filter': 8723.366400
+     of which used for sequential elements: 8723.366400 (100.00%)
+
+[INFO] Using generated ABC script '/mnt/d/Learing_Python/GP/Submission_inshallah/runs/fir_filter_synexp/1-synthesis-area-0/AREA_0.abc'…
+
+137. Executing ABC pass (technology mapping using ABC).
+
+137.1. Extracting gate netlist of module `\fir_filter' to `/tmp/yosys-abc-xuPCsC/input.blif'..
+
+137.1.1. Executed ABC.
+Extracted 4550 gates and 4898 wires to a netlist network with 348 inputs and 332 outputs.
+Running ABC script: /tmp/yosys-abc-xuPCsC/abc.script
+ABC: ======== ABC command line "source /tmp/yosys-abc-xuPCsC/abc.script"
+ABC: + read_blif /tmp/yosys-abc-xuPCsC/input.blif 
+ABC: + read_lib -w /mnt/d/Learing_Python/GP/Submission_inshallah/runs/fir_filter_synexp/tmp/559f346808c6456bbf5436d6ad67c5d8.lib 
+ABC: Parsing finished successfully.  Parsing time =     0.15 sec
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfbbn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrtp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfsbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfstp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfstp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxtp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtn_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_4".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_8".
+ABC: Library "sky130_fd_sc_hd__tt_025C_1v80" from "/mnt/d/Learing_Python/GP/Submission_inshallah/runs/fir_filter_synexp/tmp/559f346808c6456bbf5436d6ad67c5d8.lib" has 175 cells (17 skipped: 14 seq; 3 tri-state; 0 no func; 0 dont_use; 0 with 2 outputs; 0 with 3+ outputs).  Time =     0.18 sec
+ABC: Memory =    9.54 MB. Time =     0.18 sec
+ABC: Warning: Detected 2 multi-output cells (for example, "sky130_fd_sc_hd__fa_1").
+ABC: + read_constr -v /mnt/d/Learing_Python/GP/Submission_inshallah/runs/fir_filter_synexp/1-synthesis-area-0/synthesis.abc.sdc 
+ABC: Setting driving cell to be "sky130_fd_sc_hd__inv_2/Y".
+ABC: Setting output load to be 33.442001.
+ABC: + source /mnt/d/Learing_Python/GP/Submission_inshallah/runs/fir_filter_synexp/1-synthesis-area-0/AREA_0.abc 
+ABC: Error: The network is combinational.
+ABC: Cannot find the default PI driving cell (sky130_fd_sc_hd__inv_2/Y) in the library.
+ABC: WireLoad = "none"  Gates =   3387 (  1.3 %)   Cap = 11.6 ff (  3.1 %)   Area =    33159.30 ( 88.7 %)   Delay = 10864.11 ps  (  7.6 %)               
+ABC: Path  0 --       1 : 0   22 pi                       A =   0.00  Df =   0.0   -0.0 ps  S =   0.0 ps  Cin =  0.0 ff  Cout =  67.4 ff  Cmax =   0.0 ff  G =    0  
+ABC: Path  1 --     694 : 3   25 sky130_fd_sc_hd__nor3_2  A =  10.01  Df = 564.0 -479.4 ps  S = 694.8 ps  Cin =  4.4 ff  Cout =  41.3 ff  Cmax =  92.5 ff  G =  923  
+ABC: Path  2 --     695 : 2    7 sky130_fd_sc_hd__nand2_2 A =   6.26  Df = 771.8 -532.3 ps  S = 171.1 ps  Cin =  4.4 ff  Cout =  23.1 ff  Cmax = 295.7 ff  G =  494  
+ABC: Path  3 --     697 : 2  289 sky130_fd_sc_hd__nor2_2  A =   6.26  Df =8286.4-6452.8 ps  S =10220.3 ps  Cin =  4.4 ff  Cout =1008.0 ff  Cmax = 141.9 ff  G =22009  
+ABC: Path  4 --     699 : 3    1 sky130_fd_sc_hd__mux2_1  A =  11.26  Df =10864.1-7935.1 ps  S = 330.2 ps  Cin =  2.3 ff  Cout =  33.4 ff  Cmax = 173.0 ff  G = 1465  
+ABC: Start-point = pi0 (\tap_cnt [4]).  End-point = po2 ($auto$rtlil.cc:3583:MuxGate$14418).
+ABC: netlist                       : i/o =  348/  332  lat =    0  nd =  3387  edge =   9209  area =33166.17  delay =27.00  lev = 27
+ABC: + write_blif /tmp/yosys-abc-xuPCsC/output.blif 
+
+137.1.2. Re-integrating ABC results.
+ABC RESULTS:   sky130_fd_sc_hd__a2111o_2 cells:       43
+ABC RESULTS:   sky130_fd_sc_hd__a211o_2 cells:       34
+ABC RESULTS:   sky130_fd_sc_hd__a211oi_2 cells:       42
+ABC RESULTS:   sky130_fd_sc_hd__a21bo_2 cells:       42
+ABC RESULTS:   sky130_fd_sc_hd__a21boi_2 cells:       19
+ABC RESULTS:   sky130_fd_sc_hd__a21o_2 cells:      148
+ABC RESULTS:   sky130_fd_sc_hd__a21oi_2 cells:      144
+ABC RESULTS:   sky130_fd_sc_hd__a221o_2 cells:       15
+ABC RESULTS:   sky130_fd_sc_hd__a22o_2 cells:       65
+ABC RESULTS:   sky130_fd_sc_hd__a2bb2o_2 cells:        8
+ABC RESULTS:   sky130_fd_sc_hd__a311o_2 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__a311oi_2 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__a31o_2 cells:       44
+ABC RESULTS:   sky130_fd_sc_hd__a31oi_2 cells:        6
+ABC RESULTS:   sky130_fd_sc_hd__a32o_2 cells:        8
+ABC RESULTS:   sky130_fd_sc_hd__a32oi_2 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__a41o_2 cells:        3
+ABC RESULTS:   sky130_fd_sc_hd__and2_2 cells:      116
+ABC RESULTS:   sky130_fd_sc_hd__and2b_2 cells:       77
+ABC RESULTS:   sky130_fd_sc_hd__and3_2 cells:      234
+ABC RESULTS:   sky130_fd_sc_hd__and3b_2 cells:        6
+ABC RESULTS:   sky130_fd_sc_hd__and4_2 cells:        3
+ABC RESULTS:   sky130_fd_sc_hd__and4b_2 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__and4bb_2 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__inv_2 cells:       43
+ABC RESULTS:   sky130_fd_sc_hd__mux2_1 cells:      285
+ABC RESULTS:   sky130_fd_sc_hd__nand2_2 cells:      252
+ABC RESULTS:   sky130_fd_sc_hd__nand2b_2 cells:       56
+ABC RESULTS:   sky130_fd_sc_hd__nand3_2 cells:       74
+ABC RESULTS:   sky130_fd_sc_hd__nand4_2 cells:        3
+ABC RESULTS:   sky130_fd_sc_hd__nor2_2 cells:      288
+ABC RESULTS:   sky130_fd_sc_hd__nor3_2 cells:       48
+ABC RESULTS:   sky130_fd_sc_hd__nor3b_2 cells:        8
+ABC RESULTS:   sky130_fd_sc_hd__nor4_2 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__o211a_2 cells:       85
+ABC RESULTS:   sky130_fd_sc_hd__o211ai_2 cells:       33
+ABC RESULTS:   sky130_fd_sc_hd__o21a_2 cells:       52
+ABC RESULTS:   sky130_fd_sc_hd__o21ai_2 cells:      111
+ABC RESULTS:   sky130_fd_sc_hd__o21ba_2 cells:       28
+ABC RESULTS:   sky130_fd_sc_hd__o21bai_2 cells:        9
+ABC RESULTS:   sky130_fd_sc_hd__o221a_2 cells:        5
+ABC RESULTS:   sky130_fd_sc_hd__o22a_2 cells:       34
+ABC RESULTS:   sky130_fd_sc_hd__o22ai_2 cells:       12
+ABC RESULTS:   sky130_fd_sc_hd__o2bb2a_2 cells:        7
+ABC RESULTS:   sky130_fd_sc_hd__o2bb2ai_2 cells:       12
+ABC RESULTS:   sky130_fd_sc_hd__o311a_2 cells:        5
+ABC RESULTS:   sky130_fd_sc_hd__o311ai_2 cells:        3
+ABC RESULTS:   sky130_fd_sc_hd__o31a_2 cells:       14
+ABC RESULTS:   sky130_fd_sc_hd__o31ai_2 cells:        6
+ABC RESULTS:   sky130_fd_sc_hd__o32a_2 cells:        5
+ABC RESULTS:   sky130_fd_sc_hd__o32ai_2 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__o41a_2 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__or2_2 cells:      191
+ABC RESULTS:   sky130_fd_sc_hd__or3_2 cells:       77
+ABC RESULTS:   sky130_fd_sc_hd__or3b_2 cells:       22
+ABC RESULTS:   sky130_fd_sc_hd__or4_2 cells:       32
+ABC RESULTS:   sky130_fd_sc_hd__or4b_2 cells:        3
+ABC RESULTS:   sky130_fd_sc_hd__xnor2_2 cells:      362
+ABC RESULTS:   sky130_fd_sc_hd__xor2_2 cells:      156
+ABC RESULTS:        internal signals:     4218
+ABC RESULTS:           input signals:      348
+ABC RESULTS:          output signals:      332
+Removing temp directory.
+Removing global temp directory.
+
+138. Executing SETUNDEF pass (replace undef values with defined constants).
+
+139. Executing HILOMAP pass (mapping to constant drivers).
+
+140. Executing SPLITNETS pass (splitting up multi-bit signals).
+
+141. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fir_filter..
+Removed 0 unused cells and 5159 unused wires.
+<suppressed ~17 debug messages>
+
+142. Executing INSBUF pass (insert buffer cells for connected wires).
+
+143. Executing CHECK pass (checking for obvious problems).
+Checking module fir_filter...
+Found and reported 0 problems.
+{
+   "creator": "Yosys 0.62 (git sha1 7326bb7d6641500ecb285c291a54a662cb1e76cf, clang++ 21.1.2 -fPIC -O3)",
+   "invocation": "stat -json -liberty /mnt/d/Learing_Python/GP/Submission_inshallah/runs/fir_filter_synexp/tmp/559f346808c6456bbf5436d6ad67c5d8.lib ",
+   "modules": {
+      "\\fir_filter": {
+         "num_wires":         3708,
+         "num_wire_bits":     3738,
+         "num_pub_wires":     312,
+         "num_pub_wire_bits": 342,
+         "num_ports":         7,
+         "num_port_bits":     37,
+         "num_memories":      0,
+         "num_memory_bits":   0,
+         "num_processes":     0,
+         "num_cells":         3719,
+         "num_submodules":       0,
+         "area":              41882.668800,
+         "sequential_area":    8723.366400,
+         "num_cells_by_type": {
+            "sky130_fd_sc_hd__a2111o_2": 43,
+            "sky130_fd_sc_hd__a211o_2": 34,
+            "sky130_fd_sc_hd__a211oi_2": 42,
+            "sky130_fd_sc_hd__a21bo_2": 42,
+            "sky130_fd_sc_hd__a21boi_2": 19,
+            "sky130_fd_sc_hd__a21o_2": 148,
+            "sky130_fd_sc_hd__a21oi_2": 144,
+            "sky130_fd_sc_hd__a221o_2": 15,
+            "sky130_fd_sc_hd__a22o_2": 65,
+            "sky130_fd_sc_hd__a2bb2o_2": 8,
+            "sky130_fd_sc_hd__a311o_2": 1,
+            "sky130_fd_sc_hd__a311oi_2": 2,
+            "sky130_fd_sc_hd__a31o_2": 44,
+            "sky130_fd_sc_hd__a31oi_2": 6,
+            "sky130_fd_sc_hd__a32o_2": 8,
+            "sky130_fd_sc_hd__a32oi_2": 1,
+            "sky130_fd_sc_hd__a41o_2": 3,
+            "sky130_fd_sc_hd__and2_2": 116,
+            "sky130_fd_sc_hd__and2b_2": 77,
+            "sky130_fd_sc_hd__and3_2": 234,
+            "sky130_fd_sc_hd__and3b_2": 6,
+            "sky130_fd_sc_hd__and4_2": 3,
+            "sky130_fd_sc_hd__and4b_2": 1,
+            "sky130_fd_sc_hd__and4bb_2": 1,
+            "sky130_fd_sc_hd__dfrtp_2": 332,
+            "sky130_fd_sc_hd__inv_2": 43,
+            "sky130_fd_sc_hd__mux2_1": 285,
+            "sky130_fd_sc_hd__nand2_2": 252,
+            "sky130_fd_sc_hd__nand2b_2": 56,
+            "sky130_fd_sc_hd__nand3_2": 74,
+            "sky130_fd_sc_hd__nand4_2": 3,
+            "sky130_fd_sc_hd__nor2_2": 288,
+            "sky130_fd_sc_hd__nor3_2": 48,
+            "sky130_fd_sc_hd__nor3b_2": 8,
+            "sky130_fd_sc_hd__nor4_2": 1,
+            "sky130_fd_sc_hd__o211a_2": 85,
+            "sky130_fd_sc_hd__o211ai_2": 33,
+            "sky130_fd_sc_hd__o21a_2": 52,
+            "sky130_fd_sc_hd__o21ai_2": 111,
+            "sky130_fd_sc_hd__o21ba_2": 28,
+            "sky130_fd_sc_hd__o21bai_2": 9,
+            "sky130_fd_sc_hd__o221a_2": 5,
+            "sky130_fd_sc_hd__o22a_2": 34,
+            "sky130_fd_sc_hd__o22ai_2": 12,
+            "sky130_fd_sc_hd__o2bb2a_2": 7,
+            "sky130_fd_sc_hd__o2bb2ai_2": 12,
+            "sky130_fd_sc_hd__o311a_2": 5,
+            "sky130_fd_sc_hd__o311ai_2": 3,
+            "sky130_fd_sc_hd__o31a_2": 14,
+            "sky130_fd_sc_hd__o31ai_2": 6,
+            "sky130_fd_sc_hd__o32a_2": 5,
+            "sky130_fd_sc_hd__o32ai_2": 1,
+            "sky130_fd_sc_hd__o41a_2": 1,
+            "sky130_fd_sc_hd__or2_2": 191,
+            "sky130_fd_sc_hd__or3_2": 77,
+            "sky130_fd_sc_hd__or3b_2": 22,
+            "sky130_fd_sc_hd__or4_2": 32,
+            "sky130_fd_sc_hd__or4b_2": 3,
+            "sky130_fd_sc_hd__xnor2_2": 362,
+            "sky130_fd_sc_hd__xor2_2": 156
+         }
+      }
+   },
+      "design": {
+         "num_wires":         3708,
+         "num_wire_bits":     3738,
+         "num_pub_wires":     312,
+         "num_pub_wire_bits": 342,
+         "num_ports":         7,
+         "num_port_bits":     37,
+         "num_memories":      0,
+         "num_memory_bits":   0,
+         "num_processes":     0,
+         "num_cells":         3719,
+         "num_submodules":       0,
+         "area":              41882.668800,
+         "sequential_area":    8723.366400,
+         "num_cells_by_type": {
+            "sky130_fd_sc_hd__a2111o_2": 43,
+            "sky130_fd_sc_hd__a211o_2": 34,
+            "sky130_fd_sc_hd__a211oi_2": 42,
+            "sky130_fd_sc_hd__a21bo_2": 42,
+            "sky130_fd_sc_hd__a21boi_2": 19,
+            "sky130_fd_sc_hd__a21o_2": 148,
+            "sky130_fd_sc_hd__a21oi_2": 144,
+            "sky130_fd_sc_hd__a221o_2": 15,
+            "sky130_fd_sc_hd__a22o_2": 65,
+            "sky130_fd_sc_hd__a2bb2o_2": 8,
+            "sky130_fd_sc_hd__a311o_2": 1,
+            "sky130_fd_sc_hd__a311oi_2": 2,
+            "sky130_fd_sc_hd__a31o_2": 44,
+            "sky130_fd_sc_hd__a31oi_2": 6,
+            "sky130_fd_sc_hd__a32o_2": 8,
+            "sky130_fd_sc_hd__a32oi_2": 1,
+            "sky130_fd_sc_hd__a41o_2": 3,
+            "sky130_fd_sc_hd__and2_2": 116,
+            "sky130_fd_sc_hd__and2b_2": 77,
+            "sky130_fd_sc_hd__and3_2": 234,
+            "sky130_fd_sc_hd__and3b_2": 6,
+            "sky130_fd_sc_hd__and4_2": 3,
+            "sky130_fd_sc_hd__and4b_2": 1,
+            "sky130_fd_sc_hd__and4bb_2": 1,
+            "sky130_fd_sc_hd__dfrtp_2": 332,
+            "sky130_fd_sc_hd__inv_2": 43,
+            "sky130_fd_sc_hd__mux2_1": 285,
+            "sky130_fd_sc_hd__nand2_2": 252,
+            "sky130_fd_sc_hd__nand2b_2": 56,
+            "sky130_fd_sc_hd__nand3_2": 74,
+            "sky130_fd_sc_hd__nand4_2": 3,
+            "sky130_fd_sc_hd__nor2_2": 288,
+            "sky130_fd_sc_hd__nor3_2": 48,
+            "sky130_fd_sc_hd__nor3b_2": 8,
+            "sky130_fd_sc_hd__nor4_2": 1,
+            "sky130_fd_sc_hd__o211a_2": 85,
+            "sky130_fd_sc_hd__o211ai_2": 33,
+            "sky130_fd_sc_hd__o21a_2": 52,
+            "sky130_fd_sc_hd__o21ai_2": 111,
+            "sky130_fd_sc_hd__o21ba_2": 28,
+            "sky130_fd_sc_hd__o21bai_2": 9,
+            "sky130_fd_sc_hd__o221a_2": 5,
+            "sky130_fd_sc_hd__o22a_2": 34,
+            "sky130_fd_sc_hd__o22ai_2": 12,
+            "sky130_fd_sc_hd__o2bb2a_2": 7,
+            "sky130_fd_sc_hd__o2bb2ai_2": 12,
+            "sky130_fd_sc_hd__o311a_2": 5,
+            "sky130_fd_sc_hd__o311ai_2": 3,
+            "sky130_fd_sc_hd__o31a_2": 14,
+            "sky130_fd_sc_hd__o31ai_2": 6,
+            "sky130_fd_sc_hd__o32a_2": 5,
+            "sky130_fd_sc_hd__o32ai_2": 1,
+            "sky130_fd_sc_hd__o41a_2": 1,
+            "sky130_fd_sc_hd__or2_2": 191,
+            "sky130_fd_sc_hd__or3_2": 77,
+            "sky130_fd_sc_hd__or3b_2": 22,
+            "sky130_fd_sc_hd__or4_2": 32,
+            "sky130_fd_sc_hd__or4b_2": 3,
+            "sky130_fd_sc_hd__xnor2_2": 362,
+            "sky130_fd_sc_hd__xor2_2": 156
+         }
+      }
+}
+
+144. Printing statistics.
+
+=== fir_filter ===
+
+        +----------Local Count, excluding submodules.
+        |        +-Local Area, excluding submodules.
+        |        | 
+     3708        - wires
+     3738        - wire bits
+      312        - public wires
+      342        - public wire bits
+        7        - ports
+       37        - port bits
+     3719 4.19E+04 cells
+       43  538.016   sky130_fd_sc_hd__a2111o_2
+       34  340.326   sky130_fd_sc_hd__a211o_2
+       42  525.504   sky130_fd_sc_hd__a211oi_2
+       42  420.403   sky130_fd_sc_hd__a21bo_2
+       19  213.955   sky130_fd_sc_hd__a21boi_2
+      148  1.3E+03   sky130_fd_sc_hd__a21o_2
+      144  1261.21   sky130_fd_sc_hd__a21oi_2
+       15  168.912   sky130_fd_sc_hd__a221o_2
+       65  650.624   sky130_fd_sc_hd__a22o_2
+        8   90.086   sky130_fd_sc_hd__a2bb2o_2
+        1   11.261   sky130_fd_sc_hd__a311o_2
+        2   30.029   sky130_fd_sc_hd__a311oi_2
+       44   385.37   sky130_fd_sc_hd__a31o_2
+        6   75.072   sky130_fd_sc_hd__a31oi_2
+        8   90.086   sky130_fd_sc_hd__a32o_2
+        1   16.266   sky130_fd_sc_hd__a32oi_2
+        3   33.782   sky130_fd_sc_hd__a41o_2
+      116  870.835   sky130_fd_sc_hd__and2_2
+       77  674.397   sky130_fd_sc_hd__and2b_2
+      234 1.76E+03   sky130_fd_sc_hd__and3_2
+        6   60.058   sky130_fd_sc_hd__and3b_2
+        3   30.029   sky130_fd_sc_hd__and4_2
+        1   11.261   sky130_fd_sc_hd__and4b_2
+        1   12.512   sky130_fd_sc_hd__and4bb_2
+      332 8.72E+03   sky130_fd_sc_hd__dfrtp_2
+       43  161.405   sky130_fd_sc_hd__inv_2
+      285 3.21E+03   sky130_fd_sc_hd__mux2_1
+      252 1.58E+03   sky130_fd_sc_hd__nand2_2
+       56   490.47   sky130_fd_sc_hd__nand2b_2
+       74   740.71   sky130_fd_sc_hd__nand3_2
+        3   37.536   sky130_fd_sc_hd__nand4_2
+      288  1.8E+03   sky130_fd_sc_hd__nor2_2
+       48  480.461   sky130_fd_sc_hd__nor3_2
+        8  100.096   sky130_fd_sc_hd__nor3b_2
+        1   12.512   sky130_fd_sc_hd__nor4_2
+       85  850.816   sky130_fd_sc_hd__o211a_2
+       33  412.896   sky130_fd_sc_hd__o211ai_2
+       52  455.437   sky130_fd_sc_hd__o21a_2
+      111  972.182   sky130_fd_sc_hd__o21ai_2
+       28  280.269   sky130_fd_sc_hd__o21ba_2
+        9  101.347   sky130_fd_sc_hd__o21bai_2
+        5   56.304   sky130_fd_sc_hd__o221a_2
+       34  340.326   sky130_fd_sc_hd__o22a_2
+       12  150.144   sky130_fd_sc_hd__o22ai_2
+        7   78.826   sky130_fd_sc_hd__o2bb2a_2
+       12  180.173   sky130_fd_sc_hd__o2bb2ai_2
+        5   56.304   sky130_fd_sc_hd__o311a_2
+        3   48.797   sky130_fd_sc_hd__o311ai_2
+       14  140.134   sky130_fd_sc_hd__o31a_2
+        6   75.072   sky130_fd_sc_hd__o31ai_2
+        5   56.304   sky130_fd_sc_hd__o32a_2
+        1   16.266   sky130_fd_sc_hd__o32ai_2
+        1   12.512   sky130_fd_sc_hd__o41a_2
+      191 1.19E+03   sky130_fd_sc_hd__or2_2
+       77  578.054   sky130_fd_sc_hd__or3_2
+       22  192.685   sky130_fd_sc_hd__or3b_2
+       32  280.269   sky130_fd_sc_hd__or4_2
+        3   30.029   sky130_fd_sc_hd__or4b_2
+      362 5.89E+03   sky130_fd_sc_hd__xnor2_2
+      156 2.54E+03   sky130_fd_sc_hd__xor2_2
+
+   Chip area for module '\fir_filter': 41882.668800
+     of which used for sequential elements: 8723.366400 (20.83%)
+
+145. Executing Verilog backend.
+Dumping module `\fir_filter'.
+
+146. Executing JSON backend.

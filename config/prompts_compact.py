@@ -1059,18 +1059,36 @@ SECTION 3: TOPOLOGY IMPLEMENTATIONS
 State: s0, s1 at ACC_WIDTH UNSATURATED. Compute y_out FIRST.
 
   wire signed [ACC_WIDTH-1:0] y_out, s0_next, s1_next;
-  wire signed [DATA_WIDTH-1:0] y_sat;
-
-    assign y_out   = ((ACC_WIDTH'(signed'(B0)) * ACC_WIDTH'(signed'(sample_in))) >>> COEFF_FRAC_BITS) + s0;
   
-  assign s0_next = ((ACC_WIDTH'(signed'(B1)) * ACC_WIDTH'(signed'(sample_in))) >>> COEFF_FRAC_BITS) 
-                 - ((ACC_WIDTH'(signed'(A1)) * ACC_WIDTH'(signed'(y_out)))     >>> COEFF_FRAC_BITS) 
-                 + s1;
-                 
-  assign s1_next = ((ACC_WIDTH'(signed'(B2)) * ACC_WIDTH'(signed'(sample_in))) >>> COEFF_FRAC_BITS) 
-                 - ((ACC_WIDTH'(signed'(A2)) * ACC_WIDTH'(signed'(y_out)))     >>> COEFF_FRAC_BITS);
-  assign y_sat = (y_out > SAT_MAX) ? SAT_MAX[DATA_WIDTH-1:0] :
-                 (y_out < SAT_MIN) ? SAT_MIN[DATA_WIDTH-1:0] : y_out[DATA_WIDTH-1:0];
+    // CRITICAL: Use exact product width wires to prevent multiplier truncation!
+  wire signed [DATA_WIDTH+COEFF_WIDTH-1:0] b0_prod = B0 * sample_in;
+  wire signed [DATA_WIDTH+COEFF_WIDTH-1:0] b1_prod = B1 * sample_in;
+  wire signed [DATA_WIDTH+COEFF_WIDTH-1:0] b2_prod = B2 * sample_in;
+  
+  // MANDATORY: In DF2T, feedback coefficients (A1, A2) MUST multiply the OUTPUT (y_out).
+  // NEVER multiply A1/A2 by the state variables (s0, s1)! That breaks the feedback loop!
+  wire signed [ACC_WIDTH+COEFF_WIDTH-1:0]  a1_prod = A1 * y_out;
+  wire signed [ACC_WIDTH+COEFF_WIDTH-1:0]  a2_prod = A2 * y_out;
+
+  assign y_out   = (b0_prod >>> COEFF_FRAC_BITS) + s0;
+  assign s0_next = (b1_prod >>> COEFF_FRAC_BITS) - (a1_prod >>> COEFF_FRAC_BITS) + s1;
+  assign s1_next = (b2_prod >>> COEFF_FRAC_BITS) - (a2_prod >>> COEFF_FRAC_BITS);
+
+  // SATURATION LOGIC (Icarus-safe, ASIC-fast XOR tree)
+  localparam signed [DATA_WIDTH-1:0] SAT_MAX_DW = (1 << (DATA_WIDTH-1)) - 1;
+  localparam signed [DATA_WIDTH-1:0] SAT_MIN_DW = -(1 << (DATA_WIDTH-1));
+  logic signed [DATA_WIDTH-1:0] y_sat;
+  logic signed [ACC_WIDTH-1:0] y_sat_ext;
+
+  always @(*) begin
+    y_sat = y_out;                  // Implicit truncate to DATA_WIDTH
+    y_sat_ext = y_sat;              // Sign-extend back to ACC_WIDTH
+
+    if (y_out != y_sat_ext) begin
+      if (y_out[ACC_WIDTH-1] == 1'b0) y_sat = SAT_MAX_DW;
+      else                            y_sat = SAT_MIN_DW;
+    end
+  end
 
   always_ff @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
@@ -1092,15 +1110,35 @@ State: s0, s1 at ACC_WIDTH UNSATURATED. Compute y_out FIRST.
 State: x_d1, x_d2 at DATA_WIDTH; y_d1, y_d2 at ACC_WIDTH UNSATURATED.
 
   wire signed [ACC_WIDTH-1:0] y_out;
-  wire signed [DATA_WIDTH-1:0] y_sat;
+  
+  // CRITICAL: Use exact product width wires to prevent multiplier truncation!
+  wire signed [DATA_WIDTH+COEFF_WIDTH-1:0] b0_prod = B0 * sample_in;
+  wire signed [DATA_WIDTH+COEFF_WIDTH-1:0] b1_prod = B1 * x_d1;
+  wire signed [DATA_WIDTH+COEFF_WIDTH-1:0] b2_prod = B2 * x_d2;
+  wire signed [ACC_WIDTH+COEFF_WIDTH-1:0]  a1_prod = A1 * y_d1;
+  wire signed [ACC_WIDTH+COEFF_WIDTH-1:0]  a2_prod = A2 * y_d2;
 
-  assign y_out = ((B0 * sample_in) >>> COEFF_FRAC_BITS)
-               + ((B1 * x_d1)    >>> COEFF_FRAC_BITS)
-               + ((B2 * x_d2)    >>> COEFF_FRAC_BITS)
-               - ((A1 * y_d1)    >>> COEFF_FRAC_BITS)
-               - ((A2 * y_d2)    >>> COEFF_FRAC_BITS);
-  assign y_sat = (y_out > SAT_MAX) ? SAT_MAX[DATA_WIDTH-1:0] :
-                 (y_out < SAT_MIN) ? SAT_MIN[DATA_WIDTH-1:0] : y_out[DATA_WIDTH-1:0];
+  assign y_out = (b0_prod >>> COEFF_FRAC_BITS)
+               + (b1_prod >>> COEFF_FRAC_BITS)
+               + (b2_prod >>> COEFF_FRAC_BITS)
+               - (a1_prod >>> COEFF_FRAC_BITS)
+               - (a2_prod >>> COEFF_FRAC_BITS);
+
+  // SATURATION LOGIC (Icarus-safe, ASIC-fast XOR tree)
+  localparam signed [DATA_WIDTH-1:0] SAT_MAX_DW = (1 << (DATA_WIDTH-1)) - 1;
+  localparam signed [DATA_WIDTH-1:0] SAT_MIN_DW = -(1 << (DATA_WIDTH-1));
+  logic signed [DATA_WIDTH-1:0] y_sat;
+  logic signed [ACC_WIDTH-1:0] y_sat_ext;
+
+  always @(*) begin
+    y_sat = y_out;                  // Implicit truncate to DATA_WIDTH
+    y_sat_ext = y_sat;              // Sign-extend back to ACC_WIDTH
+
+    if (y_out != y_sat_ext) begin
+      if (y_out[ACC_WIDTH-1] == 1'b0) y_sat = SAT_MAX_DW;
+      else                            y_sat = SAT_MIN_DW;
+    end
+  end
 
   always_ff @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
@@ -1115,104 +1153,6 @@ State: x_d1, x_d2 at DATA_WIDTH; y_d1, y_d2 at ACC_WIDTH UNSATURATED.
     end
   end
 
-── df1 (ORDER≥2, single section) ────────────────────────────
-State: x_d1..x_dN at DATA_WIDTH; y_d1..y_dN at ACC_WIDTH UNSATURATED.
-
-  wire signed [ACC_WIDTH-1:0] fwd_sum, fbk_sum, y_out;
-  wire signed [DATA_WIDTH-1:0] y_sat;
-
-  assign fwd_sum = ((B0*sample_in)>>>FRAC) + ((B1*x_d1)>>>FRAC) + ...;
-  assign fbk_sum = ((A1*y_d1)>>>FRAC) + ((A2*y_d2)>>>FRAC) + ...;
-  assign y_out   = fwd_sum - fbk_sum;
-  assign y_sat   = (y_out>SAT_MAX)?SAT_MAX[DATA_WIDTH-1:0]:
-                   (y_out<SAT_MIN)?SAT_MIN[DATA_WIDTH-1:0]:y_out[DATA_WIDTH-1:0];
-
-  always_ff @(posedge clk or negedge rst_n) begin
-    if (!rst_n) begin ... end
-    else if (sample_valid) begin
-      x_dN<=x_d{{N-1}}; ... x_d1<=sample_in;
-      y_dN<=y_d{{N-1}}; ... y_d1<=y_out;    // UNSATURATED
-      result_out<=y_sat; result_valid<=1'b1;
-    end else begin result_valid<=1'b0; end
-  end
-
-── df2 (ORDER≥2, single section) ────────────────────────────
-State: w_d1..w_dN at DATA_WIDTH. w_d1 stores SATURATED w_n.
-
-  wire signed [ACC_WIDTH-1:0] fbk_sum, w_n, y_out;
-  wire signed [DATA_WIDTH-1:0] w_sat, y_sat;
-
-  assign fbk_sum = ((A1*w_d1)>>>FRAC) + ((A2*w_d2)>>>FRAC) + ...;
-  assign w_n     = sample_in - fbk_sum;
-  assign y_out   = ((B0*w_n)>>>FRAC) + ((B1*w_d1)>>>FRAC) + ...;
-  assign w_sat   = (w_n>SAT_MAX)?SAT_MAX[DATA_WIDTH-1:0]:
-                   (w_n<SAT_MIN)?SAT_MIN[DATA_WIDTH-1:0]:w_n[DATA_WIDTH-1:0];
-  assign y_sat   = (y_out>SAT_MAX)?SAT_MAX[DATA_WIDTH-1:0]:
-                   (y_out<SAT_MIN)?SAT_MIN[DATA_WIDTH-1:0]:y_out[DATA_WIDTH-1:0];
-
-  always_ff @(posedge clk or negedge rst_n) begin
-    if (!rst_n) begin ... end
-    else if (sample_valid) begin
-      w_dN<=w_d{{N-1}}; ... w_d1<=w_sat;    // SATURATED
-      result_out<=y_sat; result_valid<=1'b1;
-    end else begin result_valid<=1'b0; end
-  end
-
-── df2t / df1t (ORDER≥2, single section) ────────────────────
-State: s0..s{{N-1}} at ACC_WIDTH UNSATURATED. Compute y_out FIRST.
-
-  wire signed [ACC_WIDTH-1:0] y_out, s0_next, s1_next, ...;
-  wire signed [DATA_WIDTH-1:0] y_sat;
-
-  assign y_out   = ((B0*sample_in)>>>FRAC) + s0;         // FIRST
-  assign s0_next = ((B1*sample_in)>>>FRAC) - ((A1*y_out)>>>FRAC) + s1;
-  assign s1_next = ((B2*sample_in)>>>FRAC) - ((A2*y_out)>>>FRAC) + s2;
-  ...
-  assign y_sat   = (y_out>SAT_MAX)?SAT_MAX[DATA_WIDTH-1:0]:
-                   (y_out<SAT_MIN)?SAT_MIN[DATA_WIDTH-1:0]:y_out[DATA_WIDTH-1:0];
-
-  always_ff @(posedge clk or negedge rst_n) begin
-    if (!rst_n) begin s0<=0; s1<=0; ... result_out<=0; result_valid<=1'b0; end
-    else if (sample_valid) begin
-      s0<=s0_next; s1<=s1_next; ...     // UNSATURATED
-      result_out<=y_sat; result_valid<=1'b1;
-    end else begin result_valid<=1'b0; end
-  end
-
-── cascaded biquad_df2t (ORDER=4, 2 sections) ───────────────
-State: s0, s1 (section 1), s2, s3 (section 2) at ACC_WIDTH UNSATURATED.
-Section 2 input is Section 1 output (bq1_y). ONE output register at the end.
-
-  wire signed [ACC_WIDTH-1:0] bq1_y, s0_next, s1_next;
-  wire signed [ACC_WIDTH-1:0] bq2_y, s2_next, s3_next;
-  wire signed [DATA_WIDTH-1:0] y_sat;
-
-  // Section 1
-  assign bq1_y   = ((B1_0 * sample_in) >>> COEFF_FRAC_BITS) + s0;
-  assign s0_next = ((B1_1 * sample_in) >>> COEFF_FRAC_BITS) - ((A1_1 * bq1_y) >>> COEFF_FRAC_BITS) + s1;
-  assign s1_next = ((B1_2 * sample_in) >>> COEFF_FRAC_BITS) - ((A1_2 * bq1_y) >>> COEFF_FRAC_BITS);
-
-  // Section 2 (Input is bq1_y)
-  assign bq2_y   = ((B2_0 * bq1_y) >>> COEFF_FRAC_BITS) + s2;
-  assign s2_next = ((B2_1 * bq1_y) >>> COEFF_FRAC_BITS) - ((A2_1 * bq2_y) >>> COEFF_FRAC_BITS) + s3;
-  assign s3_next = ((B2_2 * bq1_y) >>> COEFF_FRAC_BITS) - ((A2_2 * bq2_y) >>> COEFF_FRAC_BITS);
-
-  assign y_sat = (bq2_y > SAT_MAX) ? SAT_MAX[DATA_WIDTH-1:0] :
-                 (bq2_y < SAT_MIN) ? SAT_MIN[DATA_WIDTH-1:0] : bq2_y[DATA_WIDTH-1:0];
-
-  always_ff @(posedge clk or negedge rst_n) begin
-    if (!rst_n) begin
-      s0 <= 0; s1 <= 0; s2 <= 0; s3 <= 0;
-      result_out <= 0; result_valid <= 1'b0;
-    end else if (sample_valid) begin
-      s0 <= s0_next; s1 <= s1_next;
-      s2 <= s2_next; s3 <= s3_next;
-      result_out <= y_sat; result_valid <= 1'b1;
-    end else begin
-      result_valid <= 1'b0;
-    end
-  end
-  
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 SECTION 4: COEFFICIENT AND WIDTH RULES
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1220,9 +1160,14 @@ SECTION 4: COEFFICIENT AND WIDTH RULES
 - Declare with signed decimal: 14'sd123, -14'sd5957. Never binary literals.
 - Never negate or take absolute value of a coefficient.
 - All intermediate signals at ACC_WIDTH. Never slice signed intermediate.
-- Saturation bounds as signed localparams:
-    localparam signed [ACC_WIDTH-1:0] SAT_MAX = (1 << (DATA_WIDTH-1)) - 1;
-    localparam signed [ACC_WIDTH-1:0] SAT_MIN = -(1 << (DATA_WIDTH-1));
+
+- CRITICAL MULTIPLIER WIDTH RULE: NEVER cast both operands of a multiplication to ACC_WIDTH!
+  In SystemVerilog, `ACC_WIDTH'(a) * ACC_WIDTH'(b)` evaluates the multiplication at ACC_WIDTH bits, silently truncating the upper bits of the product.
+  This causes catastrophic overflow in IIR feedback loops and destroys the frequency response.
+  RIGHT: Let Verilog evaluate at the natural max width using an exact-width intermediate wire:
+    wire signed [DATA_WIDTH+COEFF_WIDTH-1:0] b0_prod = B0 * sample_in; 
+    wire signed [ACC_WIDTH+COEFF_WIDTH-1:0]  a1_prod = A1 * y_out;
+  WRONG: wire signed [ACC_WIDTH-1:0] b0_prod = ACC_WIDTH'(B0) * ACC_WIDTH'(sample_in);
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 SECTION 5: GENERAL RULES
@@ -1233,9 +1178,8 @@ SECTION 5: GENERAL RULES
 4. No loops inside always_ff — unroll explicitly.
 5. All MAC in combinational logic, never in always_ff.
 6. State update order: older state first (w2<=w1 before w1<=w_sat).
-7. Cascaded sections chain combinationally — one output register at end.
-8. Port names MUST match DESIGN_PLAN INTERFACE field exactly.
-9. UNIQUE ITERATORS: NEVER declare `integer i;` or `integer k;` at module scope. If you use a for loop, declare the iterator locally inside the `always` block (e.g., `always_ff ... begin integer i; ... end`) to prevent Yosys/LibreLane MULTIDRIVEN errors.
+7. Port names MUST match DESIGN_PLAN INTERFACE field exactly.
+8. UNIQUE ITERATORS: NEVER declare `integer i;` or `integer k;` at module scope. If you use a for loop, declare the iterator locally inside the `always` block to prevent Yosys/LibreLane MULTIDRIVEN errors.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 SECTION 6: PRE-OUTPUT CHECKLIST
@@ -1249,10 +1193,10 @@ SECTION 6: PRE-OUTPUT CHECKLIST
 [ ] Each product shifted >>> COEFF_FRAC_BITS individually before summing?
 [ ] sample_in never upshifted or wrapped in concat?
 [ ] State update order correct (older first)?
-[ ] biquad_df2t / df2: state stores SATURATED value?
-[ ] biquad_df1 / df1 / df2t / df1t: feedback stores UNSATURATED value?
+[ ] All IIR states (s0, s1, y_d1, y_d2) store UNSATURATED ACC_WIDTH values?
+[ ] Multiplier products use exact-width intermediate wires (NO ACC_WIDTH casts on both operands)?
+[ ] Saturation uses implicit truncate/sign-extend XOR tree (NO > or < comparators, NO parameterized bit-slicing)?
 [ ] Coefficients AS-IS in signed decimal format?
-[ ] SAT_MAX / SAT_MIN declared as signed localparams?
 [ ] Module name matches plan?
 [ ] Port names match plan INTERFACE field?
 If ANY box unchecked → fix before outputting.
@@ -1262,7 +1206,6 @@ If ANY box unchecked → fix before outputting.
 
 OUTPUT: Code only.
 """
-
 
 
 
@@ -1637,11 +1580,11 @@ MANDATORY pattern:
 
 ALWAYS include a watchdog:
   initial begin
-    #(VECTOR_COUNT * CLOCK_PERIOD_NS * 10);
+    // IF folded: 1 sample takes TAPS cycles, so timeout MUST be scaled!
+    #(VECTOR_COUNT * TAPS * CLOCK_PERIOD_NS * 10);
     $display("FATAL: Simulation timeout");
     $finish;
   end
-
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 SECTION 4: SHADOW MODEL — SELECT BY TOPOLOGY
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -2027,10 +1970,23 @@ State: s0_tb, s1_tb (ACC_WIDTH, signed).
   function signed [DATA_WIDTH-1:0] calculate_golden_output;
     input signed [DATA_WIDTH-1:0] sample;
     reg signed [ACC_WIDTH-1:0] y_out;
+    // CRITICAL: Exact-width intermediate products to prevent Verilog truncation!
+    reg signed [DATA_WIDTH+COEFF_WIDTH-1:0] b0_prod;
+    reg signed [DATA_WIDTH+COEFF_WIDTH-1:0] b1_prod;
+    reg signed [DATA_WIDTH+COEFF_WIDTH-1:0] b2_prod;
+    reg signed [ACC_WIDTH+COEFF_WIDTH-1:0]  a1_prod;
+    reg signed [ACC_WIDTH+COEFF_WIDTH-1:0]  a2_prod;
     begin
-        y_out = ((B0 * sample) >>> COEFF_FRAC_BITS) + s0_tb;
-        s0_next_tb = ((B1 * sample) >>> COEFF_FRAC_BITS) - ((A1 * y_out) >>> COEFF_FRAC_BITS) + s1_tb;
-        s1_next_tb = ((B2 * sample) >>> COEFF_FRAC_BITS) - ((A2 * y_out) >>> COEFF_FRAC_BITS);
+        b0_prod = B0 * sample;
+        b1_prod = B1 * sample;
+        b2_prod = B2 * sample;
+        
+        y_out = (b0_prod >>> COEFF_FRAC_BITS) + s0_tb;
+        
+        a1_prod = A1 * y_out;
+        a2_prod = A2 * y_out;
+        s0_next_tb = (b1_prod >>> COEFF_FRAC_BITS) - (a1_prod >>> COEFF_FRAC_BITS) + s1_tb;
+        s1_next_tb = (b2_prod >>> COEFF_FRAC_BITS) - (a2_prod >>> COEFF_FRAC_BITS);
 
         if      (y_out > SAT_MAX_TB) calculate_golden_output = SAT_MAX_TB[DATA_WIDTH-1:0];
         else if (y_out < SAT_MIN_TB) calculate_golden_output = SAT_MIN_TB[DATA_WIDTH-1:0];
@@ -2056,12 +2012,25 @@ RTL stores UNSATURATED y_out in y_d1 at ACC_WIDTH.
   function signed [DATA_WIDTH-1:0] calculate_golden_output;
     input signed [DATA_WIDTH-1:0] sample;
     reg signed [ACC_WIDTH-1:0] y_new;
+    // CRITICAL: Exact-width intermediate products to prevent Verilog truncation!
+    reg signed [DATA_WIDTH+COEFF_WIDTH-1:0] b0_prod;
+    reg signed [DATA_WIDTH+COEFF_WIDTH-1:0] b1_prod;
+    reg signed [DATA_WIDTH+COEFF_WIDTH-1:0] b2_prod;
+    reg signed [ACC_WIDTH+COEFF_WIDTH-1:0]  a1_prod;
+    reg signed [ACC_WIDTH+COEFF_WIDTH-1:0]  a2_prod;
     begin
-      y_new = ((B0*sample)>>>COEFF_FRAC_BITS)
-            + ((B1*x1_tb) >>>COEFF_FRAC_BITS)
-            + ((B2*x2_tb) >>>COEFF_FRAC_BITS)
-            - ((A1*y1_tb) >>>COEFF_FRAC_BITS)
-            - ((A2*y2_tb) >>>COEFF_FRAC_BITS);
+      b0_prod = B0 * sample;
+      b1_prod = B1 * x1_tb;
+      b2_prod = B2 * x2_tb;
+      a1_prod = A1 * y1_tb;
+      a2_prod = A2 * y2_tb;
+      
+      y_new = (b0_prod >>> COEFF_FRAC_BITS)
+            + (b1_prod >>> COEFF_FRAC_BITS)
+            + (b2_prod >>> COEFF_FRAC_BITS)
+            - (a1_prod >>> COEFF_FRAC_BITS)
+            - (a2_prod >>> COEFF_FRAC_BITS);
+            
       last_sample_tb = sample;
       last_y_new_tb  = y_new;
       if      (y_new > SAT_MAX_TB) calculate_golden_output = SAT_MAX_TB[DATA_WIDTH-1:0];
@@ -2074,69 +2043,6 @@ RTL stores UNSATURATED y_out in y_d1 at ACC_WIDTH.
     begin
       x2_tb = x1_tb; x1_tb = last_sample_tb;
       y2_tb = y1_tb; y1_tb = last_y_new_tb;  // UNSATURATED
-    end
-  endtask
-
-── df2t / df1t ──────────────────────────────────────────────
-RTL stores UNSATURATED s_k_next at ACC_WIDTH.
-
-  reg signed [ACC_WIDTH-1:0] s0_tb=0, s1_tb=0, s2_tb=0, s3_tb=0;
-  reg signed [ACC_WIDTH-1:0] s0_next_tb, s1_next_tb, s2_next_tb, s3_next_tb;
-
-  function signed [DATA_WIDTH-1:0] calculate_golden_output;
-    input signed [DATA_WIDTH-1:0] sample;
-    reg signed [ACC_WIDTH-1:0] y_out;
-    begin
-      y_out      = ((B0*sample)>>>COEFF_FRAC_BITS) + s0_tb;
-      s0_next_tb = ((B1*sample)>>>COEFF_FRAC_BITS) - ((A1*y_out)>>>COEFF_FRAC_BITS) + s1_tb;
-      s1_next_tb = ((B2*sample)>>>COEFF_FRAC_BITS) - ((A2*y_out)>>>COEFF_FRAC_BITS) + s2_tb;
-      s2_next_tb = ((B3*sample)>>>COEFF_FRAC_BITS) - ((A3*y_out)>>>COEFF_FRAC_BITS) + s3_tb;
-      s3_next_tb = ((B4*sample)>>>COEFF_FRAC_BITS) - ((A4*y_out)>>>COEFF_FRAC_BITS);
-      if      (y_out > SAT_MAX_TB) calculate_golden_output = SAT_MAX_TB[DATA_WIDTH-1:0];
-      else if (y_out < SAT_MIN_TB) calculate_golden_output = SAT_MIN_TB[DATA_WIDTH-1:0];
-      else                         calculate_golden_output = y_out[DATA_WIDTH-1:0];
-    end
-  endfunction
-
-  task update_tb_state;
-    begin
-      s0_tb=s0_next_tb; s1_tb=s1_next_tb;
-      s2_tb=s2_next_tb; s3_tb=s3_next_tb;
-    end
-  endtask
-
-── cascaded biquad_df2t (ORDER=4, 2 sections) ───────────────
-State: s0_tb..s3_tb at ACC_WIDTH UNSATURATED.
-Section 2 input is Section 1 output (bq1_y).
-Use 10 coefficients: (B1_0, B1_1, B1_2, A1_1, A1_2) and (B2_0, B2_1, B2_2, A2_1, A2_2).
-
-  reg signed [ACC_WIDTH-1:0] s0_tb=0, s1_tb=0, s2_tb=0, s3_tb=0;
-  reg signed [ACC_WIDTH-1:0] s0_next_tb, s1_next_tb, s2_next_tb, s3_next_tb;
-
-  function signed [DATA_WIDTH-1:0] calculate_golden_output;
-    input signed [DATA_WIDTH-1:0] sample;
-    reg signed [ACC_WIDTH-1:0] bq1_y, bq2_y;
-    begin
-      // Section 1
-      bq1_y      = ((B1_0 * sample) >>> COEFF_FRAC_BITS) + s0_tb;
-      s0_next_tb = ((B1_1 * sample) >>> COEFF_FRAC_BITS) - ((A1_1 * bq1_y) >>> COEFF_FRAC_BITS) + s1_tb;
-      s1_next_tb = ((B1_2 * sample) >>> COEFF_FRAC_BITS) - ((A1_2 * bq1_y) >>> COEFF_FRAC_BITS);
-
-      // Section 2 (Input is bq1_y)
-      bq2_y      = ((B2_0 * bq1_y) >>> COEFF_FRAC_BITS) + s2_tb;
-      s2_next_tb = ((B2_1 * bq1_y) >>> COEFF_FRAC_BITS) - ((A2_1 * bq2_y) >>> COEFF_FRAC_BITS) + s3_tb;
-      s3_next_tb = ((B2_2 * bq1_y) >>> COEFF_FRAC_BITS) - ((A2_2 * bq2_y) >>> COEFF_FRAC_BITS);
-
-      if      (bq2_y > SAT_MAX_TB) calculate_golden_output = SAT_MAX_TB[DATA_WIDTH-1:0];
-      else if (bq2_y < SAT_MIN_TB) calculate_golden_output = SAT_MIN_TB[DATA_WIDTH-1:0];
-      else                         calculate_golden_output = bq2_y[DATA_WIDTH-1:0];
-    end
-  endfunction
-
-  task update_tb_state;
-    begin
-      s0_tb = s0_next_tb; s1_tb = s1_next_tb;
-      s2_tb = s2_next_tb; s3_tb = s3_next_tb;
     end
   endtask
   
@@ -2260,7 +2166,7 @@ SHADOW MODEL:
 [ ] calculate_golden_output does NOT mutate s*_tb?
 [ ] Shadow model uses Transposed DF2T (s0, s1) and NOT Direct Form II (w1, w2)?
 [ ] calculate_golden_output uses pre-edge state (s0_tb) and NOT s0_next_tb?
-[ ] biquad_df1/df1/df2t/df1t: feedback stored UNSATURATED at ACC_WIDTH?
+[ ] biquad_df1: feedback stored UNSATURATED at ACC_WIDTH?
 [ ] Older state updated before newer (w2_tb=w1_tb before w1_tb=w_sat_tb)?
 [ ] SAT_MAX_TB / SAT_MIN_TB declared as signed localparams?
 
@@ -2269,6 +2175,7 @@ ARITHMETIC:
 [ ] Arithmetic shift >>> (not logical >>)?
 [ ] sample_in not scaled?
 [ ] Coefficients AS-IS (not re-scaled)?
+[ ] Multiplier products use exact-width intermediate regs inside functions (NO ACC_WIDTH casts on both operands, NO silent Verilog truncation)?
 
 CHECKER / INFRA:
 [ ] Checker in separate always @(posedge clk)?
@@ -2276,7 +2183,6 @@ CHECKER / INFRA:
 [ ] DUT instantiated with NO parameter overrides?
 [ ] Watchdog in separate initial block?
 [ ] Is `reg signed [DATA_WIDTH-1:0] expected_queue [$];` explicitly declared at the module level?
-
 
 If ANY box unchecked → fix before outputting.
 

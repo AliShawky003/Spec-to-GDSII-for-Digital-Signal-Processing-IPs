@@ -1,14 +1,14 @@
 {
   "project_settings": {
-    "project_name": "folded_4",
-    "output_file": "output/folded_4.sv",
+    "project_name": "fir_filter",
+    "output_file": "output/fir_filter.sv",
     "target_clock_freq_mhz": 50
   },
   "filter_design_specification": {
     "filter_type": "lowpass",
     "filter_class": "FIR",
-    "structure": "folded",
-    "order": 4,
+    "structure": "",
+    "order": 16,
     "design_method": "firwin",
 
     "common": {
@@ -49,9 +49,9 @@
   },
   "hardware_specifications": {
     "data_width": 16,
-    "coefficient_width": 10,
+    "coefficient_width": 16,
     "accumulator_width": 24,
     "reset_type": "asynchronous_active_low",
-    "max_area_um2":"" 
+    "max_area_um2":"150000" 
   }
 }

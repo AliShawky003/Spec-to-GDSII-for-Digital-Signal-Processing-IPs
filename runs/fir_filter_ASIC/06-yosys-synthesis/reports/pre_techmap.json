@@ -1,0 +1,61 @@
+{
+   "creator": "Yosys 0.62 (git sha1 7326bb7d6641500ecb285c291a54a662cb1e76cf, clang++ 21.1.2 -fPIC -O3)",
+   "invocation": "stat -json -liberty /mnt/d/Learing_Python/GP/Submission_inshallah/runs/fir_filter_ASIC/tmp/5a15b173f7fe48199db8aef6ec6be832.lib ",
+   "modules": {
+      "\\fir_filter": {
+         "num_wires":         4192,
+         "num_wire_bits":     4832,
+         "num_pub_wires":     28,
+         "num_pub_wire_bits": 358,
+         "num_ports":         7,
+         "num_port_bits":     37,
+         "num_memories":      0,
+         "num_memory_bits":   0,
+         "num_processes":     0,
+         "num_cells":         4552,
+         "num_submodules":       0,
+         "num_cells_by_type": {
+            "$_ANDNOT_": 1437,
+            "$_AND_": 29,
+            "$_DFFE_PN0P_": 330,
+            "$_DFF_PN0_": 2,
+            "$_MUX_": 92,
+            "$_NAND_": 43,
+            "$_NOR_": 312,
+            "$_NOT_": 122,
+            "$_ORNOT_": 130,
+            "$_OR_": 821,
+            "$_XNOR_": 367,
+            "$_XOR_": 867
+         }
+      }
+   },
+      "design": {
+         "num_wires":         4192,
+         "num_wire_bits":     4832,
+         "num_pub_wires":     28,
+         "num_pub_wire_bits": 358,
+         "num_ports":         7,
+         "num_port_bits":     37,
+         "num_memories":      0,
+         "num_memory_bits":   0,
+         "num_processes":     0,
+         "num_cells":         4552,
+         "num_submodules":       0,
+         "num_cells_by_type": {
+            "$_ANDNOT_": 1437,
+            "$_AND_": 29,
+            "$_DFFE_PN0P_": 330,
+            "$_DFF_PN0_": 2,
+            "$_MUX_": 92,
+            "$_NAND_": 43,
+            "$_NOR_": 312,
+            "$_NOT_": 122,
+            "$_ORNOT_": 130,
+            "$_OR_": 821,
+            "$_XNOR_": 367,
+            "$_XOR_": 867
+         }
+      }
+}
+

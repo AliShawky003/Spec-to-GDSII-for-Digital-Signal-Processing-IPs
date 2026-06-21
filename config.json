@@ -1,0 +1,14 @@
+{
+    "DESIGN_NAME": "fir_filter",
+    "PDN_MULTILAYER": false,
+    "CLOCK_PORT": "clk",
+    "CLOCK_PERIOD": 20.0,
+    "VERILOG_FILES": [
+        "dir::output/fir_filter.sv"
+    ],
+    "FP_CORE_UTIL": 40,
+    "RT_MAX_LAYER": "met4",
+    "SYNTH_STRATEGY": "DELAY 4",
+    "PNR_SDC_FILE": "dir::pnr.sdc",
+    "SIGNOFF_SDC_FILE": "dir::signoff.sdc"
+}

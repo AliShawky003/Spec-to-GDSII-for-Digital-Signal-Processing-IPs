@@ -1,0 +1,17 @@
+{
+  "id": "harv_linter_folded_4bf2631b39",
+  "source": "linter",
+  "topology": "folded",
+  "filter_class": "FIR",
+  "error_signature": "%warning-varhidden: <file>:<n>: declaration of signal hides declaration in upper scope: <ident> <n> | integer i; | ^ <file>:<n>: ... location of original declaration <n> | integer i; | ^ ... for warning description see https://verilator.org/warn/varhidden?v=<n>.<n> ... use \"/* verilator lint_off varhidden */\" and lint_on around source to disable this message. %warning-varhidden: <file>:<n>: declaration of signal hides declaration in upper scope: <ident> <n> | integer i; | ^ <file>:<n>: ... location of original declaration <n> | integer i; | ^ %error: <file>:<n>: can't find definition of variable: <ident> <n> | accum_reg <= '<n>; | ^~~~~~~~~ %error: exiting due to <n> error(s)",
+  "raw_error_example": "%Warning-VARHIDDEN: output/fir_filter.sv:69:17: Declaration of signal hides declaration in upper scope: 'i'\n   69 |         integer i;\n      |                 ^\n                    output/fir_filter.sv:29:13: ... Location of original declaration\n   29 |     integer i;\n      |             ^\n                    ... For warning description see https://verilator.org/warn/VARHIDDEN?v=5.020\n                    ... Use \"/* verilator lint_off VARHIDDEN */\" and lint_on around source to disable this message.\n%Warning-VARHIDDEN: output/fir_filter.sv:112:17: Declaration of signal hides declaration in upper scope: 'i'\n  112 |         integer i;\n      |                 ^\n                    output/fir_filter.sv:29:13: ... Location of original declaration\n   29 |     integer i;\n      |             ^\n%Error: output/fir_filter.sv:96:13: Can't find definition of variable: 'accum_reg'\n   96 |             accum_reg <= '0;\n      |             ^~~~~~~~~\n%Error: Exiting due to 1 error(s)",
+  "root_cause": "The accumulator variable was named `accum` but referenced as `accum_reg` in the always block, and local integer declarations in generate blocks unnecessarily shadowed module-level variables causing warnings.",
+  "fix_rule": "Use consistent variable names between declarations and all usages, and remove duplicate local integer declarations inside always blocks when a module-scope integer already exists.",
+  "fix_snippet": "logic signed [ACC_WIDTH-1:0] accum_reg;\n    always_ff @(posedge clk or negedge rst_n) begin : shift_logic\n        if (!rst_n) begin\n            for (i = 0; i < TAPS; i = i + 1) data_reg[i] <= '0;\n        end else if (sample_valid && ready) begin\n            data_reg[0] <= sample_in;\n            for (i = 1; i < TAPS; i = i + 1) data_reg[i] <= data_reg[i-1];\n        end\n    end",
+  "tags": [
+    "harvested",
+    "rtl_fix"
+  ],
+  "source_notes": "harvested",
+  "date": "2026-06-21"
+}

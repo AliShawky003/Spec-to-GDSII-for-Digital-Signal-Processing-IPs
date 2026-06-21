@@ -1,0 +1,49 @@
+%Warning-WIDTHEXPAND: /mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:92:27: Operator ASSIGNDLY expects 37 bits on the Assign RHS, but Assign RHS's VARREF 'prod' generates 32 bits.
+                                                                                              : ... note: In instance 'fir_filter'
+   92 |                 accum_reg <= prod;
+      |                           ^~
+                      ... For warning description see https://verilator.org/warn/WIDTHEXPAND?v=5.044
+                      ... Use "/* verilator lint_off WIDTHEXPAND */" and lint_on around source to disable this message.
+%Warning-WIDTHEXPAND: /mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:95:40: Operator ADD expects 37 bits on the RHS, but RHS's VARREF 'prod' generates 32 bits.
+                                                                                              : ... note: In instance 'fir_filter'
+   95 |                 accum_reg <= accum_reg + prod;
+      |                                        ^
+%Warning-BLKSEQ: /mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:91:22: Blocking assignment '=' in sequential logic process
+                                                                                         : ... note: In instance 'fir_filter'
+                                                                                         : ... Suggest using delayed assignment '<='
+   91 |                 prod = sample_in * coeffs[0];
+      |                      ^
+                 ... For warning description see https://verilator.org/warn/BLKSEQ?v=5.044
+                 ... Use "/* verilator lint_off BLKSEQ */" and lint_on around source to disable this message.
+%Warning-BLKSEQ: /mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:94:22: Blocking assignment '=' in sequential logic process
+                                                                                         : ... note: In instance 'fir_filter'
+                                                                                         : ... Suggest using delayed assignment '<='
+   94 |                 prod = data_reg[tap_cnt] * coeffs[tap_cnt];
+      |                      ^
+%Warning-UNUSEDPARAM: /mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:13:16: Parameter is not used: 'ORDER'
+                                                                                              : ... note: In instance 'fir_filter'
+   13 |     localparam ORDER = 16;
+      |                ^~~~~
+                      ... For warning description see https://verilator.org/warn/UNUSEDPARAM?v=5.044
+                      ... Use "/* verilator lint_off UNUSEDPARAM */" and lint_on around source to disable this message.
+%Warning-UNUSEDPARAM: /mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:20:16: Parameter is not used: 'PIPE_DEPTH'
+                                                                                              : ... note: In instance 'fir_filter'
+   20 |     localparam PIPE_DEPTH = LATENCY - BASE_LATENCY;
+      |                ^~~~~~~~~~
+%Warning-UNUSEDSIGNAL: /mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:47:13: Signal is not driven, nor used: 'k'
+                                                                                               : ... note: In instance 'fir_filter'
+   47 |     integer k;
+      |             ^
+                       ... For warning description see https://verilator.org/warn/UNUSEDSIGNAL?v=5.044
+                       ... Use "/* verilator lint_off UNUSEDSIGNAL */" and lint_on around source to disable this message.
+%Warning-UNUSEDPARAM: /mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:104:39: Parameter is not used: 'SAT_MAX'
+                                                                                               : ... note: In instance 'fir_filter'
+  104 |     localparam signed [ACC_WIDTH-1:0] SAT_MAX = (1 << (DATA_WIDTH-1)) - 1;
+      |                                       ^~~~~~~
+%Warning-UNUSEDPARAM: /mnt/d/Learing_Python/GP/Submission_inshallah/output/fir_filter.sv:105:39: Parameter is not used: 'SAT_MIN'
+                                                                                               : ... note: In instance 'fir_filter'
+  105 |     localparam signed [ACC_WIDTH-1:0] SAT_MIN = -(1 << (DATA_WIDTH-1));
+      |                                       ^~~~~~~
+- V e r i l a t i o n   R e p o r t: Verilator 5.044 2026-01-01 rev v5.040
+- Verilator: Built from 0.407 MB sources in 448 modules, into 0.031 MB in 3 C++ files needing 0.000 MB
+- Verilator: Walltime 0.140 s (elab=0.029, cvt=0.030, bld=0.000); cpu 0.072 s on 1 threads; alloced 28.035 MB
