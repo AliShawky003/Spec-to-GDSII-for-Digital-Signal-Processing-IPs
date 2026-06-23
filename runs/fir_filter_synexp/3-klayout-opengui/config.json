@@ -149,10 +149,7 @@
     "KLAYOUT_EDITOR_MODE": false,
     "KLAYOUT_GUI_USE_GDS": true,
     "meta": {
-        "version": 1,
-        "flow": null,
-        "substituting_steps": null,
-        "step": null,
-        "librelane_version": "3.0.4"
+        "librelane_version": "3.0.4",
+        "step": "KLayout.OpenGUI"
     }
 }
